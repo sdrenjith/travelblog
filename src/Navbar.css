@@ -1,0 +1,96 @@
+.navbar-custom {
+  background-color: #ffffff;
+  padding: 8px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.navbar-brand {
+  flex-shrink: 0;
+}
+
+.navbar-brand img {
+  height: 28px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0 15px;
+  font-size: 10px;
+}
+
+.nav-link {
+  color: #86898d;
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.nav-links {
+  color: #ffa726;
+}
+
+.nav-link:hover {
+  color:rgb(239, 152, 22);
+  text-decoration: none;
+}
+
+.contact-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.phone-number {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #86898d;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.phone-number i {
+  color: #ffa726;
+  transform: rotate(90deg);
+  font-size: 10px;
+}
+
+.book-travel-btn {
+  background-color: #ffa726;
+  color: white;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.book-travel-btn:hover {
+  background-color: #f57c00;
+  color: white;
+  text-decoration: none;
+} 
