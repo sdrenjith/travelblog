@@ -89,6 +89,7 @@ function Blog() {
                 >
                   {category}
                 </button>
+                
               ))}
             </div>
           </div>

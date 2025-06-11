@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Banner3() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="travel-package" style={{
       maxWidth: "1200px",
@@ -51,7 +53,7 @@ function Banner3() {
           height: "450px",
           borderRadius: "8px",
           overflow: "hidden",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          // boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           zIndex: 2
         }}>
           <img 
@@ -172,19 +174,26 @@ function Banner3() {
           </div>
         </div>
 
-        {/* Book Button */}
-        <button style={{
-          backgroundColor: "#f97316",
-          color: "white",
-          border: "none",
-          padding: "15px 40px",
-          borderRadius: "30px",
-          fontSize: "16px",
-          fontWeight: "500",
-          cursor: "pointer",
-          transition: "background-color 0.3s ease",
-          boxShadow: "0 4px 12px rgba(249, 115, 22, 0.2)"
-        }}>
+        {/* Book Button with Hover Effect */}
+        <button 
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={{
+            backgroundColor: isHovered ? "#ea580c" : "#f97316",
+            color: "white",
+            border: "none",
+            padding: "15px 40px",
+            borderRadius: "30px",
+            fontSize: "16px",
+            fontWeight: "500",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            boxShadow: isHovered 
+              ? "0 6px 20px rgba(249, 115, 22, 0.4)" 
+              : "0 4px 12px rgba(249, 115, 22, 0.2)",
+            transform: isHovered ? "translateY(-2px)" : "translateY(0)"
+          }}
+        >
           BOOK YOUR TRAVEL
         </button>
       </div>
@@ -193,18 +202,6 @@ function Banner3() {
 }
 
 export default Banner3
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

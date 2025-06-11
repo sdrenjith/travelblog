@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Banner6() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="position-relative" style={{background: '#f8f8f8', padding: '100px 0'}}>
      <div className="container">
@@ -68,18 +70,28 @@ One of the world's best-known hikes.</p>
           </div>
         </div>
 
-            <button style={{
-              background: '#ff9f1c',
-              color: 'white',
-              border: 'none',
-              padding: '15px 35px',
-              borderRadius: '30px',
-              fontSize: '14px',
-              fontWeight: '600',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}>Book Your Travel</button>
+            <button 
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              style={{
+                background: isHovered ? '#e6880f' : '#ff9f1c',
+                color: 'white',
+                border: 'none',
+                padding: '15px 35px',
+                borderRadius: '30px',
+                fontSize: '14px',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: isHovered 
+                  ? '0 6px 20px rgba(255, 159, 28, 0.4)' 
+                  : '0 2px 10px rgba(255, 159, 28, 0.2)',
+                transform: isHovered ? 'translateY(-2px)' : 'translateY(0)'
+              }}
+            >
+              Book Your Travel
+            </button>
           </div>
         </div>
 

@@ -11,10 +11,10 @@ import Banner9 from '../Banner9';
 
 function Home() {
   return (
-    <div>
+    <div style={{ overflowX: 'hidden'}}>
       <Banner />
       <Banner2 />
-      <br /><br />
+      <br/><br/>
       <Banner3 />
       <br /><br />
       <br /><br />

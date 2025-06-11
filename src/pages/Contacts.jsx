@@ -23,7 +23,7 @@ function Contacts() {
       </div>
 
       <div className="contact-content">
-        <h2>Have a Question?</h2>
+        <h2>Have a Question ?</h2>
         <h3 className="drop-line">DROP A LINE</h3>
         
         <div className="contact-form-container">

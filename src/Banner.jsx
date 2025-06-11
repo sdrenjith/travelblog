@@ -1,66 +1,3 @@
-// import React from 'react'
-
-// function Banner() {
-//   return (
-//     <div>
-//       <div className="row">
-//         <div className="col-5">
-//             {/* <img src="https://th.bing.com/th/id/OIP.nUjJwtXWDscqCzTT6Rh3oQHaE8?rs=1&pid=ImgDetMain" width={'750px'} height={"499px"}  alt="banner1" /> */}
-//             <h1>PERFECT YOUR DREAM VACATION</h1>
-
-//             <p>Perched on</p>
-//             <div id="carouselExampleDark" class="carousel carousel-dark slide">
-//   <div class="carousel-indicators">
-//     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-//     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-//     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-//   </div>
-//   <div class="carousel-inner">
-//     <div class="carousel-item active" data-bs-interval="10000">
-//       <img src="..." class="d-block w-100" alt="...">
-//       <div class="carousel-caption d-none d-md-block">
-//         <h5>First slide label</h5>
-//         <p>Some representative placeholder content for the first slide.</p>
-//       </div>
-//     </div>
-//     <div class="carousel-item" data-bs-interval="2000">
-//       <img src="..." class="d-block w-100" alt="...">
-//       <div class="carousel-caption d-none d-md-block">
-//         <h5>Second slide label</h5>
-//         <p>Some representative placeholder content for the second slide.</p>
-//       </div>
-//     </div>
-//     <div class="carousel-item">
-//       <img src="..." class="d-block w-100" alt="...">
-//       <div class="carousel-caption d-none d-md-block">
-//         <h5>Third slide label</h5>
-//         <p>Some representative placeholder content for the third slide.</p>
-//       </div>
-//     </div>
-//   </div>
-//   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-//     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-//     <span class="visually-hidden">Previous</span>
-//   </button>
-//   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-//     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-//     <span class="visually-hidden">Next</span>
-//   </button>
-// </div>
-            
-//         </div>
-//         <div className="col-5">
-//             <img style={{marginLeft: '260px'}} src="https://media.cntraveler.com/photos/58e3c109dfba867684551721/master/pass/tips-Eric-Rubens-1.jpg" height={'300px'} width={'400px'} alt="" />
-//             <img style={{marginLeft: '260px'}} src="https://th.bing.com/th/id/OIP.Sx6jlOnmD_J042KZObkqNAHaFj?pid=ImgDet&w=474&h=355&rs=1" alt=""  height={'199px'} width={'400px'} />
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Banner
-
-
 import React, { useState, useEffect } from 'react';
 
 function Banner() {
@@ -104,280 +41,276 @@ function Banner() {
     return () => clearInterval(interval);
   }, []);
 
-  const styles = {
-    heroContainer: {
-      position: 'relative',
-      width: '100%',
-      height: '98vh',
-      overflow: 'hidden',
-      background: '#000'
-    },
-    heroGrid: {
-      display: 'grid',
-      gridTemplateColumns: '2fr 1fr',
-      gridTemplateRows: '1fr',
-      height: '100vh',
-      gap: 0
-    },
-    mainHero: {
-      position: 'relative',
-      background: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('${slides[currentSlide].image}') center/cover`,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      padding: '4rem',
-      overflow: 'hidden',
-      transition: 'background-image 0.8s ease-in-out'
-    },
-    heroText: {
-      maxWidth: '600px',
-      animation: 'fadeInUp 1.2s ease-out',
-      color: 'white'
-    },
-    heroTitle: {
-      fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-      fontWeight: 900,
-      lineHeight: 0.9,
-      marginBottom: '1.5rem',
-      textTransform: 'uppercase',
-      letterSpacing: '-2px',
-      textShadow: '2px 2px 4px rgba(0,0,0,0.7)'
-    },
-    heroSubtitle: {
-      fontSize: '1.1rem',
-      marginBottom: '2rem',
-      opacity: 0.9,
-      lineHeight: 1.6
-    },
-    priceTag: {
-      background: 'rgba(255,255,255,0.1)',
-      backdropFilter: 'blur(10px)',
-      padding: '1rem 2rem',
-      borderRadius: '50px',
-      display: 'inline-block',
-      border: '1px solid rgba(255,255,255,0.2)'
-    },
-    priceLabel: {
-      fontSize: '1.2rem',
-      marginBottom: '0.5rem',
-      fontStyle: 'italic',
-      color: '#ffd700',
-      margin: 0
-    },
-    price: {
-      fontSize: '2.5rem',
-      fontWeight: 900,
-      color: 'white',
-      margin: 0
-    },
-    sideImages: {
-      display: 'grid',
-      gridTemplateRows: '1fr 1fr',
-      gap: 0
-    },
-    sideImage: {
-      position: 'relative',
-      overflow: 'hidden',
-      cursor: 'pointer',
-      transition: 'transform 0.3s ease'
-    },
-    sideImageImg: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
-      transition: 'transform 0.5s ease'
-    },
-    imageOverlay: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-      padding: '2rem 1.5rem 1.5rem',
-      color: 'white'
-    },
-    overlayTag: {
-      background: 'rgba(255,255,255,0.9)',
-      color: '#333',
-      padding: '0.5rem 1rem',
-      borderRadius: '20px',
-      fontWeight: 'bold',
-      fontSize: '0.9rem',
-      textTransform: 'uppercase',
-      letterSpacing: '1px',
-      display: 'inline-block',
-      marginBottom: '0.5rem'
-    },
-    overlayTitle: {
-      fontSize: '1.1rem',
-      fontWeight: 'bold',
-      margin: 0,
-      textShadow: '1px 1px 2px rgba(0,0,0,0.7)'
-    },
-    navigationArrows: {
-      position: 'absolute',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      zIndex: 10,
-      background: 'rgba(255,255,255,0.1)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255,255,255,0.2)',
-      color: 'white',
-      width: '50px',
-      height: '50px',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      transition: 'all 0.3s ease',
-      fontSize: '1.2rem'
-    },
-    navLeft: {
-      left: '2rem'
-    },
-    navRight: {
-      right: '2rem'
-    },
-    indicators: {
-      position: 'absolute',
-      bottom: '2rem',
-      left: '4rem',
-      display: 'flex',
-      gap: '0.5rem',
-      zIndex: 10
-    },
-    indicator: {
-      width: '12px',
-      height: '12px',
-      borderRadius: '50%',
-      border: '2px solid white',
-      cursor: 'pointer',
-      transition: 'all 0.3s ease'
-    },
-    indicatorActive: {
-      background: 'white'
-    },
-    mobileGrid: {
-      '@media (max-width: 768px)': {
-        gridTemplateColumns: '1fr',
-        gridTemplateRows: '2fr 1fr'
-      }
-    }
-  };
-
   return (
-    <div style={styles.heroContainer}>
-      <div style={styles.heroGrid}>
+    <div className="hero-container">
+      <div className="hero-grid">
         {/* Main Hero Section */}
-        <div style={styles.mainHero}>
-          <div 
-            style={{...styles.navigationArrows, ...styles.navLeft}}
+        <div 
+          className="main-hero"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('${slides[currentSlide].image}')`
+          }}
+        >
+          <button 
+            className="nav-arrow nav-left"
             onClick={prevSlide}
-            onMouseEnter={(e) => {
-              e.target.style.background = 'rgba(255,255,255,0.2)';
-              e.target.style.transform = 'translateY(-50%) scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = 'rgba(255,255,255,0.1)';
-              e.target.style.transform = 'translateY(-50%) scale(1)';
-            }}
+            aria-label="Previous slide"
           >
             ‹
-          </div>
+          </button>
           
-          <div 
-            style={{...styles.navigationArrows, ...styles.navRight}}
+          <button 
+            className="nav-arrow nav-right"
             onClick={nextSlide}
-            onMouseEnter={(e) => {
-              e.target.style.background = 'rgba(255,255,255,0.2)';
-              e.target.style.transform = 'translateY(-50%) scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = 'rgba(255,255,255,0.1)';
-              e.target.style.transform = 'translateY(-50%) scale(1)';
-            }}
+            aria-label="Next slide"
           >
             ›
-          </div>
+          </button>
           
-          <div style={styles.heroText}>
-            <h1 style={styles.heroTitle}>
+          <div className="hero-text">
+            <h1 className="hero-title">
               {slides[currentSlide].title}
             </h1>
-            <p style={styles.heroSubtitle}>
+            <p className="hero-subtitle">
               {slides[currentSlide].subtitle}
             </p>
-            <div style={styles.priceTag}>
-              <h3 style={styles.priceLabel}>{slides[currentSlide].location} from</h3>
-              <div style={styles.price}>{slides[currentSlide].price}</div>
+            <div className="price-tag">
+              <h3 className="price-label">{slides[currentSlide].location} from</h3>
+              <div className="price">{slides[currentSlide].price}</div>
             </div>
           </div>
 
           {/* Slide Indicators */}
-          <div style={styles.indicators}>
+          <div className="indicators">
             {slides.map((_, index) => (
-              <div
+              <button
                 key={index}
-                style={{
-                  ...styles.indicator,
-                  ...(index === currentSlide ? styles.indicatorActive : {})
-                }}
+                className={`indicator ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
         </div>
 
         {/* Side Images */}
-        <div style={styles.sideImages}>
-          <div 
-            style={styles.sideImage}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.02)';
-              e.currentTarget.querySelector('img').style.transform = 'scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.querySelector('img').style.transform = 'scale(1)';
-            }}
-          >
+        <div className="side-images">
+          <div className="side-image">
             <img 
               src="https://images.unsplash.com/photo-1531065208531-4036c0dba3ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" 
               alt="Llamas in Peru"
-              style={styles.sideImageImg}
             />
-            <div style={styles.imageOverlay}>
-              <div style={styles.overlayTag}>SIT BACK AND RELAX</div>
-              <h3 style={styles.overlayTitle}>THIS IS PERU</h3>
+            <div className="image-overlay">
+              <div className="overlay-tag">SIT BACK AND RELAX</div>
+              <h3 className="overlay-title">THIS IS PERU</h3>
             </div>
           </div>
           
-          <div 
-            style={styles.sideImage}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.02)';
-              e.currentTarget.querySelector('img').style.transform = 'scale(1.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.querySelector('img').style.transform = 'scale(1)';
-            }}
-          >
+          <div className="side-image">
             <img 
               src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
               alt="Colonial Architecture"
-              style={styles.sideImageImg}
             />
-            <div style={styles.imageOverlay}>
-              <div style={styles.overlayTag}>COURTYARD OF THE CONVENTO</div>
-              <h3 style={styles.overlayTitle}>SANTO DOMINGO IN LIMA</h3>
+            <div className="image-overlay">
+              <div className="overlay-tag">COURTYARD OF THE CONVENTO</div>
+              <h3 className="overlay-title">SANTO DOMINGO IN LIMA</h3>
             </div>
           </div>
         </div>
       </div>
 
-      <style>{`
+      <style jsx>{`
+        .hero-container {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          min-height: 600px;
+          overflow: hidden;
+          background: #000;
+        }
+
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          height: 100%;
+          gap: 0;
+        }
+
+        .main-hero {
+          position: relative;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 4rem;
+          overflow: hidden;
+          transition: background-image 0.8s ease-in-out;
+        }
+
+        .hero-text {
+          max-width: 600px;
+          animation: fadeInUp 1.2s ease-out;
+          color: white;
+          z-index: 2;
+        }
+
+        .hero-title {
+          font-size: clamp(2rem, 5vw, 4.5rem);
+          font-weight: 900;
+          line-height: 0.9;
+          margin-bottom: 1.5rem;
+          text-transform: uppercase;
+          letter-spacing: -2px;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(1rem, 2vw, 1.1rem);
+          margin-bottom: 2rem;
+          opacity: 0.9;
+          line-height: 1.6;
+        }
+
+        .price-tag {
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(10px);
+          padding: 1rem 2rem;
+          border-radius: 50px;
+          display: inline-block;
+          border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .price-label {
+          font-size: clamp(1rem, 2vw, 1.2rem);
+          margin-bottom: 0.5rem;
+          font-style: italic;
+          color: #ffd700;
+          margin: 0;
+        }
+
+        .price {
+          font-size: clamp(1.8rem, 4vw, 2.5rem);
+          font-weight: 900;
+          color: white;
+          margin: 0;
+        }
+
+        .nav-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: white;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 1.2rem;
+        }
+
+        .nav-arrow:hover {
+          background: rgba(255,255,255,0.2);
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-left {
+          left: 2rem;
+        }
+
+        .nav-right {
+          right: 2rem;
+        }
+
+        .indicators {
+          position: absolute;
+          bottom: 2rem;
+          left: 4rem;
+          display: flex;
+          gap: 0.5rem;
+          z-index: 10;
+        }
+
+        .indicator {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          border: 2px solid white;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+          background: white;
+        }
+
+        .side-images {
+          display: grid;
+          grid-template-rows: 1fr 1fr;
+          gap: 0;
+        }
+
+        .side-image {
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+        }
+
+        .side-image:hover {
+          transform: scale(1.02);
+        }
+
+        .side-image:hover img {
+          transform: scale(1.1);
+        }
+
+        .side-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .image-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(transparent, rgba(0,0,0,0.8));
+          padding: 2rem 1.5rem 1.5rem;
+          color: white;
+        }
+
+        .overlay-tag {
+          background: rgba(255,255,255,0.9);
+          color: #333;
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-weight: bold;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          display: inline-block;
+          margin-bottom: 0.5rem;
+        }
+
+        .overlay-title {
+          font-size: 1.1rem;
+          font-weight: bold;
+          margin: 0;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -389,15 +322,228 @@ function Banner() {
           }
         }
 
-        @media (max-width: 768px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-            grid-template-rows: 2fr 1fr !important;
+        /* Tablet Styles */
+        @media (max-width: 1024px) {
+          .main-hero {
+            padding: 3rem 2rem;
           }
-          
+
+          .hero-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+          }
+
+          .nav-arrow {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+          }
+
+          .nav-left {
+            left: 1rem;
+          }
+
+          .nav-right {
+            right: 1rem;
+          }
+
+          .indicators {
+            left: 2rem;
+            bottom: 1.5rem;
+          }
+
+          .overlay-tag {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+          }
+
+          .overlay-title {
+            font-size: 1rem;
+          }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+          .hero-container {
+            height: 100vh;
+            min-height: 500px;
+          }
+
+          .hero-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: 2fr 1fr;
+          }
+
+          .main-hero {
+            padding: 2rem 1.5rem;
+            min-height: 60vh;
+          }
+
+          .hero-text {
+            max-width: 100%;
+          }
+
+          .hero-title {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            margin-bottom: 1rem;
+          }
+
+          .hero-subtitle {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            margin-bottom: 1.5rem;
+          }
+
+          .price-tag {
+            padding: 0.8rem 1.5rem;
+          }
+
+          .price-label {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+          }
+
+          .price {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+          }
+
+          .nav-arrow {
+            width: 35px;
+            height: 35px;
+            font-size: 0.9rem;
+          }
+
+          .nav-left {
+            left: 0.5rem;
+          }
+
+          .nav-right {
+            right: 0.5rem;
+          }
+
+          .indicators {
+            left: 1.5rem;
+            bottom: 1rem;
+          }
+
+          .indicator {
+            width: 10px;
+            height: 10px;
+          }
+
           .side-images {
-            grid-template-columns: 1fr 1fr !important;
-            grid-template-rows: 1fr !important;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            height: 40vh;
+            min-height: 200px;
+          }
+
+          .image-overlay {
+            padding: 1rem 1rem 1rem;
+          }
+
+          .overlay-tag {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+          }
+
+          .overlay-title {
+            font-size: 0.9rem;
+          }
+        }
+
+        /* Small Mobile Styles */
+        @media (max-width: 480px) {
+          .main-hero {
+            padding: 1.5rem 1rem;
+          }
+
+          .hero-title {
+            font-size: clamp(1.2rem, 7vw, 2rem);
+            line-height: 1;
+          }
+
+          .hero-subtitle {
+            font-size: clamp(0.8rem, 4vw, 0.9rem);
+            margin-bottom: 1rem;
+          }
+
+          .price-tag {
+            padding: 0.6rem 1rem;
+          }
+
+          .nav-arrow {
+            width: 30px;
+            height: 30px;
+            font-size: 0.8rem;
+          }
+
+          .indicators {
+            left: 1rem;
+            bottom: 0.5rem;
+          }
+
+          .indicator {
+            width: 8px;
+            height: 8px;
+          }
+
+          .side-images {
+            height: 30vh;
+            min-height: 150px;
+          }
+
+          .image-overlay {
+            padding: 0.8rem 0.8rem 0.8rem;
+          }
+
+          .overlay-tag {
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+          }
+
+          .overlay-title {
+            font-size: 0.8rem;
+          }
+        }
+
+        /* Landscape Mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+          .hero-container {
+            height: 100vh;
+          }
+
+          .hero-grid {
+            grid-template-columns: 1.5fr 1fr;
+            grid-template-rows: 1fr;
+          }
+
+          .main-hero {
+            min-height: auto;
+            padding: 1.5rem;
+          }
+
+          .side-images {
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr;
+            height: auto;
+          }
+        }
+
+        /* Very Small Screens */
+        @media (max-width: 360px) {
+          .hero-title {
+            font-size: 1.2rem;
+          }
+
+          .hero-subtitle {
+            font-size: 0.8rem;
+            line-height: 1.4;
+          }
+
+          .price {
+            font-size: 1.3rem;
+          }
+
+          .price-label {
+            font-size: 0.8rem;
           }
         }
       `}</style>
@@ -406,46 +552,3 @@ function Banner() {
 }
 
 export default Banner;
-
-
-
-
-// import React from 'react';
-
-// function Banner() {
-//   return (
-//     <div style={{
-//       width: '100%',
-//       overflow: 'hidden',
-//       border: '1px solid gray',
-//       backgroundColor: '#fffbe6',
-//       height: '50px',
-//       display: 'flex',
-//       alignItems: 'center'
-//     }}>
-//       <div style={{
-//         whiteSpace: 'nowrap',
-//         display: 'inline-block',
-//         animation: 'scroll-once 8s linear forwards'
-//       }}>
-//         🌍 Explore the world with us — Best travel tips, destinations, and deals!
-//       </div>
-
-//       <style>
-//         {`
-//           @keyframes scroll-once {
-//             0% {
-//               transform: translateX(100%);
-//             }
-//             100% {
-//               transform: translateX(0%);
-//             }
-//           }
-//         `}
-//       </style>
-//     </div>
-//   );
-// }
-
-// export default Banner;
-

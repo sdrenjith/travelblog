@@ -1,5 +1,5 @@
 body {
-  overflow-x: hidden;
+  overflow-x: 'hidden';
 }
 #nav{
   height: 100px;

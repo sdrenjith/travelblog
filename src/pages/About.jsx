@@ -66,13 +66,14 @@ function About() {
       {/* Hero Section */}
       <div className="hero-section" style={{
         backgroundImage: 'url("https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
-        height: '400px',
+        height: '500px',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative'
+        position: 'relative',
+        
       }}>
         <div style={{
           position: 'absolute',
@@ -102,9 +103,9 @@ function About() {
           }}className="col-md-6">
             <h6 style={{color: 'orange',  fontFamily: 'Satisfy, cursive', fontSize: '21px',fontWeight: '600'}}>Who we are</h6>
             <h2 style={{color: '#333', marginBottom: '25px',fontWeight: '600'}}>WHY CHOOSE US</h2>
-            <p style={{fontSize: '13px', lineHeight: '1.8', color: '#666',fontWeight: 'normal', width: '300px'}}>
+            <p style={{fontSize: '13px', lineHeight: '1.8', color: '#666',fontWeight: 'normal', maxWidth: '300px'}}>
              Researching and organising your own holiday can be a stressful task. Let us do the work for you! By choosing us you can save both time and money. Our staff always ready to handle any unforeseen situations. Welcome to learn the world with us.            </p>
-            <p style={{fontSize: '13px', lineHeight: '1.8', color: '#666' ,fontWeight: 'normal', width: '300px'}}>
+            <p style={{fontSize: '13px', lineHeight: '1.8', color: '#666' ,fontWeight: 'normal', maxWidth: '300px'}}>
              Ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum.            </p>
 
 
@@ -115,9 +116,9 @@ function About() {
               src="https://images.pexels.com/photos/32456060/pexels-photo-32456060/free-photo-of-man-admiring-autumn-leaves-by-lakeside-fountain.jpeg?auto=compress&cs=tinysrgb&w=600"
               alt="Travel Experience"
               style={{  position: "absolute",
-          top: "550px",
-          left: "630px",
-          width: "440px",
+          top: "20px",
+          left: "560px",
+          maxWidth: "840px",
           height: "500px",
           overflow: "hidden",
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
@@ -125,13 +126,13 @@ function About() {
             />
             <img
             style={{zIndex: -1,
-              width: '400px',
+              maxWidth: '400px',
               position:"absolute",
               
-               top: "600px",
-              width: '412px',
+               top: "80px",
+              maxWidth: '412px',
               height: '520px',
-              left: "730px"
+              left: "650px"
             }} src="https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
           </div>
         </div>

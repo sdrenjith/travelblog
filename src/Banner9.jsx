@@ -30,13 +30,13 @@ function Banner9() {
            <div className="row">
             <div className="col-2"></div>
             <div className="col-3">
-                <img width={'100%'} src="https://images.pexels.com/photos/2884864/pexels-photo-2884864.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
+                <img style={{borderRadius: '300px',marginLeft: '40px'}} width={'200px'} height={'200px'} src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
             </div>
             <div className="col-3">
-                <img width={'100%'} src="https://images.pexels.com/photos/1537979/pexels-photo-1537979.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
+                <img style={{borderRadius: '300px',marginLeft: '14px'}} width={'200px'} height={'200px'} src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
             </div>
                         <div className="col-3">
-                            <img width={'100%'} src="https://media.istockphoto.com/id/546456042/photo/kanyakumari-mountains.jpg?b=1&s=612x612&w=0&k=20&c=DbHm6IHpU8Z2wdBM-wOr4OJ2Z0GoOQWA3GkKS7RzlbI=" alt="" />
+                                    <img style={{borderRadius: '300px',marginLeft: '14px'}} width={'200px'} height={'200px'} src="https://images.pexels.com/photos/874158/pexels-photo-874158.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
                         </div>
 
            </div>
@@ -45,20 +45,28 @@ function Banner9() {
            <div className="row" style={{padding: '20px'}}>
             <div className="col-2"></div>
             <div className="col-3">
-
-               <h4 style={{marginLeft: '50px'}}>COLOMBIA</h4> 
+               
+               <p style={{color: "orange",fontSize: "9px", marginLeft: "105px"}}>PERU GUID</p>
+               <h4 style={{marginLeft: '70px',fontSize: "14px"}}>ROBERT SPARKS</h4> 
                <p style={{fontWeight:'1', marginLeft: '15px',fontSize: '10px'}}>Colombia is ripe for discovery, and there is a little bit of everything: green Valleys, golden beaches and snow-capped mountains, colonial fortresses.</p>    
-               <button style={{borderRadius: '20px', borderWidth: '2px',marginLeft:'66px'}} type="button" class="btn btn-outline-warning">LEARN MORE</button>
+               
                       </div>
-            <div className="col-3">
+                      
+                       <div className="col-3">
+               
+               <p style={{color: "orange",fontSize: "9px", marginLeft: "85px"}}>LIMA GUIDE</p>
+               <h4 style={{marginLeft: '50px',fontSize: "14px"}}>RODNEY GALLAGHER</h4> 
+               <p style={{fontWeight:'1', marginLeft: '15px',fontSize: '10px'}}>Colombia is ripe for discovery, and there is a little bit of everything: green Valleys, golden beaches and snow-capped mountains, colonial fortresses.</p>    
+               
+                      </div>
 
-<h4  style={{marginLeft: '50px'}}>ARGENTINA</h4>
-<p style={{fontWeight:'1', marginLeft: '15px',fontSize: '10px'}}>It has become cliche to say that Argentina is as much European as it is Latin; yet to arrive in Buenos Aires and discover this is actually true still surprise</p>  
-<button style={{borderRadius: '20px', borderWidth: '2px',marginLeft:'66px'}} type="button" class="btn btn-outline-warning">LEARN MORE</button>          </div>
                         <div className="col-3">
-<h4  style={{marginLeft: '50px'}}>VIETNAM</h4>
-<p style={{fontWeight:'1', marginLeft: '15px',fontSize: '10px'}}>But today,the Vietnamese are focused on rocketing into furthure.In this new era of confident self-determination the atmosphere is one of palpable optimism.</p>       
-<button style={{borderRadius: '20px', borderWidth: '2px',marginLeft:'66px'}} type="button" class="btn btn-outline-warning">LEARN MORE</button>                 </div>
+               
+               <p style={{color: "orange",fontSize: "9px", marginLeft: "99px"}}>CUSCO GUIDE</p>
+               <h4 style={{marginLeft: '70px',fontSize: "14px"}}>PETER BENNETT</h4> 
+               <p style={{fontWeight:'1', marginLeft: '15px',fontSize: '10px'}}>Colombia is ripe for discovery, and there is a little bit of everything: green Valleys, golden beaches and snow-capped mountains, colonial fortresses.</p>    
+               
+                      </div>
 
            </div>
 

@@ -72,7 +72,7 @@ function Banner5() {
         color: "white",
       }}
     >
-      <div style={{ maxWidth: "1500px", color: "white", marginLeft: "400px", marginTop: "100px" }}>
+      <div style={{ maxWidth: "1500px", color: "white", marginLeft: "300px", marginTop: "100px" }}>
         <h1 className="display-3 fw-bold">PERFECT YOUR DREAM</h1>
         <h1 className="display-3 fw-bold">VACATION</h1>
         <p className="lead mt-4" style={{ color: "white", width: "660px" }}>
@@ -101,7 +101,7 @@ function Banner5() {
 
           {/* Timeline dots and lines */}
           <div className="timeline-container mt-5">
-            <div className="line-wrapper" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div className="line-wrapper" style={{ display: "flex", alignItems: "center", justifyContent: "center",marginTop: "15px" }}>
               {days.map((day, index) => (
                 <React.Fragment key={day}>
                   <div
