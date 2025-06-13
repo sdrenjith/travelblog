@@ -1,8 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Contacts.css';
 
 function Contacts() {
+
+
+const location = useLocation();
+
+   useEffect(() => {
+    if (location.hash === '#enquiry') {
+      const element = document.getElementById('enquiry');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
+
+
+
+
   return (
     <div className="contacts-page">
       {/* Google Fonts - Satisfy */}
@@ -22,7 +39,7 @@ function Contacts() {
         </div>
       </div>
 
-      <div className="contact-content">
+      <div className="contact-content"  id="enquiry">
         <h2>Have a Question ?</h2>
         <h3 className="drop-line">DROP A LINE</h3>
         

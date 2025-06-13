@@ -1,640 +1,747 @@
-import React, { useState } from 'react';
-import { Plus, MapPin, Clock, Calendar, Edit3, Trash2, Save, X, Waves, Palmtree, Camera, Sunset, Fish, Star, Heart } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const TravelItinerary = () => {
-  const [itineraries, setItineraries] = useState([
+const PremiumServiceCategories = () => {
+  // Service data
+  const serviceData = [
     {
-      id: 1,
-      title: "Explore Andaman",
-      destination: "Andaman & Nicobar Islands, India",
-      startDate: "2024-07-15",
-      endDate: "2024-07-20",
+      title: "2 Days 3 Nights",
+      icon: "fas fa-mountain",
+      badge: "Popular",
+      description: "Perfect for weekend getaways and short trips. Experience the best of your destination in a compact itinerary.",
+      bgClass: "bg-primary",
       days: [
         {
-          id: 1,
-          date: "2024-07-15",
-          activities: [
-            { id: 1, time: "10:00", activity: "Airport pickup and hotel check-in", location: "Port Blair Airport", icon: "✈️" },
-            { id: 2, time: "14:00", activity: "Visit Carbyn's Cove Beach - swimming and coastal drive", location: "Carbyn's Cove Beach", icon: "🏖️" },
-            { id: 3, time: "16:30", activity: "Explore Cellular Jail - National Memorial", location: "Cellular Jail", icon: "🏛️" },
-            { id: 4, time: "18:00", activity: "Attend Light & Sound Show - Indian freedom struggle", location: "Cellular Jail", icon: "🎭" }
-          ]
+          name: "Day 1",
+          summary: "Arrival and city tour",
+          details: {
+            "Morning": "Arrival at hotel, check-in and welcome drinks",
+            "Afternoon": "City sightseeing tour covering major landmarks",
+            "Evening": "Welcome dinner at local restaurant",
+            "Night": "Rest at hotel"
+          }
         },
         {
-          id: 2,
-          date: "2024-07-16",
-          activities: [
-            { id: 5, time: "08:00", activity: "Check out and board Premium Cruise to Swaraj Island", location: "Port Blair Dock", icon: "🚢" },
-            { id: 6, time: "12:00", activity: "Arrive and check into resort", location: "Swaraj Island", icon: "🏨" },
-            { id: 7, time: "15:00", activity: "Visit Radhanagar Beach - Asia's best beach", location: "Radhanagar Beach", icon: "🏆" },
-            { id: 8, time: "17:30", activity: "Watch mesmerizing sunset", location: "Radhanagar Beach", icon: "🌅" }
-          ]
+          name: "Day 2",
+          summary: "Adventure activities",
+          details: {
+            "Morning": "Breakfast and adventure park visit",
+            "Afternoon": "Water sports and beach activities",
+            "Evening": "Shopping and local market tour",
+            "Night": "Cultural show and dinner"
+          }
         },
         {
-          id: 3,
-          date: "2024-07-17",
-          activities: [
-            { id: 9, time: "09:00", activity: "Boat ride to Elephant Beach (30 minutes)", location: "Swaraj Island Dock", icon: "🛥️" },
-            { id: 10, time: "10:00", activity: "Snorkeling at Elephant Beach - explore coral reefs", location: "Elephant Beach", icon: "🤿" },
-            { id: 11, time: "13:00", activity: "Return to Swaraj Deep dock", location: "Swaraj Island", icon: "⛵" },
-            { id: 12, time: "15:00", activity: "Board Premium Cruise to Shaheed Deep Island", location: "Swaraj Island Dock", icon: "🚢" },
-            { id: 13, time: "17:00", activity: "Visit Laxmanpur Beach - sunset point", location: "Laxmanpur Beach", icon: "🏖️" },
-            { id: 14, time: "18:30", activity: "Watch sunset at the beach", location: "Laxmanpur Beach", icon: "🌇" }
-          ]
+          name: "Day 3",
+          summary: "Cultural experience and departure",
+          details: {
+            "Morning": "Visit to historical monuments",
+            "Afternoon": "Cultural show and traditional lunch",
+            "Evening": "Farewell ceremony and departure transfer"
+          }
+        }
+      ]
+    },
+    {
+      title: "3 Days 4 Nights",
+      icon: "fas fa-umbrella-beach",
+      badge: "Best Value",
+      description: "Extended stay package with comprehensive dining options. Enjoy diverse culinary experiences throughout your journey.",
+      bgClass: "bg-success",
+      days: [
+        {
+          name: "Continental",
+          summary: "European style breakfast",
+          details: {
+            "Bread & Pastries": "Croissants, muffins, toast",
+            "Beverages": "Coffee, tea, fresh juices",
+            "Fruits": "Seasonal fresh fruit selection",
+            "Extras": "Butter, jam, honey"
+          }
         },
         {
-          id: 4,
-          date: "2024-07-18",
-          activities: [
-            { id: 15, time: "09:00", activity: "Visit Bharatpur Beach - snorkeling and water sports", location: "Bharatpur Beach", icon: "🏄‍♂️" },
-            { id: 16, time: "11:30", activity: "Explore Natural Bridge - picturesque location", location: "Natural Bridge, Shaheed Island", icon: "🌉" },
-            { id: 17, time: "14:00", activity: "Board Premium Cruise back to Port Blair", location: "Shaheed Island Dock", icon: "🚢" },
-            { id: 18, time: "17:00", activity: "Arrive Port Blair and hotel check-in", location: "Port Blair", icon: "🏨" }
-          ]
+          name: "Indian",
+          summary: "Traditional Indian breakfast",
+          details: {
+            "Main Items": "Idli, dosa, upma, poha",
+            "Accompaniments": "Sambar, chutney varieties",
+            "Beverages": "Masala chai, filter coffee",
+            "Sweets": "Jalebi, gulab jamun"
+          }
         },
         {
-          id: 5,
-          date: "2024-07-19",
-          activities: [
-            { id: 19, time: "09:00", activity: "Boat ride to Ross Island - British administrative settlement", location: "Port Blair Dock", icon: "⛵" },
-            { id: 20, time: "10:30", activity: "Explore Ross Island ruins - 'Paris of the past'", location: "Ross Island", icon: "🏛️" },
-            { id: 21, time: "13:00", activity: "Visit North Bay Island - Coral Island", location: "North Bay Island", icon: "🐠" },
-            { id: 22, time: "14:30", activity: "Marine life exploration and activities", location: "North Bay Island", icon: "🐟" },
-            { id: 23, time: "16:00", activity: "Return to Port Blair", location: "Port Blair", icon: "🚤" }
-          ]
+          name: "American",
+          summary: "Classic American breakfast",
+          details: {
+            "Main Course": "Pancakes, waffles, eggs benedict",
+            "Sides": "Bacon, sausages, hash browns",
+            "Beverages": "Orange juice, coffee, milk",
+            "Extras": "Maple syrup, fresh berries"
+          }
+        }
+      ]
+    },
+    {
+      title: "4 Days 5 Nights",
+      icon: "fas fa-landmark",
+      badge: "Premium",
+      description: "Capture unforgettable moments with our premium photography services. Perfect for special occasions and celebrations.",
+      bgClass: "bg-secondary",
+      days: [
+        {
+          name: "Pre-Wedding",
+          summary: "Engagement and pre-wedding shoots",
+          details: {
+            "Duration": "4-6 hours outdoor shoot",
+            "Locations": "2-3 scenic locations",
+            "Deliverables": "100+ edited photos",
+            "Extras": "Online gallery, print options"
+          }
         },
         {
-          id: 6,
-          date: "2024-07-20",
-          activities: [
-            { id: 24, time: "10:00", activity: "Hotel check-out and airport transfer", location: "Port Blair", icon: "🧳" },
-            { id: 25, time: "12:00", activity: "Departure flight", location: "Port Blair Airport", icon: "✈️" }
-          ]
+          name: "Wedding Day",
+          summary: "Full wedding day coverage",
+          details: {
+            "Coverage": "12+ hours complete coverage",
+            "Events": "Ceremony, reception, rituals",
+            "Team": "2 photographers + videographer",
+            "Deliverables": "500+ photos, highlight video"
+          }
+        },
+        {
+          name: "Post-Wedding",
+          summary: "After wedding couple shoot",
+          details: {
+            "Session": "2-3 hours studio/outdoor",
+            "Concept": "Glamour and candid shots",
+            "Styling": "Professional makeup included",
+            "Products": "Album design, wall frames"
+          }
+        }
+      ]
+    },
+    {
+      title: "5 Days 6 Nights",
+      icon: "fas fa-city",
+      badge: "Business",
+      description: "Ideal for corporate events and business meetings. Professional setup with all necessary amenities.",
+      bgClass: "bg-warning",
+      days: [
+        {
+          name: "Conference",
+          summary: "Business conference planning",
+          details: {
+            "Venue": "Premium conference halls",
+            "Services": "AV equipment, catering, registration",
+            "Duration": "Full day or multi-day events",
+            "Extras": "Photography, live streaming"
+          }
+        },
+        {
+          name: "Team Building",
+          summary: "Corporate team activities",
+          details: {
+            "Activities": "Outdoor adventures, workshops",
+            "Venue": "Resorts, adventure parks",
+            "Facilitators": "Professional team builders",
+            "Meals": "Breakfast, lunch, evening snacks"
+          }
+        },
+        {
+          name: "Product Launch",
+          summary: "New product introduction events",
+          details: {
+            "Setup": "Stage design, branding",
+            "Media": "Press coverage, social media",
+            "Audience": "Invitations, guest management",
+            "Experience": "Product demos, presentations"
+          }
+        }
+      ]
+    },
+    {
+      title: "6 Days 7 Nights",
+      icon: "fas fa-spa",
+      badge: "Luxury",
+      description: "Experience luxury accommodation with premium amenities. Perfect for an extended comfortable stay.",
+      bgClass: "bg-info",
+      days: [
+        {
+          name: "Suite",
+          summary: "Luxury suite accommodation",
+          details: {
+            "Room": "Spacious suite with city view",
+            "Amenities": "Mini bar, jacuzzi, balcony",
+            "Services": "24/7 room service, concierge",
+            "Extras": "Complimentary breakfast, wifi"
+          }
+        },
+        {
+          name: "Deluxe",
+          summary: "Comfortable deluxe rooms",
+          details: {
+            "Room": "Well-appointed deluxe room",
+            "Features": "King bed, work desk, sofa",
+            "Facilities": "Gym access, pool, spa",
+            "Services": "Daily housekeeping, laundry"
+          }
+        },
+        {
+          name: "Standard",
+          summary: "Comfortable standard rooms",
+          details: {
+            "Room": "Cozy standard accommodation",
+            "Basics": "Queen bed, TV, AC",
+            "Access": "Common areas, restaurant",
+            "Services": "Front desk, parking"
+          }
+        }
+      ]
+    },
+    {
+      title: "7 Days 8 Nights",
+      icon: "fas fa-route",
+      badge: "Adventure",
+      description: "Explore multiple destinations with our adventure package. Perfect for thrill-seekers and explorers.",
+      bgClass: "bg-dark",
+      days: [
+        {
+          name: "Shimla",
+          summary: "Queen of Hills experience",
+          details: {
+            "Attractions": "Mall Road, Jakhoo Temple",
+            "Activities": "Toy train ride, trekking",
+            "Weather": "Pleasant year-round climate",
+            "Specialties": "Apple orchards, colonial architecture"
+          }
+        },
+        {
+          name: "Manali",
+          summary: "Adventure capital of Himachal",
+          details: {
+            "Attractions": "Rohtang Pass, Solang Valley",
+            "Adventures": "Paragliding, river rafting",
+            "Culture": "Hadimba Temple, local markets",
+            "Season": "Best from March to June"
+          }
+        },
+        {
+          name: "Ooty",
+          summary: "Nilgiri mountain retreat",
+          details: {
+            "Gardens": "Botanical gardens, rose garden",
+            "Lakes": "Ooty Lake boating",
+            "Railways": "Nilgiri mountain railway",
+            "Climate": "Cool weather throughout year"
+          }
         }
       ]
     }
-  ]);
-
-  const [isCreating, setIsCreating] = useState(false);
-  const [newItinerary, setNewItinerary] = useState({
-    title: '',
-    destination: '',
-    startDate: '',
-    endDate: ''
-  });
-
-  const [newActivity, setNewActivity] = useState({
-    time: '',
-    activity: '',
-    location: '',
-    icon: '📍'
-  });
-
-  const createItinerary = () => {
-    if (newItinerary.title && newItinerary.destination && newItinerary.startDate && newItinerary.endDate) {
-      const itinerary = {
-        id: Date.now(),
-        ...newItinerary,
-        days: [{
-          id: 1,
-          date: newItinerary.startDate,
-          activities: []
-        }]
-      };
-      setItineraries([...itineraries, itinerary]);
-      setNewItinerary({ title: '', destination: '', startDate: '', endDate: '' });
-      setIsCreating(false);
-    }
-  };
-
-  const deleteItinerary = (id) => {
-    setItineraries(itineraries.filter(it => it.id !== id));
-  };
-
-  const addActivity = (itineraryId, dayId) => {
-    if (newActivity.time && newActivity.activity && newActivity.location) {
-      setItineraries(itineraries.map(it => {
-        if (it.id === itineraryId) {
-          return {
-            ...it,
-            days: it.days.map(day => {
-              if (day.id === dayId) {
-                return {
-                  ...day,
-                  activities: [...day.activities, {
-                    id: Date.now(),
-                    ...newActivity
-                  }]
-                };
-              }
-              return day;
-            })
-          };
-        }
-        return it;
-      }));
-      setNewActivity({ time: '', activity: '', location: '', icon: '📍' });
-    }
-  };
-
-  const deleteActivity = (itineraryId, dayId, activityId) => {
-    setItineraries(itineraries.map(it => {
-      if (it.id === itineraryId) {
-        return {
-          ...it,
-          days: it.days.map(day => {
-            if (day.id === dayId) {
-              return {
-                ...day,
-                activities: day.activities.filter(act => act.id !== activityId)
-              };
-            }
-            return day;
-          })
-        };
-      }
-      return it;
-    }));
-  };
-
-  const addDay = (itineraryId) => {
-    setItineraries(itineraries.map(it => {
-      if (it.id === itineraryId) {
-        const lastDay = it.days[it.days.length - 1];
-        const nextDate = new Date(lastDay.date);
-        nextDate.setDate(nextDate.getDate() + 1);
-        
-        return {
-          ...it,
-          days: [...it.days, {
-            id: Date.now(),
-            date: nextDate.toISOString().split('T')[0],
-            activities: []
-          }]
-        };
-      }
-      return it;
-    }));
-  };
-
-  const dayGradients = [
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-    'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-    'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
   ];
 
-  const styles = {
-    body: {
-      fontFamily: "'Poppins', sans-serif",
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
-      backgroundSize: '400% 400%',
-      animation: 'gradientShift 15s ease infinite',
-      minHeight: '100vh',
-      position: 'relative',
-      overflow: 'hidden'
-    },
-    
-    floatingElements: {
-      position: 'fixed',
-      width: '100%',
-      height: '100%',
-      pointerEvents: 'none',
-      zIndex: 1
-    },
+  // State for particles
+  const [particles, setParticles] = useState([]);
 
-    floatingElement: {
-      position: 'absolute',
-      opacity: 0.1,
-      fontSize: '3rem',
-      color: 'white',
-      animation: 'float 6s ease-in-out infinite'
-    },
-
-    mainContent: {
-      position: 'relative',
-      zIndex: 10
-    },
-
-    heroSection: {
-      textAlign: 'center',
-      padding: '80px 0',
-      color: 'white'
-    },
-
-    heroIcon: {
-      width: '120px',
-      height: '120px',
-      background: 'rgba(255, 255, 255, 0.2)',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: '0 auto 30px',
-      backdropFilter: 'blur(10px)',
-      border: '2px solid rgba(255, 255, 255, 0.3)',
-      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
-      animation: 'pulse 2s infinite'
-    },
-
-    heroTitle: {
-      fontSize: '4rem',
-      fontWeight: '900',
-      textShadow: '3px 3px 6px rgba(0, 0, 0, 0.3)',
-      marginBottom: '20px',
-      background: 'linear-gradient(45deg, #fff, #ffd700, #fff)',
-      backgroundSize: '200% 200%',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      animation: 'shimmer 3s ease-in-out infinite'
-    },
-
-    heroSubtitle: {
-      fontSize: '1.3rem',
-      opacity: 0.95,
-      maxWidth: '600px',
-      margin: '0 auto 30px',
-      lineHeight: 1.6
-    },
-
-    glassCard: {
-      background: 'rgba(255, 255, 255, 0.15)',
-      backdropFilter: 'blur(15px)',
-      borderRadius: '25px',
-      border: '1px solid rgba(255, 255, 255, 0.2)',
-      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-      transition: 'all 0.3s ease'
-    },
-
-    btnMagical: {
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
-      border: 'none',
-      borderRadius: '50px',
-      padding: '15px 40px',
-      fontWeight: '700',
-      fontSize: '1.1rem',
-      color: 'white',
-      textTransform: 'uppercase',
-      letterSpacing: '1px',
-      position: 'relative',
-      overflow: 'hidden',
-      transition: 'all 0.3s ease',
-      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+  // Particle effect
+  useEffect(() => {
+    const createParticle = () => {
+      const id = Math.random().toString(36).substr(2, 9);
+      const newParticle = {
+        id,
+        left: Math.random() * window.innerWidth,
+        animationDuration: Math.random() * 3 + 3 // 3-6 seconds
+      };
       
-    },
+      setParticles(prev => [...prev, newParticle]);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        setParticles(prev => prev.filter(p => p.id !== id));
+      }, newParticle.animationDuration * 1000);
+    };
 
-    dayCard: {
-      marginBottom: '30px',
-      borderRadius: '20px',
-      overflow: 'hidden',
-      boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
-      transition: 'all 0.3s ease',
-      border: '1px solid rgba(255, 255, 255, 0.3)',
-      background: 'rgba(255, 255, 255, 0.95)',
-      backdropFilter: 'blur(10px)'
-    },
-
-    activityCard: {
-      background: 'rgba(255, 255, 255, 0.9)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255, 255, 255, 0.5)',
-      borderRadius: '15px',
-      padding: '20px',
-      marginBottom: '15px',
-      transition: 'all 0.3s ease',
-      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)'
-    },
-
-    addActivityForm: {
-      background: 'linear-gradient(135deg, rgba(103, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
-      borderRadius: '15px',
-      padding: '20px',
-      border: '2px dashed rgba(103, 126, 234, 0.3)',
-      backdropFilter: 'blur(5px)'
-    }
-  };
-
-  const navigate = useNavigate();
-  const handleBookNow = () => navigate('/booking');
+    const interval = setInterval(createParticle, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div style={styles.body}>
-      {/* Add CSS keyframes */}
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-          @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    <>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      
+      <style jsx>{`
+        :root {
+          --primary-gradient: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+          --secondary-gradient: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+          --success-gradient: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+          --warning-gradient: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+          --info-gradient: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+          --dark-gradient: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          background: #ffffff;
+          min-height: 100vh;
+          position: relative;
+          overflow-x: hidden;
+        }
+
+        .app-container {
+          font-family: 'Poppins', sans-serif;
+          min-height: 100vh;
+          position: relative;
+          overflow-x: hidden;
+        }
+
+        .app-container::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, transparent 49%, rgba(255, 128, 9, 0.05) 50%, transparent 51%),
+                      linear-gradient(-45deg, transparent 49%, rgba(255, 140, 66, 0.05) 50%, transparent 51%),
+                      radial-gradient(circle at 20% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 60% 40%, rgba(255, 165, 0, 0.08) 0%, transparent 50%);
+          background-size: 60px 60px, 60px 60px, 800px 800px, 600px 600px, 1000px 1000px;
+          animation: backgroundShift 20s ease-in-out infinite;
+          pointer-events: none;
+          z-index: -2;
+        }
+
+        .app-container::after {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ff6b35" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+          animation: gridMove 15s linear infinite;
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        .hero-section {
+          width: 100vw;
+          height: 98vh;
+          min-height: 400px;
+          margin: 0;
+          padding: 0;
+          background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                      url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2021&q=80');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          backdrop-filter: blur(5px);
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, 
+            rgba(255, 107, 53, 0.2) 0%,
+            rgba(255, 140, 66, 0.2) 50%,
+            rgba(255, 165, 0, 0.2) 100%);
+          animation: gradientShift 15s ease infinite;
+          pointer-events: none;
+        }
+
+        .hero-title {
+          font-size: 4rem;
+          font-weight: 700;
+          color: white;
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+          margin-bottom: 20px;
+          animation: fadeInUp 1s ease-out;
+          position: relative;
+          z-index: 1;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+          font-size: 1.4rem;
+          color: rgba(255, 255, 255, 0.95);
+          font-weight: 300;
+          animation: fadeInUp 1s ease-out 0.2s both;
+          position: relative;
+          z-index: 1;
+          max-width: 700px;
+          margin: 0 auto;
+          line-height: 1.6;
+          padding: 0 20px;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 30px;
+          padding: 60px 20px;
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+
+        .service-card {
+          background: rgba(255, 226, 185, 0.95);
+          border-radius: 20px;
+          padding: 30px;
+          box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
+          border: 1px solid rgba(255, 107, 53, 0.1);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          position: relative;
+          overflow: hidden;
+          animation: fadeInUp 0.8s ease both;
+        }
+
+        .service-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+          transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+          left: 100%;
+        }
+
+        .service-card:hover {
+          transform: translateY(-10px) scale(1.02);
+          box-shadow: 0 30px 60px rgba(255, 107, 53, 0.2);
+          border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .service-header {
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 25px;
+          position: relative;
+          z-index: 1;
+          flex-shrink: 0;
+        }
+
+        .service-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 20px;
+          font-size: 24px;
+          color: white;
+          box-shadow: 0 10px 20px rgba(255, 184, 53, 0.3);
+          animation: pulse 2s infinite;
+          flex-shrink: 0;
+          background: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+        }
+
+        .service-icon:hover {
+          transform: scale(1.1);
+          box-shadow: 0 15px 30px rgba(255, 184, 53, 0.4);
+        }
+
+        .service-title-container {
+          flex-grow: 1;
+        }
+
+        .service-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #333;
+          margin: 0 0 8px 0;
+          display: flex;
+          align-items: center;
+        }
+
+        .service-description {
+          font-size: 0.9rem;
+          color: #666;
+          line-height: 1.4;
+          margin: 0;
+        }
+
+        .service-badge {
+          display: inline-flex;
+          align-items: center;
+          background: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 0.8rem;
+          margin-left: 12px;
+          box-shadow: 0 2px 8px rgba(255, 184, 53, 0.2);
+        }
+
+        .service-badge i {
+          margin-right: 6px;
+          font-size: 0.9rem;
+          color: white;
+        }
+
+        .main-dropdown-btn {
+          width: 100%;
+          background: linear-gradient(135deg,rgb(255, 184, 53) 0%, #ff8c42 100%);
+          color: white;
+          border: none;
+          border-radius: 15px;
+          padding: 15px 20px;
+          font-size: 1.1rem;
+          font-weight: 500;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+        }
+
+        .main-dropdown-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(251, 162, 59, 0.2), transparent);
+          transition: left 0.5s;
+        }
+
+        .main-dropdown-btn:hover::before {
+          left: 100%;
+        }
+
+        .main-dropdown-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .bg-primary { background: var(--primary-gradient); }
+        .bg-secondary { background: var(--secondary-gradient); }
+        .bg-success { background: var(--success-gradient); }
+        .bg-warning { background: var(--warning-gradient); }
+        .bg-info { background: var(--info-gradient); }
+        .bg-dark { background: var(--dark-gradient); }
+
+        .particle {
+          position: fixed;
+          width: 6px;
+          height: 6px;
+          background: linear-gradient(45deg, #ff6b35, #ff8c42);
+          border-radius: 50%;
+          pointer-events: none;
+          opacity: 0.8;
+          z-index: -1;
+          bottom: -10px;
+          box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        .particle-animate {
+          animation: float-up linear forwards;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes pulse {
+          0% {
+            box-shadow: 0 10px 20px rgba(255, 184, 53, 0.3);
+          }
+          50% {
+            box-shadow: 0 15px 30px rgba(255, 184, 53, 0.5);
+          }
+          100% {
+            box-shadow: 0 10px 20px rgba(255, 184, 53, 0.3);
+          }
+        }
+
+        @keyframes float-up {
+          to {
+            transform: translateY(-100vh) translateX(100px);
+            opacity: 0;
+          }
+        }
+
+        @keyframes backgroundShift {
+          0%, 100% {
+            transform: translateX(0) translateY(0);
+          }
+          25% {
+            transform: translateX(20px) translateY(-20px);
+          }
+          50% {
+            transform: translateX(-20px) translateY(20px);
+          }
+          75% {
+            transform: translateX(20px) translateY(20px);
+          }
+        }
+
+        @keyframes gridMove {
+          0% {
+            transform: translateX(0) translateY(0);
+          }
+          100% {
+            transform: translateX(10px) translateY(10px);
+          }
+        }
+
+        @keyframes gradientShift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-section {
+            height: 50vh;
+            min-height: 350px;
+          }
           
-          @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+          .hero-title {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
           }
-
-          @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+          
+          .hero-subtitle {
+            font-size: 1.1rem;
+            padding: 0 30px;
           }
-
-          @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+          
+          .service-card {
+            padding: 20px;
           }
-
-          @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+          
+          .services-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 40px 20px;
           }
+        }
 
-          .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        @media (max-width: 480px) {
+          .hero-title {
+            font-size: 2rem;
           }
-
-          .btn-magical:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+          
+          .hero-subtitle {
+            font-size: 1rem;
           }
+        }
+      `}</style>
 
-          .activity-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-          }
+      <div className="app-container">
+        {/* Floating Particles */}
+        {particles.map(particle => (
+          <div
+            key={particle.id}
+            className="particle particle-animate"
+            style={{
+              left: `${particle.left}px`,
+              animationDuration: `${particle.animationDuration}s`
+            }}
+          />
+        ))}
 
-          .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-          .floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
-          .floating-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
-          .floating-element:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1s; }
-        `}
-      </style>
-
-      {/* Floating Background Elements */}
-      <div style={styles.floatingElements}>
-        <div className="floating-element" style={{...styles.floatingElement, top: '10%', left: '10%'}}>🌴</div>
-        <div className="floating-element" style={{...styles.floatingElement, top: '20%', right: '15%'}}>🏖️</div>
-        <div className="floating-element" style={{...styles.floatingElement, bottom: '30%', left: '20%'}}>🌊</div>
-        <div className="floating-element" style={{...styles.floatingElement, bottom: '10%', right: '10%'}}>⛵</div>
-      </div>
-
-      <div style={styles.mainContent} className="container-fluid">
-        {/* Hero Section */}
-        <div style={styles.heroSection}>
-          <div style={styles.heroIcon}>
-            <Waves size={60} className="text-white" />
-          </div>
-          <h1 style={styles.heroTitle}>🌴 Dream Destinations 🌴</h1>
-          <p style={styles.heroSubtitle} className="lead">
-            Create unforgettable memories with our stunning travel itineraries. 
-            From pristine beaches to cultural wonders, your adventure awaits!
-          </p>
-          <div className="d-flex justify-content-center mt-4 " >
-            {[1,2,3,4,5].map(i => (
-              <Star key={i} size={24} className="text-warning mx-1" fill="currentColor" />
-            ))}
-          </div>
+        {/* Hero Section - Full Width */}
+        <div className="hero-section">
+          <h1 className="hero-title">Premium Service Categories</h1>
+          <p className="hero-subtitle">Discover Our Exclusive Travel, Event & Hospitality Services</p>
         </div>
 
-        <div className="container  ">
-          {/* Create New Itinerary Button */}
-          <div className="text-center mb-5 " style={{marginRight:"10px",width: "10vh"}}>
-           
-          </div>
-
-          {/* Create Itinerary Form */}
-          {isCreating && (
-            <div className="mb-5" style={styles.glassCard}>
-              <div className="p-4">
-                <h3 className="text-center text-white mb-4">🎯 Plan Your Dream Trip</h3>
-                <div className="row g-3 mb-4">
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      className="form-control form-control-lg"
-                      placeholder="Trip Title (e.g., Magical Bali Adventure)"
-                      value={newItinerary.title}
-                      onChange={(e) => setNewItinerary({...newItinerary, title: e.target.value})}
-                      style={{borderRadius: '15px', border: '2px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)'}}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      className="form-control form-control-lg"
-                      placeholder="Destination (e.g., Bali, Indonesia)"
-                      value={newItinerary.destination}
-                      onChange={(e) => setNewItinerary({...newItinerary, destination: e.target.value})}
-                      style={{borderRadius: '15px', border: '2px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)'}}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="date"
-                      className="form-control form-control-lg"
-                      value={newItinerary.startDate}
-                      onChange={(e) => setNewItinerary({...newItinerary, startDate: e.target.value})}
-                      style={{borderRadius: '15px', border: '2px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)'}}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <input
-                      type="date"
-                      className="form-control form-control-lg"
-                      value={newItinerary.endDate}
-                      onChange={(e) => setNewItinerary({...newItinerary, endDate: e.target.value})}
-                      style={{borderRadius: '15px', border: '2px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.9)'}}
-                    />
-                  </div>
-                </div>
-                <div className="d-flex gap-3 justify-content-center">
-                  <button onClick={createItinerary} className="btn btn-success btn-lg px-4" style={{borderRadius: '25px'}}>
-                    <Save size={20} className="me-2" /> Create
-                  </button>
-                  <button onClick={() => setIsCreating(false)} className="btn btn-secondary btn-lg px-4" style={{borderRadius: '25px'}}>
-                    <X size={20} className="me-2" /> Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Itineraries List */}
-          {itineraries.map((itinerary) => (
-            <div key={itinerary.id} className="mb-5" style={styles.glassCard}>
-              {/* Itinerary Header */}
-              <div className="p-4 text-white" style={{background: dayGradients[0], borderRadius: '25px 25px 0 0'}}>
-                <div className="d-flex justify-content-between align-items-start">
-                  <div>
-                    <h2 className="display-5 fw-bold mb-3">{itinerary.title}</h2>
-                    <div className="d-flex flex-wrap gap-4">
-                      <div className="d-flex align-items-center">
-                        <MapPin size={20} className="me-2" />
-                        <span className="fs-5">{itinerary.destination}</span>
-                      </div>
-                      <div className="d-flex align-items-center">
-                        <Calendar size={20} className="me-2" />
-                        <span className="fs-5">{itinerary.startDate} to {itinerary.endDate}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => deleteItinerary(itinerary.id)}
-                    className="btn btn-outline-light btn-lg"
-                    style={{borderRadius: '15px'}}
-                  >
-                    <Trash2 size={20} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Days */}
-              <div className="p-4">
-                {itinerary.days.map((day, dayIndex) => (
-                  <div key={day.id} style={styles.dayCard}>
-                    <div className="p-4 text-white" style={{background: dayGradients[dayIndex % dayGradients.length]}}>
-                      <h3 className="h4 mb-0 d-flex align-items-center">
-                        <Calendar size={24} className="me-3" />
-                        Day {dayIndex + 1} - {new Date(day.date).toLocaleDateString('en-US', { 
-                          weekday: 'long', 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })}
-                      </h3>
-                    </div>
-
-                    <div className="p-4">
-                      {/* Activities */}
-                      {day.activities.map((activity) => (
-                        <div key={activity.id} className="activity-card" style={styles.activityCard}>
-                          <div className="d-flex justify-content-between align-items-start">
-                            <div className="d-flex align-items-start">
-                              <div className="me-4">
-                                <div className="badge bg-primary fs-6 p-2" style={{borderRadius: '12px'}}>
-                                  <Clock size={16} className="me-1" />
-                                  {activity.time}
-                                </div>
-                              </div>
-                              <div className="flex-grow-1">
-                                <div className="d-flex align-items-center mb-2">
-                                  <span className="fs-4 me-2">{activity.icon}</span>
-                                  <h5 className="mb-0 text-dark">{activity.activity}</h5>
-                                </div>
-                                <p className="text-muted mb-0 d-flex align-items-center">
-                                  <MapPin size={16} className="me-1" />
-                                  {activity.location}
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => deleteActivity(itinerary.id, day.id, activity.id)}
-                              className="btn btn-outline-danger btn-sm"
-                              style={{borderRadius: '10px'}}
-                            >
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-
-                      {/* Add Activity Form */}
-                      <div style={styles.addActivityForm}>
-                        <h5 className="text-primary mb-3">📝 Add New Activity</h5>
-                        <div className="row g-3 mb-3">
-                          <div className="col-md-3">
-                            <input
-                              type="time"
-                              className="form-control"
-                              value={newActivity.time}
-                              onChange={(e) => setNewActivity({...newActivity, time: e.target.value})}
-                              style={{borderRadius: '10px'}}
-                            />
-                          </div>
-                          <div className="col-md-4">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Activity Description"
-                              value={newActivity.activity}
-                              onChange={(e) => setNewActivity({...newActivity, activity: e.target.value})}
-                              style={{borderRadius: '10px'}}
-                            />
-                          </div>
-                          <div className="col-md-3">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Location"
-                              value={newActivity.location}
-                              onChange={(e) => setNewActivity({...newActivity, location: e.target.value})}
-                              style={{borderRadius: '10px'}}
-                            />
-                          </div>
-                          <div className="col-md-2">
-                            <button
-                              onClick={() => addActivity(itinerary.id, day.id)}
-                              className="btn btn-primary w-100"
-                              style={{borderRadius: '10px'}}
-                            >
-                              <Plus size={20} />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Add Day Button */}
-                <button
-                  onClick={() => addDay(itinerary.id)}
-                  className="btn btn-outline-primary btn-lg w-100 mt-4"
-                  style={{borderRadius: '15px', borderStyle: 'dashed', borderWidth: '3px'}}
-                >
-                  <Plus size={24} className="me-2" />
-                  🎯 Add Another Amazing Day
-                </button>
-                {/* Book travel */}
-
-                 <button style={{
-          backgroundColor: "pink",
-          color: "white",
-          border: "none",
-          padding: "15px 40px",
-          borderRadius: "30px",
-          fontSize: "16px",
-          fontWeight: "500",
-          cursor: "pointer",
-          transition: "background-color 0.3s ease",
-          boxShadow: "0 4px 12px rgba(249, 115, 22, 0.2)",
-          marginLeft: "300px",
-          marginTop: "50px"
-        }}
-        onClick={handleBookNow}>
-          BOOK YOUR TRAVEL
-        </button>
-              </div>
-            </div>
+        {/* Main Content */}
+        <div className="services-grid">
+          {serviceData.map((service, index) => (
+            <ServiceCard 
+              key={index} 
+              service={service} 
+              index={index}
+            />
           ))}
-
-          {/* Empty State */}
-          {itineraries.length === 0 && !isCreating && (
-            <div className="text-center py-5" style={styles.glassCard}>
-              <div className="p-5">
-                <Calendar size={80} className="text-white opacity-50 mb-4" />
-                <h3 className="text-white mb-3">No Adventures Yet!</h3>
-                <p className="text-white opacity-75 fs-5">Start planning your dream vacation today!</p>
-              </div>
-            </div>
-          )}
         </div>
+      </div>
+    </>
+  );
+};
+
+// Service Card Component
+const ServiceCard = ({ service, index }) => {
+  const navigate = useNavigate();
+  const handleViewMore = () => {
+    navigate(`/service/${index}`);
+  };
+  
+  return (
+    <div className="service-card" style={{ animationDelay: `${index * 0.2}s` }}>
+      <div className="service-header">
+        <div className={`service-icon ${service.bgClass}`}> <i className={service.icon}></i> </div>
+        <div className="service-title-container">
+          <h3 className="service-title">
+            {service.title}
+            <span className="service-badge">
+              <i className="fas fa-star"></i>
+              {service.badge}
+            </span>
+          </h3>
+          <p className="service-description">{service.description}</p>
+        </div>
+      </div>
+      <div style={{ marginTop: 24, textAlign: 'center' }}>
+        <button
+          className="main-dropdown-btn"
+          style={{ width: 'auto', minWidth: 160, padding: '12px 32px', fontWeight: 600, fontSize: '1rem' }}
+          onClick={handleViewMore}
+        >
+          View More
+        </button>
       </div>
     </div>
   );
 };
 
-export default TravelItinerary;
+export default PremiumServiceCategories;

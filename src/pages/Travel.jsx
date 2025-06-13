@@ -5,51 +5,51 @@ function Travel() {
   const travelPackages = [
     {
       id: 0,
-      title: "Machu Picchu Adventure",
-      location: "Peru",
+      title: "3 day 4 night",
+      location: "",
       duration: "9 Days",
       price: "$1,500",
-      image: "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      image: "https://images.pexels.com/photos/30851795/pexels-photo-30851795/free-photo-of-historic-ruins-with-tree-roots-on-andaman-island.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
       id: 1,
-      title: "Greek Islands Explorer",
-      location: "Greece",
+      title: "6 day 7 night",
+      location: "",
       duration: "7 Days",
       price: "$1,800",
-      image: "https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      image: "https://images.pexels.com/photos/10794387/pexels-photo-10794387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       id: 2,
-      title: "Safari Adventure",
-      location: "Tanzania",
+      title: "7 day 8 night",
+      location: "",
       duration: "8 Days",
       price: "$2,500",
-      image: "https://images.pexels.com/photos/259397/pexels-photo-259397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      image: "https://images.pexels.com/photos/10818890/pexels-photo-10818890.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
       id: 3,
-      title: "Himachal Hills Explorer",
-      location: "India",
+      title: "4 day 5 night",
+      location: "",
       duration: "12 Days",
       price: "$9,800",
-      image: "https://images.pexels.com/photos/32420392/pexels-photo-32420392/free-photo-of-scenic-bridge-and-snow-capped-mountains-view.jpeg?auto=compress&cs=tinysrgb&w=600"
+      image: "https://i.pinimg.com/736x/1a/bd/fc/1abdfc0cb2cd7470a0cf82ec958b3bed.jpg"
     },
      {
       id: 4,
-      title: "Explore Andaman",
-      location: "Andaman & Nicobar Islands, India",
+      title: "2 day 3 night",
+      location: " ",
       duration: "6 Days",
       price: "$2,800",
-      image: "https://images.pexels.com/photos/30658207/pexels-photo-30658207/free-photo-of-rustic-boat-on-tranquil-andaman-sea.jpeg?auto=compress&cs=tinysrgb&w=600"
+      image: "https://i.pinimg.com/736x/fa/6c/ba/fa6cbaf15ddc25ada242ed9435e1ab86.jpg"
     },
      {
       id: 5,
-      title: "Japanese Culture Tour",
-      location: "Japan",
+      title: "5 days 6 night",
+      location: "",
       duration: "10 Days",
       price: "$2,800",
-      image: "https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      image: "https://i.pinimg.com/736x/c6/80/77/c68077f39b27dda19f08e9378bde160b.jpg"
     },
 
   ];
@@ -117,74 +117,17 @@ function Travel() {
                     <p className="mb-0">{pkg.location}</p>
                   </div>
                 </div>
-                <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div>
-                      <p className="mb-0"><i className="far fa-clock me-2"></i>{pkg.duration}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-warning mb-0">{pkg.price}</h4>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="d-grid">
-                    <button className="btn btn-warning text-white" onClick={() => handleViewDetails(1)}>View Details</button>
-                  </div>
-                </div>
+                                    <button className="btn btn-warning text-white" onClick={() => handleViewDetails(1)}>View Details</button>
+
+               
               </div>
             </div>
           ))}
         </div>
         </div>
 
-        {/* Featured Destinations */}
-        <div className="row mt-5">
-          <div className="col-12 text-center mb-4">
-            <h2>Featured Destinations</h2>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="card border-0 shadow-sm">
-              <img 
-                src="https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="card-img-top"
-                alt="Europe"
-                style={{height: '200px', objectFit: 'cover'}}
-              />
-              <div className="card-body text-center">
-                <h5 className="card-title">Europe</h5>
-                <p className="card-text">20+ Destinations</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="card border-0 shadow-sm">
-              <img 
-                src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="card-img-top"
-                alt="Asia"
-                style={{height: '200px', objectFit: 'cover'}}
-              />
-              <div className="card-body text-center">
-                <h5 className="card-title">Asia</h5>
-                <p className="card-text">15+ Destinations</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="card border-0 shadow-sm">
-              <img 
-                src="https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                className="card-img-top"
-                alt="Americas"
-                style={{height: '200px', objectFit: 'cover'}}
-              />
-              <div className="card-body text-center">
-                <h5 className="card-title">Americas</h5>
-                <p className="card-text">25+ Destinations</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      
+        
       
     </div>
   );

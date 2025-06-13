@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Plus, Save, X, MapPin, Calendar, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 function Destination() {
   const [isCreating, setIsCreating] = useState(false);
   const [itineraries, setItineraries] = useState([]);
+  const navigate = useNavigate();
 
   const [newItinerary, setNewItinerary] = useState({
     title: '',
@@ -59,6 +61,45 @@ function Destination() {
 
   const dayGradients = ['linear-gradient(90deg, #1CB5E0 0%, #000851 100%)'];
 
+  const featuredDestinations = [
+    {
+      title: 'Port Blair',
+      img: 'https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600',
+      text: '20+ Destinations',
+      description: 'Port Blair is the capital city of the Andaman and Nicobar Islands, known for its rich history and beautiful beaches.'
+    },
+    {
+      title: 'Rangat',
+      img: 'https://images.pexels.com/photos/7970786/pexels-photo-7970786.jpeg?auto=compress&cs=tinysrgb&w=600',
+      text: '15+ Destinations',
+      description: 'Rangat is a peaceful town in Middle Andaman, famous for its mangroves and eco-tourism.'
+    },
+    {
+      title: 'Diglipur',
+      img: 'https://images.pexels.com/photos/28581876/pexels-photo-28581876/free-photo-of-beautiful-tropical-seascape-with-limestone-cliffs.jpeg?auto=compress&cs=tinysrgb&w=600',
+      text: '25+ Destinations',
+      description: 'Diglipur is the largest town in North Andaman, home to beautiful beaches and the highest peak in the islands.'
+    },
+    {
+      title: 'Havelock Island ',
+      img: 'https://images.pexels.com/photos/10914023/pexels-photo-10914023.jpeg?auto=compress&cs=tinysrgb&w=600',
+      text: '25+ Destinations',
+      description: 'Havelock Island is a popular destination for its white sandy beaches and crystal-clear waters.'
+    },
+    {
+      title: 'Neil Island ',
+      img: 'https://images.pexels.com/photos/16827207/pexels-photo-16827207/free-photo-of-sea-coast-with-island.jpeg?auto=compress&cs=tinysrgb&w=600',
+      text: '25+ Destinations',
+      description: 'Neil Island is known for its laid-back vibe and beautiful coral reefs.'
+    },
+    {
+      title: 'Baratang Island ',
+      img: 'https://images.pexels.com/photos/10794420/pexels-photo-10794420.jpeg?auto=compress&cs=tinysrgb&w=600',
+      text: '25+ Destinations',
+      description: 'Baratang Island is famous for its limestone caves and mud volcanoes.'
+    }
+  ];
+
   return (
     <div>
       {/* Hero section */}
@@ -97,25 +138,13 @@ function Destination() {
           <h2>Featured Destinations</h2>
         </div>
 
-        {[
-          {
-            title: 'Europe',
-            img: 'https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg',
-            text: '20+ Destinations'
-          },
-          {
-            title: 'Asia',
-            img: 'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg',
-            text: '15+ Destinations'
-          },
-          {
-            title: 'Americas',
-            img: 'https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg',
-            text: '25+ Destinations'
-          }
-        ].map((dest, index) => (
-          <div key={index} className="col-md-4 mb-4">
-            <div className="card border-0 shadow-sm">
+        {featuredDestinations.map((dest, index) => (
+          <div key={index} className="col-md-4 mb-4" style={{padding: '60px'}}>
+            <div
+              className="card border-0 shadow-sm"
+              style={{ cursor: 'pointer' }}
+              onClick={() => navigate(`/destination/${encodeURIComponent(dest.title.trim())}`)}
+            >
               <img
                 src={`${dest.img}?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
                 className="card-img-top"
@@ -132,136 +161,15 @@ function Destination() {
       </div>
 
       {/* Create destination */}
-      <div className="text-center my-4">
-        <button
-          onClick={() => setIsCreating(true)}
-          className="btn btn-lg shadow-lg"
-          style={styles.btnMagical}
-        >
-          <Plus size={24} className="me-3" />
-          ✨ Create Magical Journey ✨
-        </button>
-      </div>
+     
 
       {/* Create Itinerary Form */}
-      {isCreating && (
-        <div className="mb-5" style={styles.glassCard}>
-          <div className="p-4">
-            <h3 className="text-center text-dark mb-4">🎯 Plan Your Dream Trip</h3>
-            <div className="row g-3 mb-4">
-              <div className="col-md-6">
-                <input
-                  type="text"
-                  className="form-control form-control-lg"
-                  placeholder="Trip Title (e.g., Magical Bali Adventure)"
-                  value={newItinerary.title}
-                  onChange={(e) => setNewItinerary({ ...newItinerary, title: e.target.value })}
-                  style={{
-                    borderRadius: '15px',
-                    border: '2px solid rgba(255,255,255,0.3)',
-                    background: 'rgba(255,255,255,0.9)'
-                  }}
-                />
-              </div>
-              <div className="col-md-6">
-                <input
-                  type="text"
-                  className="form-control form-control-lg"
-                  placeholder="Destination (e.g., Bali, Indonesia)"
-                  value={newItinerary.destination}
-                  onChange={(e) =>
-                    setNewItinerary({ ...newItinerary, destination: e.target.value })
-                  }
-                  style={{
-                    borderRadius: '15px',
-                    border: '2px solid rgba(255,255,255,0.3)',
-                    background: 'rgba(255,255,255,0.9)'
-                  }}
-                />
-              </div>
-              <div className="col-md-6">
-                <input
-                  type="date"
-                  className="form-control form-control-lg"
-                  value={newItinerary.startDate}
-                  onChange={(e) =>
-                    setNewItinerary({ ...newItinerary, startDate: e.target.value })
-                  }
-                  style={{
-                    borderRadius: '15px',
-                    border: '2px solid rgba(255,255,255,0.3)',
-                    background: 'rgba(255,255,255,0.9)'
-                  }}
-                />
-              </div>
-              <div className="col-md-6">
-                <input
-                  type="date"
-                  className="form-control form-control-lg"
-                  value={newItinerary.endDate}
-                  onChange={(e) => setNewItinerary({ ...newItinerary, endDate: e.target.value })}
-                  style={{
-                    borderRadius: '15px',
-                    border: '2px solid rgba(255,255,255,0.3)',
-                    background: 'rgba(255,255,255,0.9)'
-                  }}
-                />
-              </div>
-            </div>
-            <div className="d-flex gap-3 justify-content-center">
-              <button
-                onClick={createItinerary}
-                className="btn btn-success btn-lg px-4"
-                style={{ borderRadius: '25px' }}
-              >
-                <Save size={20} className="me-2" /> Create
-              </button>
-              <button
-                onClick={() => setIsCreating(false)}
-                className="btn btn-secondary btn-lg px-4"
-                style={{ borderRadius: '25px' }}
-              >
-                <X size={20} className="me-2" /> Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     
+              
+           
 
-      {/* Itinerary list */}
-      {itineraries.map((itinerary) => (
-        <div key={itinerary.id} className="mb-5" style={styles.glassCard}>
-          <div
-            className="p-4 text-white"
-            style={{ background: dayGradients[0], borderRadius: '25px 25px 0 0' }}
-          >
-            <div className="d-flex justify-content-between align-items-start">
-              <div>
-                <h2 className="display-5 fw-bold mb-3">{itinerary.title}</h2>
-                <div className="d-flex flex-wrap gap-4">
-                  <div className="d-flex align-items-center">
-                    <MapPin size={20} className="me-2" />
-                    <span className="fs-5">{itinerary.destination}</span>
-                  </div>
-                  <div className="d-flex align-items-center">
-                    <Calendar size={20} className="me-2" />
-                    <span className="fs-5">
-                      {itinerary.startDate} to {itinerary.endDate}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={() => deleteItinerary(itinerary.id)}
-                className="btn btn-outline-light btn-lg"
-                style={{ borderRadius: '15px' }}
-              >
-                <Trash2 size={20} />
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
+  
+     
     </div>
   );
 }

@@ -51,9 +51,15 @@ function Navbar() {
     </a>
   );
 
+
+  //when click booktravel button go to booking page
+  const handleBookClick = () => {
+    Navigate('/Booking');
+  }
+
   return (
     <>
-      <nav className={`navbar-custom ${isScrolled ? 'scrolled' : ''}`}>
+      <nav className={`navbar-custom ${isScrolled ? 'scrolled' : ''}`} style={{overflowX: "hidden"}}>
         <div className="container">
           <Link className="navbar-brand" to="/">
             <img 
@@ -77,7 +83,7 @@ function Navbar() {
               <i className="fas fa-phone-alt"></i>
               <span>1 800 123 4567</span>
             </div>
-            <Link to="/book" className="book-travel-btn">BOOK YOUR TRAVEL</Link>
+            <Link  className="book-travel-btn" to="/contacts#enquiry" onClick={handleBookClick}>ENQUIRY</Link>
           </div>
 
           <button 
@@ -105,6 +111,7 @@ function Navbar() {
           top: 0;
           z-index: 1000;
           transition: all 0.3s ease;
+          overflow-x: "hidden";
         }
 
         .navbar-custom.scrolled {

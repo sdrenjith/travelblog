@@ -5,23 +5,23 @@ function Banner() {
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+      image: "https://images.pexels.com/photos/2617548/pexels-photo-2617548.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "INSPIRING, BEAUTIFUL, BREATHTAKING",
-      subtitle: "Many people visit Peru to see the impressive Inca ruins of Machu Picchu, which are deservedly a stand-alone destination.",
+      subtitle: "Visiting Andaman was a dream come true. The crystal-clear beaches, peaceful islands, and rich history made it an unforgettable experience. We especially loved the boat rides and the Cellular Jail light show!",
       location: "Machu Picchu",
       price: "$1200"
     },
     {
-      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+      image: "https://images.pexels.com/photos/2554603/pexels-photo-2554603.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "EXPLORE ANCIENT WONDERS",
-      subtitle: "Discover the mystical beauty of Peru's archaeological treasures and breathtaking landscapes.",
+      subtitle: "Andaman is pure magic. From snorkeling in Havelock to relaxing at Radhanagar Beach, every moment was picture-perfect. The people were friendly and the food was delicious too!",
       location: "Sacred Valley",
       price: "$950"
     },
     {
-      image: "https://images.unsplash.com/photo-1531065208531-4036c0dba3ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80",
+      image: "https://images.pexels.com/photos/90336/pexels-photo-90336.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "AUTHENTIC CULTURAL EXPERIENCE",
-      subtitle: "Immerse yourself in the rich culture and traditions of Peru's highland communities.",
+      subtitle: "We were amazed by the beauty of the coral reefs and untouched beaches. If you love nature, peace, and adventure, Andaman is the place to be.",
       location: "Cusco Region",
       price: "$800"
     }
@@ -97,23 +97,23 @@ function Banner() {
         <div className="side-images">
           <div className="side-image">
             <img 
-              src="https://images.unsplash.com/photo-1531065208531-4036c0dba3ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" 
+              src="https://images.pexels.com/photos/237739/pexels-photo-237739.jpeg?auto=compress&cs=tinysrgb&w=600" 
               alt="Llamas in Peru"
             />
             <div className="image-overlay">
               <div className="overlay-tag">SIT BACK AND RELAX</div>
-              <h3 className="overlay-title">THIS IS PERU</h3>
+              <h3 className="overlay-title">THIS IS ANDAMAN</h3>
             </div>
           </div>
           
           <div className="side-image">
             <img 
-              src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+              src="https://images.pexels.com/photos/18198496/pexels-photo-18198496/free-photo-of-bay-on-sea-shore-of-island-in-thailand.jpeg?auto=compress&cs=tinysrgb&w=600" 
               alt="Colonial Architecture"
             />
             <div className="image-overlay">
-              <div className="overlay-tag">COURTYARD OF THE CONVENTO</div>
-              <h3 className="overlay-title">SANTO DOMINGO IN LIMA</h3>
+              <div className="overlay-tag">COURTYARD OF THE HISTORIC </div>
+              <h3 className="overlay-title">CELLULAR JAIL IN PORT BLAIR</h3>
             </div>
           </div>
         </div>

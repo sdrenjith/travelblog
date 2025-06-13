@@ -57,7 +57,7 @@ function Banner3() {
           zIndex: 2
         }}>
           <img 
-            src="https://images.unsplash.com/photo-1587595431973-160d0d94add1" 
+            src="https://i.pinimg.com/736x/79/ee/95/79ee952da56758c83d1e7b1e85e12916.jpg" 
             alt="Machu Picchu"
             style={{
               width: "100%",
@@ -97,11 +97,11 @@ function Banner3() {
               fontSize: "42px",
               fontWeight: "bold",
               lineHeight: "1"
-            }}>$1500</div>
+            }}>6 Day</div>
             <div style={{
               fontSize: "16px",
               marginTop: "5px"
-            }}>9 DAYS</div>
+            }}>7 NIGHT</div>
           </div>
         </div>
       </div>
@@ -119,14 +119,14 @@ function Banner3() {
           fontWeight: "normal",
           fontFamily: 'Itim, cursive',
           marginBottom: "10px"
-        }}>Machu Picchu</h3>
+        }}>CELLULAR JAIL</h3>
         
         <h2 style={{
           fontSize: "32px",
           fontWeight: "bold",
           marginBottom: "20px",
           color: "#1f2937"
-        }}>LIMA TO CUSCO</h2>
+        }}>PORT BLAIR TO DIGLIPUR</h2>
         
         <p style={{
           color: "#4b5563",
@@ -135,7 +135,7 @@ function Banner3() {
           marginBottom: "30px",
           fontWeight: "300"
         }}>
-          Perfect for those looking to experience <br /> the region's  archaeological and cultural <br /> treasures in a short amount of time, this <br /> adventure includes a four-day trek <br />along the Inca Trail.
+          Perfect for travelers eager to uncover the region's rich archaeological and cultural heritage in just a few days, this adventure features an unforgettable four-day trek along the legendary Inca Trail.
         </p>
 
         {/* Travel Details */}

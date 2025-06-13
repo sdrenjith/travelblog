@@ -301,3 +301,32 @@
     font-size: 20px;
   }
 } 
+
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #f0f0f0; /* optional */
+  padding: 10px 0;
+}
+
+.marquee-track {
+  display: flex;
+  animation: scroll-marquee 25s linear infinite;
+}
+
+.marquee-track img {
+  height: 100px;
+  margin-right: 40px;
+  flex-shrink: 0;
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
