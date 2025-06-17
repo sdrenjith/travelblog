@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const PremiumServiceCategories = () => {
   // Service data
@@ -13,31 +13,31 @@ const PremiumServiceCategories = () => {
       days: [
         {
           name: "Day 1",
-          summary: "Arrival and city tour",
+          summary: " Arrival in Port Blair",
           details: {
-            "Morning": "Arrival at hotel, check-in and welcome drinks",
-            "Afternoon": "City sightseeing tour covering major landmarks",
+            "Morning": "Arrive at Port Blair Airport and transfer to your hotel",
+            "Afternoon": " Visit the historic Cellular Jail and enjoy the mesmerizing Light & Sound Show",
             "Evening": "Welcome dinner at local restaurant",
-            "Night": "Rest at hotel"
+            "Night": "Overnight stay in Port Blair"
           }
         },
         {
           name: "Day 2",
-          summary: "Adventure activities",
+          summary: "Havelock Island – Radhanagar Beach",
           details: {
-            "Morning": "Breakfast and adventure park visit",
-            "Afternoon": "Water sports and beach activities",
-            "Evening": "Shopping and local market tour",
-            "Night": "Cultural show and dinner"
+            "Morning": "Take a ferry to Havelock Island and spend time at the breathtaking Radhanagar Beach.",
+            "Afternoon": "Relax on the pristine white sand and enjoy the serene waves",
+            
+            "Night": "Overnight stay in Havelock."
           }
         },
         {
           name: "Day 3",
-          summary: "Cultural experience and departure",
+          summary: "Return to Port Blair – Departure",
           details: {
-            "Morning": "Visit to historical monuments",
-            "Afternoon": "Cultural show and traditional lunch",
-            "Evening": "Farewell ceremony and departure transfer"
+            "Morning": "Return to Port Blair by ferry.",
+            "Afternoon": " Enjoy some last-minute shopping before transferring to the airport for departure.",
+           
           }
         }
       ]
@@ -46,37 +46,46 @@ const PremiumServiceCategories = () => {
       title: "3 Days 4 Nights",
       icon: "fas fa-umbrella-beach",
       badge: "Best Value",
-      description: "Extended stay package with comprehensive dining options. Enjoy diverse culinary experiences throughout your journey.",
+      description: "Experience the beauty of the Andaman Islands with this comprehensive package.",
       bgClass: "bg-success",
       days: [
         {
-          name: "Continental",
-          summary: "European style breakfast",
+          name: "Day 1",
+          summary: " Arrival in Port Blair – Cellular Jail & Light Show",
           details: {
-            "Bread & Pastries": "Croissants, muffins, toast",
-            "Beverages": "Coffee, tea, fresh juices",
-            "Fruits": "Seasonal fresh fruit selection",
-            "Extras": "Butter, jam, honey"
+            "Morning": "Arrive at Port Blair Airport and transfer to your hotel.",
+            "Afternoon": "Visit the historic Cellular Jail and enjoy the Light & Sound Show.",
+           
+            "Night": "Overnight stay in Port Blair."
           }
         },
         {
-          name: "Indian",
-          summary: "Traditional Indian breakfast",
+          name: "Day 2",
+          summary: "Havelock Island – Radhanagar Beach",
           details: {
-            "Main Items": "Idli, dosa, upma, poha",
-            "Accompaniments": "Sambar, chutney varieties",
-            "Beverages": "Masala chai, filter coffee",
-            "Sweets": "Jalebi, gulab jamun"
+            "Morning": "Take a ferry to Havelock Island ",
+            "Afternoon": "Relax at the stunning Radhanagar Beach",
+            "Evening": "Enjoy the white sandy shores and crystal-clear waters.",
+            "Night": "Overnight stay in Havelock"
           }
         },
         {
-          name: "American",
-          summary: "Classic American breakfast",
+          name: "Day 3",
+          summary: "Elephant Beach – Snorkeling & Return to Port Blair",
           details: {
-            "Main Course": "Pancakes, waffles, eggs benedict",
-            "Sides": "Bacon, sausages, hash browns",
-            "Beverages": "Orange juice, coffee, milk",
-            "Extras": "Maple syrup, fresh berries"
+            "Morning": "Visit Elephant Beach for exciting water activities",
+            "Afternoon": "Enjoy snorkeling and jet skiing",
+            "Evening": "Return to Port Blair",
+            "Night": "Overnight stay in Port Blair"
+          }
+        },
+        {
+          name: "Day 4",
+          summary: "Departure from Andaman",
+          details: {
+            "Morning": "Breakfast at the hotel",
+            "Afternoon": "Check out and transfer to the airport",
+            "Evening": "Departure from Andaman"
           }
         }
       ]
@@ -85,158 +94,342 @@ const PremiumServiceCategories = () => {
       title: "4 Days 5 Nights",
       icon: "fas fa-landmark",
       badge: "Premium",
-      description: "Capture unforgettable moments with our premium photography services. Perfect for special occasions and celebrations.",
+      description: "Comprehensive Andaman exploration with premium activities. Experience the best of Port Blair and Havelock Island with this well-planned itinerary.",
       bgClass: "bg-secondary",
       days: [
         {
-          name: "Pre-Wedding",
-          summary: "Engagement and pre-wedding shoots",
+          name: "Day 1",
+          summary: "Arrival in Port Blair – Sightseeing",
           details: {
-            "Duration": "4-6 hours outdoor shoot",
-            "Locations": "2-3 scenic locations",
-            "Deliverables": "100+ edited photos",
-            "Extras": "Online gallery, print options"
+            "Morning": "Arrive at Port Blair Airport and transfer to your hotel",
+            "Afternoon": "Visit the iconic Cellular Jail",
+            "Evening": "Witness the captivating Light & Sound Show",
+            "Night": "Overnight stay in Port Blair"
           }
         },
         {
-          name: "Wedding Day",
-          summary: "Full wedding day coverage",
+          name: "Day 2",
+          summary: "Havelock Island – Radhanagar Beach",
           details: {
-            "Coverage": "12+ hours complete coverage",
-            "Events": "Ceremony, reception, rituals",
-            "Team": "2 photographers + videographer",
-            "Deliverables": "500+ photos, highlight video"
+            "Morning": "Board a ferry to Havelock Island",
+            "Afternoon": "Visit the stunning Radhanagar Beach",
+            "Evening": "Spend your day relaxing by the turquoise waters",
+            "Night": "Overnight stay in Havelock"
           }
         },
         {
-          name: "Post-Wedding",
-          summary: "After wedding couple shoot",
+          name: "Day 3",
+          summary: "Elephant Beach – Water Activities",
           details: {
-            "Session": "2-3 hours studio/outdoor",
-            "Concept": "Glamour and candid shots",
-            "Styling": "Professional makeup included",
-            "Products": "Album design, wall frames"
+            "Morning": "Explore Elephant Beach",
+            "Afternoon": "Enjoy snorkeling & jet skiing",
+            "Evening": "Return to Havelock",
+            "Night": "Overnight stay in Havelock"
+          }
+        },
+        {
+          name: "Day 4",
+          summary: "Return to Port Blair – Corbyn's Cove Beach",
+          details: {
+            "Morning": "Take a ferry back to Port Blair",
+            "Afternoon": "Visit the serene Corbyn's Cove Beach",
+            "Evening": "Enjoy a peaceful evening",
+            "Night": "Overnight stay in Port Blair"
+          }
+        },
+        {
+          name: "Day 5",
+          summary: "Departure from Andaman",
+          details: {
+            "Morning": "Breakfast at the hotel",
+            "Afternoon": "Check out and transfer to Port Blair Airport",
+            "Evening": "Departure with unforgettable memories"
           }
         }
+      ],
+      includes: [
+        "Accommodation with breakfast",
+        "Private transfers & ferry tickets",
+        "Sightseeing as per itinerary"
+      ],
+      exclusions: [
+        "Airfare & personal expenses",
+        "Water sports & additional activities"
       ]
     },
     {
       title: "5 Days 6 Nights",
       icon: "fas fa-city",
       badge: "Business",
-      description: "Ideal for corporate events and business meetings. Professional setup with all necessary amenities.",
+      description: "Comprehensive Andaman exploration with premium activities. Experience the best of Port Blair, Havelock, and Neil Island with this well-planned itinerary.",
       bgClass: "bg-warning",
       days: [
         {
-          name: "Conference",
-          summary: "Business conference planning",
+          name: "Day 1",
+          summary: "Arrival in Port Blair – Cellular Jail",
           details: {
-            "Venue": "Premium conference halls",
-            "Services": "AV equipment, catering, registration",
-            "Duration": "Full day or multi-day events",
-            "Extras": "Photography, live streaming"
+            "Morning": "Arrive at Port Blair Airport and transfer to your hotel",
+            "Afternoon": "Explore the historic Cellular Jail",
+            "Evening": "Enjoy the Light & Sound Show",
+            "Night": "Overnight stay in Port Blair"
           }
         },
         {
-          name: "Team Building",
-          summary: "Corporate team activities",
+          name: "Day 2",
+          summary: "Havelock Island – Radhanagar Beach",
           details: {
-            "Activities": "Outdoor adventures, workshops",
-            "Venue": "Resorts, adventure parks",
-            "Facilitators": "Professional team builders",
-            "Meals": "Breakfast, lunch, evening snacks"
+            "Morning": "Take a ferry to Havelock Island",
+            "Afternoon": "Visit the stunning Radhanagar Beach",
+            "Evening": "Relax amidst the white sand and blue waters",
+            "Night": "Overnight stay in Havelock"
           }
         },
         {
-          name: "Product Launch",
-          summary: "New product introduction events",
+          name: "Day 3",
+          summary: "Elephant Beach – Snorkeling & Water Sports",
           details: {
-            "Setup": "Stage design, branding",
-            "Media": "Press coverage, social media",
-            "Audience": "Invitations, guest management",
-            "Experience": "Product demos, presentations"
+            "Morning": "Visit Elephant Beach for adventure activities",
+            "Afternoon": "Enjoy snorkeling, glass-bottom boat rides, and jet skiing",
+            "Evening": "Return to Havelock",
+            "Night": "Overnight stay in Havelock"
+          }
+        },
+        {
+          name: "Day 4",
+          summary: "Neil Island – Natural Bridge & Beaches",
+          details: {
+            "Morning": "Travel to Neil Island",
+            "Afternoon": "Visit Bharatpur Beach and Laxmanpur Beach",
+            "Evening": "Explore the iconic Natural Bridge",
+            "Night": "Overnight stay in Neil Island"
+          }
+        },
+        {
+          name: "Day 5",
+          summary: "Return to Port Blair – Shopping & Leisure",
+          details: {
+            "Morning": "Return to Port Blair",
+            "Afternoon": "Explore local markets for souvenirs",
+            "Evening": "Enjoy an evening stroll at Corbyn's Cove Beach",
+            "Night": "Overnight stay in Port Blair"
+          }
+        },
+        {
+          name: "Day 6",
+          summary: "Departure from Andaman",
+          details: {
+            "Morning": "Breakfast at the hotel",
+            "Afternoon": "Check out and transfer to Port Blair Airport",
+            "Evening": "Departure with unforgettable memories"
           }
         }
+      ],
+      includes: [
+        "Accommodation with breakfast",
+        "Private transfers & ferry tickets",
+        "Sightseeing as per itinerary",
+        "Light & Sound Show tickets"
+      ],
+      exclusions: [
+        "Airfare & personal expenses",
+        "Water sports & additional activities",
+        "Meals other than breakfast"
       ]
     },
     {
       title: "6 Days 7 Nights",
       icon: "fas fa-spa",
       badge: "Luxury",
-      description: "Experience luxury accommodation with premium amenities. Perfect for an extended comfortable stay.",
+      description: "Experience the ultimate Andaman adventure with this comprehensive package. Explore Port Blair, Havelock, and Neil Island with premium activities and comfortable stays.",
       bgClass: "bg-info",
       days: [
         {
-          name: "Suite",
-          summary: "Luxury suite accommodation",
+          name: "Day 1",
+          summary: "Arrival in Port Blair – Cellular Jail & Light Show",
           details: {
-            "Room": "Spacious suite with city view",
-            "Amenities": "Mini bar, jacuzzi, balcony",
-            "Services": "24/7 room service, concierge",
-            "Extras": "Complimentary breakfast, wifi"
+            "Morning": "Arrive at Port Blair Airport and transfer to your hotel",
+            "Afternoon": "Visit the historic Cellular Jail",
+            "Evening": "Witness the Light & Sound Show",
+            "Night": "Overnight stay in Port Blair"
           }
         },
         {
-          name: "Deluxe",
-          summary: "Comfortable deluxe rooms",
+          name: "Day 2",
+          summary: "Havelock Island – Radhanagar Beach",
           details: {
-            "Room": "Well-appointed deluxe room",
-            "Features": "King bed, work desk, sofa",
-            "Facilities": "Gym access, pool, spa",
-            "Services": "Daily housekeeping, laundry"
+            "Morning": "Take a ferry to Havelock Island",
+            "Afternoon": "Visit the breathtaking Radhanagar Beach",
+            "Evening": "Relax on the soft white sands",
+            "Night": "Overnight stay in Havelock"
           }
         },
         {
-          name: "Standard",
-          summary: "Comfortable standard rooms",
+          name: "Day 3",
+          summary: "Elephant Beach – Snorkeling & Water Sports",
           details: {
-            "Room": "Cozy standard accommodation",
-            "Basics": "Queen bed, TV, AC",
-            "Access": "Common areas, restaurant",
-            "Services": "Front desk, parking"
+            "Morning": "Visit Elephant Beach for thrilling activities",
+            "Afternoon": "Enjoy snorkeling, jet skiing, and glass-bottom boat rides",
+            "Evening": "Return to Havelock",
+            "Night": "Overnight stay in Havelock"
+          }
+        },
+        {
+          name: "Day 4",
+          summary: "Kalapathar Beach – Leisure Time",
+          details: {
+            "Morning": "Spend a peaceful morning at Kalapathar Beach",
+            "Afternoon": "Enjoy leisure time exploring Havelock",
+            "Evening": "Return to the hotel",
+            "Night": "Overnight stay in Havelock"
+          }
+        },
+        {
+          name: "Day 5",
+          summary: "Neil Island – Natural Bridge & Beaches",
+          details: {
+            "Morning": "Travel to Neil Island",
+            "Afternoon": "Visit Bharatpur Beach and Laxmanpur Beach",
+            "Evening": "Explore the iconic Natural Bridge",
+            "Night": "Overnight stay in Neil Island"
+          }
+        },
+        {
+          name: "Day 6",
+          summary: "Return to Port Blair – Shopping & Sightseeing",
+          details: {
+            "Morning": "Return to Port Blair",
+            "Afternoon": "Explore local markets for souvenirs",
+            "Evening": "Visit Corbyn's Cove Beach",
+            "Night": "Overnight stay in Port Blair"
+          }
+        },
+        {
+          name: "Day 7",
+          summary: "Departure from Andaman",
+          details: {
+            "Morning": "Breakfast at the hotel",
+            "Afternoon": "Check out and transfer to Port Blair Airport",
+            "Evening": "Departure with unforgettable memories"
           }
         }
+      ],
+      includes: [
+        "Luxury accommodation with breakfast",
+        "Private transfers & ferry tickets",
+        "Sightseeing as per itinerary",
+        "Light & Sound Show tickets",
+        "Welcome drink on arrival"
+      ],
+      exclusions: [
+        "Airfare & personal expenses",
+        "Water sports & additional activities",
+        "Meals other than breakfast",
+        "Any other services not mentioned in includes"
       ]
     },
     {
       title: "7 Days 8 Nights",
       icon: "fas fa-route",
       badge: "Adventure",
-      description: "Explore multiple destinations with our adventure package. Perfect for thrill-seekers and explorers.",
+      description: "Experience the complete Andaman adventure with this premium package. Explore Port Blair, Havelock, Neil Island, and Ross Island with a perfect blend of adventure, history, and natural beauty.",
       bgClass: "bg-dark",
       days: [
         {
-          name: "Shimla",
-          summary: "Queen of Hills experience",
+          name: "Day 1",
+          summary: "Arrival in Port Blair – Cellular Jail & Light Show",
           details: {
-            "Attractions": "Mall Road, Jakhoo Temple",
-            "Activities": "Toy train ride, trekking",
-            "Weather": "Pleasant year-round climate",
-            "Specialties": "Apple orchards, colonial architecture"
+            "Morning": "Arrive at Port Blair Airport and transfer to your hotel",
+            "Afternoon": "Visit the historic Cellular Jail",
+            "Evening": "Enjoy the Light & Sound Show",
+            "Night": "Overnight stay in Port Blair"
           }
         },
         {
-          name: "Manali",
-          summary: "Adventure capital of Himachal",
+          name: "Day 2",
+          summary: "Havelock Island – Radhanagar Beach",
           details: {
-            "Attractions": "Rohtang Pass, Solang Valley",
-            "Adventures": "Paragliding, river rafting",
-            "Culture": "Hadimba Temple, local markets",
-            "Season": "Best from March to June"
+            "Morning": "Take a ferry to Havelock Island",
+            "Afternoon": "Visit the picturesque Radhanagar Beach",
+            "Evening": "Enjoy the scenic beauty and unwind",
+            "Night": "Overnight stay in Havelock"
           }
         },
         {
-          name: "Ooty",
-          summary: "Nilgiri mountain retreat",
+          name: "Day 3",
+          summary: "Elephant Beach – Snorkeling & Water Sports",
           details: {
-            "Gardens": "Botanical gardens, rose garden",
-            "Lakes": "Ooty Lake boating",
-            "Railways": "Nilgiri mountain railway",
-            "Climate": "Cool weather throughout year"
+            "Morning": "Visit Elephant Beach for adventure sports",
+            "Afternoon": "Enjoy snorkeling, jet skiing, and glass-bottom boat rides",
+            "Evening": "Return to Havelock",
+            "Night": "Overnight stay in Havelock"
+          }
+        },
+        {
+          name: "Day 4",
+          summary: "Kalapathar Beach – Leisure & Exploration",
+          details: {
+            "Morning": "Spend a serene morning at Kalapathar Beach",
+            "Afternoon": "Enjoy free time to explore local attractions",
+            "Evening": "Relax by the beach",
+            "Night": "Overnight stay in Havelock"
+          }
+        },
+        {
+          name: "Day 5",
+          summary: "Neil Island – Natural Bridge & Beaches",
+          details: {
+            "Morning": "Travel to Neil Island",
+            "Afternoon": "Visit Bharatpur Beach and Laxmanpur Beach",
+            "Evening": "Explore the famous Natural Bridge",
+            "Night": "Overnight stay in Neil Island"
+          }
+        },
+        {
+          name: "Day 6",
+          summary: "Ross Island – Historical Excursion",
+          details: {
+            "Morning": "Head to Ross Island",
+            "Afternoon": "Explore fascinating ruins and wildlife",
+            "Evening": "Return to Port Blair",
+            "Night": "Overnight stay in Port Blair"
+          }
+        },
+        {
+          name: "Day 7",
+          summary: "Chidiya Tapu – Sunset Point",
+          details: {
+            "Morning": "Visit Chidiya Tapu",
+            "Afternoon": "Enjoy birdwatching and nature exploration",
+            "Evening": "Witness stunning sunset view",
+            "Night": "Overnight stay in Port Blair"
+          }
+        },
+        {
+          name: "Day 8",
+          summary: "Departure from Andaman",
+          details: {
+            "Morning": "Breakfast at the hotel",
+            "Afternoon": "Check out and transfer to Port Blair Airport",
+            "Evening": "Departure with unforgettable memories"
           }
         }
+      ],
+      includes: [
+        "Premium accommodation with breakfast",
+        "Private transfers & ferry tickets",
+        "Sightseeing as per itinerary",
+        "Light & Sound Show tickets",
+        "Welcome drink on arrival",
+        "All entry fees to monuments"
+      ],
+      exclusions: [
+        "Airfare & personal expenses",
+        "Water sports & additional activities",
+        "Meals other than breakfast",
+        "Any other services not mentioned in includes"
       ]
-    }
+    },
+   
   ];
 
   // State for particles
@@ -298,6 +491,11 @@ const PremiumServiceCategories = () => {
           min-height: 100vh;
           position: relative;
           overflow-x: hidden;
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                      url('https://i.pinimg.com/736x/d6/76/76/d676766f119c08fbe3353b3ff421e722.jpg');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
         }
 
         .app-container::before {
@@ -318,19 +516,6 @@ const PremiumServiceCategories = () => {
           z-index: -2;
         }
 
-        .app-container::after {
-          content: '';
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ff6b35" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-          animation: gridMove 15s linear infinite;
-          pointer-events: none;
-          z-index: -1;
-        }
-
         .hero-section {
           width: 100vw;
           height: 98vh;
@@ -338,7 +523,7 @@ const PremiumServiceCategories = () => {
           margin: 0;
           padding: 0;
           background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-                      url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2021&q=80');
+                      url('https://i.pinimg.com/736x/1a/bd/fc/1abdfc0cb2cd7470a0cf82ec958b3bed.jpg');
           background-size: cover;
           background-position: center;
           background-attachment: fixed;
@@ -393,12 +578,6 @@ const PremiumServiceCategories = () => {
           padding: 0 20px;
         }
 
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-        }
-
         .services-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -406,18 +585,21 @@ const PremiumServiceCategories = () => {
           padding: 60px 20px;
           max-width: 1400px;
           margin: 0 auto;
+          position: relative;
+          z-index: 1;
         }
 
         .service-card {
-          background: rgba(255, 226, 185, 0.95);
+          background: rgba(255, 255, 255, 0.95);
           border-radius: 20px;
           padding: 30px;
-          box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
-          border: 1px solid rgba(255, 107, 53, 0.1);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           position: relative;
           overflow: hidden;
           animation: fadeInUp 0.8s ease both;
+          backdrop-filter: blur(10px);
         }
 
         .service-card::before {
@@ -427,7 +609,7 @@ const PremiumServiceCategories = () => {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
           transition: left 0.5s;
         }
 
@@ -437,8 +619,8 @@ const PremiumServiceCategories = () => {
 
         .service-card:hover {
           transform: translateY(-10px) scale(1.02);
-          box-shadow: 0 30px 60px rgba(255, 107, 53, 0.2);
-          border-color: rgba(255, 107, 53, 0.3);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+          border-color: rgba(255, 255, 255, 0.3);
         }
 
         .service-header {
@@ -464,15 +646,6 @@ const PremiumServiceCategories = () => {
           animation: pulse 2s infinite;
           flex-shrink: 0;
           background: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
-        }
-
-        .service-icon:hover {
-          transform: scale(1.1);
-          box-shadow: 0 15px 30px rgba(255, 184, 53, 0.4);
-        }
-
-        .service-title-container {
-          flex-grow: 1;
         }
 
         .service-title {
@@ -503,15 +676,9 @@ const PremiumServiceCategories = () => {
           box-shadow: 0 2px 8px rgba(255, 184, 53, 0.2);
         }
 
-        .service-badge i {
-          margin-right: 6px;
-          font-size: 0.9rem;
-          color: white;
-        }
-
         .main-dropdown-btn {
           width: 100%;
-          background: linear-gradient(135deg,rgb(255, 184, 53) 0%, #ff8c42 100%);
+          background: linear-gradient(135deg, rgb(255, 184, 53) 0%, #ff8c42 100%);
           color: white;
           border: none;
           border-radius: 15px;
@@ -525,50 +692,12 @@ const PremiumServiceCategories = () => {
           position: relative;
           overflow: hidden;
           cursor: pointer;
-        }
-
-        .main-dropdown-btn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(251, 162, 59, 0.2), transparent);
-          transition: left 0.5s;
-        }
-
-        .main-dropdown-btn:hover::before {
-          left: 100%;
+          box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
         }
 
         .main-dropdown-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
-        }
-
-        .bg-primary { background: var(--primary-gradient); }
-        .bg-secondary { background: var(--secondary-gradient); }
-        .bg-success { background: var(--success-gradient); }
-        .bg-warning { background: var(--warning-gradient); }
-        .bg-info { background: var(--info-gradient); }
-        .bg-dark { background: var(--dark-gradient); }
-
-        .particle {
-          position: fixed;
-          width: 6px;
-          height: 6px;
-          background: linear-gradient(45deg, #ff6b35, #ff8c42);
-          border-radius: 50%;
-          pointer-events: none;
-          opacity: 0.8;
-          z-index: -1;
-          bottom: -10px;
-          box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
-        }
-
-        .particle-animate {
-          animation: float-up linear forwards;
+          box-shadow: 0 8px 25px rgba(255, 140, 66, 0.4);
         }
 
         @keyframes fadeInUp {
@@ -594,13 +723,6 @@ const PremiumServiceCategories = () => {
           }
         }
 
-        @keyframes float-up {
-          to {
-            transform: translateY(-100vh) translateX(100px);
-            opacity: 0;
-          }
-        }
-
         @keyframes backgroundShift {
           0%, 100% {
             transform: translateX(0) translateY(0);
@@ -613,15 +735,6 @@ const PremiumServiceCategories = () => {
           }
           75% {
             transform: translateX(20px) translateY(20px);
-          }
-        }
-
-        @keyframes gridMove {
-          0% {
-            transform: translateX(0) translateY(0);
-          }
-          100% {
-            transform: translateX(10px) translateY(10px);
           }
         }
 
@@ -712,15 +825,23 @@ const PremiumServiceCategories = () => {
 // Service Card Component
 const ServiceCard = ({ service, index }) => {
   const navigate = useNavigate();
+  
   const handleViewMore = () => {
-    navigate(`/service/${index}`);
+    navigate(`/service/${index}`, { 
+      state: { 
+        serviceData: {
+          ...service,
+          index: index
+        }
+      } 
+    });
   };
   
   return (
     <div className="service-card" style={{ animationDelay: `${index * 0.2}s` }}>
       <div className="service-header">
         <div className={`service-icon ${service.bgClass}`}> <i className={service.icon}></i> </div>
-        <div className="service-title-container">
+        <div className="service-title-container" id='detailscroll'>
           <h3 className="service-title">
             {service.title}
             <span className="service-badge">
@@ -734,7 +855,14 @@ const ServiceCard = ({ service, index }) => {
       <div style={{ marginTop: 24, textAlign: 'center' }}>
         <button
           className="main-dropdown-btn"
-          style={{ width: 'auto', minWidth: 160, padding: '12px 32px', fontWeight: 600, fontSize: '1rem' }}
+          style={{ 
+            width: 'auto', 
+            minWidth: 160, 
+            padding: '12px 32px', 
+            fontWeight: 600, 
+            fontSize: '1rem',
+            cursor: 'pointer'
+          }}
           onClick={handleViewMore}
         >
           View More

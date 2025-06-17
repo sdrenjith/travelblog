@@ -117,7 +117,7 @@ function Travel() {
                     <p className="mb-0">{pkg.location}</p>
                   </div>
                 </div>
-                                    <button className="btn btn-warning text-white" onClick={() => handleViewDetails(1)}>View Details</button>
+                                    <button className="btn text-white" style={{backgroundColor: 'gray'}} onClick={() => handleViewDetails(1)}>View Details</button>
 
                
               </div>

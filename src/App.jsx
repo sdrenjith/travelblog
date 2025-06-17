@@ -18,6 +18,7 @@ import Details from './pages/Details';
 import PremiumServiceCategories from './pages/Details';
 import ServiceDetails from './pages/ServiceDetails';
 import DestinationDetails from './pages/DestinationDetails';
+import BookingDetails from './pages/BookingDetails';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/destination/:name" element={<DestinationDetails />} />
+        <Route path="/booking-details" element={<BookingDetails />} />
       </Routes>
 
       <Footer />

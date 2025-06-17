@@ -1,442 +1,558 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, Calendar, Clock, MapPin, Star, Users, Camera, Utensils } from 'lucide-react';
-
-const serviceData = [
-  {
-    title: "2 Days 3 Nights Adventure",
-    subtitle: "Discover the perfect getaway experience",
-    rating: 4.8,
-    reviews: 234,
-    price: "$299",
-    image: "🏔️",
-    category: "Adventure Tour",
-    days: [
-      {
-        name: "Day 1",
-        icon: "🌅",
-        summary: "Arrival and city tour",
-        details: {
-          "Morning (9:00 AM)": "Arrival at hotel, check-in and welcome drinks with city overview briefing",
-          "Afternoon (2:00 PM)": "Guided city sightseeing tour covering major landmarks and photo stops",
-          "Evening (6:00 PM)": "Welcome dinner at authentic local restaurant with live music",
-          "Night (9:00 PM)": "Rest at luxury hotel with spa facilities"
-        }
-      },
-      {
-        name: "Day 2",
-        icon: "🏄‍♂️",
-        summary: "Adventure activities",
-        details: {
-          "Morning (8:00 AM)": "Hearty breakfast followed by thrilling adventure park visit",
-          "Afternoon (1:00 PM)": "Water sports and pristine beach activities with equipment included",
-          "Evening (5:00 PM)": "Shopping spree and vibrant local market exploration",
-          "Night (8:00 PM)": "Cultural show and traditional dinner with folk performances"
-        }
-      },
-      {
-        name: "Day 3",
-        icon: "🏛️",
-        summary: "Cultural experience and departure",
-        details: {
-          "Morning (9:00 AM)": "Visit to UNESCO World Heritage historical monuments",
-          "Afternoon (1:00 PM)": "Immersive cultural show and royal traditional lunch",
-          "Evening (4:00 PM)": "Farewell ceremony with gifts and airport departure transfer"
-        }
-      }
-    ]
-  },
-  {
-    title: "3 Days 4 Nights Culinary Journey",
-    subtitle: "Taste the world's finest breakfast experiences",
-    rating: 4.9,
-    reviews: 156,
-    price: "$399",
-    image: "🍳",
-    category: "Food Experience",
-    days: [
-      {
-        name: "Continental",
-        icon: "🥐",
-        summary: "European style breakfast",
-        details: {
-          "Bread & Pastries": "Fresh croissants, artisan muffins, sourdough toast with premium butter",
-          "Beverages": "Barista coffee, premium teas, fresh-squeezed juices from local fruits",
-          "Fruits": "Seasonal organic fruit selection with exotic varieties",
-          "Extras": "Imported butter, homemade jams, wildflower honey, local cheese"
-        }
-      },
-      {
-        name: "Indian",
-        icon: "🫓",
-        summary: "Traditional Indian breakfast",
-        details: {
-          "Main Items": "Fluffy idli, crispy dosa, aromatic upma, spiced poha with garnish",
-          "Accompaniments": "Rich sambar, coconut chutney, mint chutney, tomato chutney",
-          "Beverages": "Authentic masala chai, South Indian filter coffee, lassi varieties",
-          "Sweets": "Fresh jalebi, warm gulab jamun, regional specialties"
-        }
-      },
-      {
-        name: "American",
-        icon: "🥞",
-        summary: "Classic American breakfast",
-        details: {
-          "Main Course": "Fluffy pancakes, Belgian waffles, eggs benedict with hollandaise",
-          "Sides": "Crispy bacon, breakfast sausages, golden hash browns, fresh avocado",
-          "Beverages": "Fresh orange juice, premium coffee, organic milk varieties",
-          "Extras": "Pure maple syrup, mixed berries, whipped cream, nuts"
-        }
-      }
-    ]
-  }
-];
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ServiceDetails = () => {
-  const [selectedIndex] = useState(0);
-  const [selectedDay, setSelectedDay] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const serviceData = location.state?.serviceData;
 
-  const service = serviceData[selectedIndex];
-
-  useEffect(() => {
-    // Bootstrap CSS
-    const bootstrapLink = document.createElement('link');
-    bootstrapLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css';
-    bootstrapLink.rel = 'stylesheet';
-    document.head.appendChild(bootstrapLink);
-
-    // Google Fonts
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
-
-    // Font Awesome
-    const faLink = document.createElement('link');
-    faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-    faLink.rel = 'stylesheet';
-    document.head.appendChild(faLink);
-
-    setIsVisible(true);
-
-    return () => {
-      document.head.removeChild(bootstrapLink);
-      document.head.removeChild(fontLink);
-      document.head.removeChild(faLink);
-    };
-  }, []);
-
-  if (!service) return <div className="d-flex align-items-center justify-content-center min-vh-100 text-muted">Service not found.</div>;
-
+  // Add responsive styles
   const styles = {
-    body: {
-      fontFamily: "'Poppins', sans-serif",
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    container: {
       minHeight: '100vh',
-      margin: 0,
-      padding: 0
+      background: 'linear-gradient(135deg, #f8fafc 0%, #fcb69f 100%)',
+      padding: '100px',
+      position: 'relative',
+      overflow: 'hidden',
+      marginTop: '20px'
     },
-    animatedBg: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      zIndex: -1,
-      background: 'linear-gradient(45deg, #ff9a9e 0%, #fecfef 25%, #fecfef 50%, #f093fb 75%, #f5576c 100%)',
-      backgroundSize: '400% 400%',
-      animation: 'gradientShift 15s ease infinite'
-    },
-    floatingElement: {
+    backgroundImage: {
       position: 'absolute',
-      borderRadius: '50%',
-      background: 'linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3))',
+      inset: 0,
+      zIndex: 0,
+      backgroundImage: 'url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80), url(https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=1200&q=80)',
+      backgroundSize: 'cover, 600px',
+      backgroundPosition: 'center, right bottom',
+      backgroundRepeat: 'no-repeat',
+      opacity: 0.18,
+      pointerEvents: 'none',
+      filter: 'blur(0.5px)',
+    },
+    overlay: {
+      position: 'absolute',
+      inset: 0,
+      background: 'linear-gradient(135deg,rgba(255,255,255,0.92) 0%,rgba(255,255,255,0.92) 100%)',
+      zIndex: 1,
+      pointerEvents: 'none',
+    },
+    contentWrapper: {
+      maxWidth: '900px',
+      margin: '0 auto',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '40px',
+      position: 'relative',
+      zIndex: 2,
+      width: '100%',
+    },
+    sidebar: {
+      background: 'rgba(255, 255, 255, 0.85)',
+      borderRadius: '24px',
+      padding: '36px 28px',
+      backdropFilter: 'blur(12px)',
+      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)',
+      height: 'fit-content',
+      position: 'sticky',
+      top: '40px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      '@media (max-width: 768px)': {
+        position: 'relative',
+        top: 0,
+        padding: '20px'
+      }
+    },
+    bannerImg: {
+      width: '100%',
+      maxWidth: '180px',
+      borderRadius: '18px',
+      marginBottom: '18px',
+      boxShadow: '0 4px 16px rgba(255, 179, 71, 0.13)',
+      objectFit: 'cover',
+    },
+    mainContent: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '30px',
+      width: '100%',
+      maxWidth: '900px',
+      margin: '0 auto',
+      '@media (max-width: 1024px)': {
+        maxWidth: '100%',
+      },
+      '@media (max-width: 768px)': {
+        gap: '20px',
+        maxWidth: '100%',
+      }
+    },
+    section: {
+      background: 'rgba(255, 255, 255, 0.95)',
+      borderRadius: '22px',
+      padding: '32px',
       backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255,255,255,0.2)'
+      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.08)',
+      '@media (max-width: 768px)': {
+        padding: '20px'
+      }
     },
-    glassmorphism: {
-      background: 'rgba(255, 255, 255, 0.25)',
-      backdropFilter: 'blur(15px)',
-      border: '1px solid rgba(255, 255, 255, 0.3)',
-      borderRadius: '20px',
-      boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37)'
+    packageGrid: {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '30px',
+      '@media (max-width: 768px)': {
+        gridTemplateColumns: '1fr',
+        gap: '20px'
+      }
     },
-    gradientBtn: {
-      background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+    dayCard: {
+      background: 'rgba(255, 255, 255, 0.85)',
+      borderRadius: '16px',
+      padding: '25px',
+      border: '1.5px solid #ffe0b2',
+      boxShadow: '0 4px 16px rgba(255, 179, 71, 0.09)',
+      '@media (max-width: 768px)': {
+        padding: '15px'
+      },
+      transition: 'box-shadow 0.2s',
+      ':hover': {
+        boxShadow: '0 8px 32px 0 rgba(255, 179, 71, 0.18)',
+      }
+    },
+    timeSlot: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '15px',
+      padding: '12px',
+      background: 'rgba(255, 236, 179, 0.25)',
+      borderRadius: '10px',
+      color: '#2d3748',
+      '@media (max-width: 480px)': {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: '8px'
+      }
+    },
+    button: {
+      width: '100%',
+      padding: '14px 28px',
+      background: 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)',
+      color: '#fff',
       border: 'none',
-      borderRadius: '25px',
-      padding: '12px 30px',
-      color: 'white',
-      fontWeight: '600',
-      fontSize: '16px',
+      borderRadius: '30px',
       cursor: 'pointer',
+      fontSize: '1.08rem',
+      fontWeight: 600,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '10px',
+      boxShadow: '0 4px 15px rgba(255, 179, 71, 0.18)',
       transition: 'all 0.3s ease',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+      '@media (max-width: 480px)': {
+        padding: '10px 20px',
+        fontSize: '0.98rem'
+      }
+    },
+    heading: {
+      color: '#222',
+      fontWeight: 700,
+      fontSize: '2.1rem',
+      marginBottom: '10px',
+      letterSpacing: '0.01em',
+    },
+    subheading: {
+      color: '#ff6b6b',
+      fontWeight: 600,
+      fontSize: '1.3rem',
+      marginBottom: '8px',
+      letterSpacing: '0.01em',
+    },
+    text: {
+      color: '#2d3748',
+      fontSize: '1.08rem',
+      lineHeight: 1.7,
+    },
+    accent: {
+      color: '#ffa726',
+      fontWeight: 600,
+    },
+    decorativeLeft: {
+      position: 'absolute',
+      top: '50%',
+      left: 0,
+      transform: 'translateY(-50%)',
+      width: '480px',
+      height: '600px',
+      zIndex: 1,
+      pointerEvents: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    decorativeImg: {
+      width: '100%',
+      height: 'auto',
+      opacity: 0.18,
+      filter: 'blur(2px) saturate(1.1)',
+      borderRadius: '40px',
+      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)',
+    },
+    quote: {
+      marginTop: '-40px',
+      color: '#ffa726',
+      fontWeight: 600,
+      fontSize: '1.3rem',
+      textAlign: 'center',
+      textShadow: '0 2px 8px rgba(255, 179, 71, 0.13)',
+      fontStyle: 'italic',
+      letterSpacing: '0.01em',
+      maxWidth: '400px',
+    },
+    sideCard: {
+      width: '100%',
+      background: 'rgba(255,255,255,0.97)',
+      borderRadius: '22px',
+      boxShadow: '0 8px 32px 0 rgba(255, 179, 71, 0.25), 0 2px 8px 0 rgba(31, 38, 135, 0.10)',
+      padding: '32px 24px',
+      marginTop: '32px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '18px',
+      border: '1.5px solid #ffe0b2',
+    },
+    sideCardIcon: {
+      fontSize: '2.5rem',
+      color: '#ffa726',
+      marginBottom: '8px',
+    },
+    sideCardTitle: {
+      color: '#222',
+      fontWeight: 700,
+      fontSize: '1.2rem',
+      marginBottom: '6px',
+      textAlign: 'center',
+    },
+    sideCardText: {
+      color: '#666',
+      fontSize: '1.05rem',
+      textAlign: 'center',
+      lineHeight: 1.6,
+    },
+    // Add animation and accent styles
+    fadeIn: {
+      animation: 'fade-in 1.2s cubic-bezier(.39,.575,.56,1) both',
+    },
+    fadeInDelayed: {
+      animation: 'fade-in 1.7s cubic-bezier(.39,.575,.56,1) both',
+      animationDelay: '0.3s',
     },
     cardHover: {
-      transition: 'all 0.3s ease',
-      cursor: 'pointer'
+      transition: 'box-shadow 0.2s, transform 0.2s',
+      ':hover': {
+        boxShadow: '0 12px 32px 0 rgba(255, 179, 71, 0.22)',
+        transform: 'scale(1.025)',
+      }
     },
-    pulseAnimation: {
-      animation: 'pulse 2s infinite'
+    gradientBar: {
+      width: '100%',
+      height: '8px',
+      borderRadius: '8px',
+      background: 'linear-gradient(90deg, #ffb347 0%, #ffcc80 100%)',
+      margin: '32px 0',
+      opacity: 0.7,
     },
-    fadeInUp: {
-      animation: 'fadeInUp 1s ease-out'
-    }
   };
 
-  const keyframes = `
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+  if (!serviceData) {
+    return (
+      <div style={styles.container}>
+        <div style={{
+          ...styles.section,
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '0 auto'
+        }}>
+          <h1 style={{ 
+            color: 'white', 
+            fontSize: '2rem',
+            marginBottom: '20px',
+            '@media (max-width: 480px)': {
+              fontSize: '1.5rem'
+            }
+          }}>
+            Service not found
+          </h1>
+          <button 
+            onClick={() => navigate('/details/1')}
+            style={styles.button}
+          >
+            <i className="fas fa-arrow-left"></i>
+            Back to Services
+          </button>
+        </div>
+      </div>
+    );
     }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.7; }
-    }
-    
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    .floating-1 { animation: float 6s ease-in-out infinite; }
-    .floating-2 { animation: float 8s ease-in-out infinite reverse; }
-    .floating-3 { animation: float 7s ease-in-out infinite; }
-    .floating-4 { animation: float 9s ease-in-out infinite reverse; }
-    
-    .card-hover:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    
-    .btn-gradient:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-    
-    .service-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-    }
-    
-    .day-button {
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .day-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .day-button.active {
-      background: linear-gradient(45deg, #667eea, #764ba2);
-      color: white;
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-    }
-    
-    .detail-card {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .detail-card:hover {
-      background: rgba(255, 255, 255, 0.95);
-      transform: translateX(10px);
-    }
-  `;
 
   return (
-    <div >
-      <div style={styles.body}>
-      <style>{keyframes}</style>
-      
-      {/* Animated Background */}
-      <div style={styles.animatedBg}></div>
-      
-      {/* Floating Elements */}
-      <div style={{...styles.floatingElement, width: '100px', height: '100px', top: '10%', left: '5%'}} className="floating-1"></div>
-      <div style={{...styles.floatingElement, width: '150px', height: '150px', top: '60%', right: '10%'}} className="floating-2"></div>
-      <div style={{...styles.floatingElement, width: '80px', height: '80px', top: '30%', right: '20%'}} className="floating-3"></div>
-      <div style={{...styles.floatingElement, width: '120px', height: '120px', bottom: '20%', left: '15%'}} className="floating-4"></div>
-
-      <div className={`container-fluid ${isVisible ? 'fade-in-up' : ''}`} style={styles.fadeInUp}>
-        {/* Header */}
-        <nav className="navbar navbar-expand-lg" style={{background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(15px)'}}>
-          <div className="container">
-            <button className="btn btn-link text-white text-decoration-none d-flex align-items-center">
-              <ChevronLeft className="me-2" size={20} />
-              <span className="fw-semibold">Back to Services</span>
-            </button>
+    <div style={styles.container}>
+      <div style={styles.backgroundImage}></div>
+      <div style={styles.overlay}></div>
+      {/* Decorative left-side image and quote */}
+      <div style={styles.decorativeLeft}>
+        <img
+          src="https://cdn.pixabay.com/photo/2017/01/31/13/14/airplane-2029712_1280.png"
+          alt="Travel Airplane Decorative"
+          style={styles.decorativeImg}
+        />
+      </div>
+      <div style={styles.contentWrapper}>
+        {/* Sidebar */}
+        <div style={{...styles.sidebar, ...styles.fadeIn}}>
+          {/* Decorative Banner Image */}
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Travel Banner" style={styles.bannerImg} />
+          <div style={{
+            width: '80px',
+            height: '80px',
+            borderRadius: '20px',
+            background: 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: '32px',
+            marginBottom: '20px',
+            boxShadow: '0 10px 20px rgba(255, 179, 71, 0.18)',
+            '@media (max-width: 768px)': {
+              width: '60px',
+              height: '60px',
+              fontSize: '24px'
+            }
+          }}>
+            <i className={serviceData.icon}></i>
           </div>
-        </nav>
-
-       
-          {/* Service Header Card */}
-          <div className="row justify-content-center mb-5">
-            <div className="col-12">
-              <div 
-                className="card service-card border-0 rounded-4 p-4 card-hover"
-                style={{
-                  backgroundImage: `url('https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=800')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                {/* Overlay for readability */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: 'rgba(255,255,255,0.7)',
-                  zIndex: 1,
-                  borderRadius: 'inherit',
-                }} />
-                <div className="card-body" style={{ position: 'relative', zIndex: 2 }}>
-                   <div className="d-flex flex-column align-items-center text-center gap-3">
-                    <div style={{fontSize: '5rem'}}>{service.image}</div>
-                    <span className="badge rounded-pill px-3 py-2 mb-2" style={{background: 'linear-gradient(45deg, #667eea, #764ba2)', fontSize: '0.8rem'}}>
-                      {service.category}
-                    </span>
-                    <div className="d-flex align-items-center justify-content-center mb-2 gap-2">
-                      <Star className="text-warning" size={16} fill="currentColor" />
-                      <span className="fw-bold text-dark">{service.rating}</span>
-                      <span className="text-muted">({service.reviews} reviews)</span>
-                    </div>
-                    <h1 className="display-5 fw-bold text-dark mb-2">{service.title}</h1>
-                    <p className="lead text-muted mb-3">{service.subtitle}</p>
-                    <div className="d-flex flex-wrap gap-4 justify-content-center text-muted mb-3">
-                      <div className="d-flex align-items-center">
-                        <Clock className="me-2" size={18} />
-                        <span>Multi-day experience</span>
-                      </div>
-                      <div className="d-flex align-items-center">
-                        <Users className="me-2" size={18} />
-                        <span>All group sizes</span>
-                      </div>
-                      <div className="d-flex align-items-center">
-                        <MapPin className="me-2" size={18} />
-                        <span>Premium locations</span>
-                      </div>
-                    </div>
-                    <div className="display-4 fw-bold text-dark mb-2">{service.price}</div>
-                    <div className="text-muted mb-3">per person</div>
-                    <button className="btn btn-gradient fw-semibold px-4 py-2" style={styles.gradientBtn}>
-                      <i className="fas fa-calendar-check me-2"></i>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
+          <h1 style={styles.heading}>{serviceData.title}</h1>
+          <div style={{
+            background: 'rgba(255, 179, 71, 0.13)',
+            padding: '8px 16px',
+            borderRadius: '20px',
+            display: 'inline-block',
+            marginBottom: '20px',
+            color: '#ffa726',
+            fontWeight: 600,
+          }}>
+            <span>{serviceData.badge}</span>
+          </div>
+          <p style={styles.text}>{serviceData.description}</p>
+          <button 
+            onClick={() => navigate('/details/1')}
+            style={styles.button}
+          >
+            <i className="fas fa-arrow-left"></i>
+            Back to Services
+          </button>
+          {/* Side Info Card with Box Shadow - now inside sidebar */}
+          <div style={{...styles.sideCard, ...styles.fadeInDelayed}}>
+            <i className="fas fa-globe-asia" style={styles.sideCardIcon}></i>
+            <div style={styles.sideCardTitle}>Travel Tip</div>
+            <div style={styles.sideCardText}>
+              Always keep digital and paper copies of your important documents when traveling abroad. Safe travels!
             </div>
           </div>
-
-          {/* Day Selection */}
-          <div className="row justify-content-center">
-            <div className="col-12">
-              <div className="d-flex align-items-center mb-4">
-                <Calendar className="me-3 text-white" size={28} />
-                <h2 className="display-6 fw-bold text-white mb-0">Choose Your Experience</h2>
-              </div>
-              
-              <div className="row g-4 mb-5">
-                {service.days.map((day, i) => (
-                  <div key={i} className="col-lg-4 col-md-6">
-                    <div 
-                      className={`card day-button border-0 rounded-3 p-4 text-center ${selectedDay === i ? 'active' : ''}`}
-                      style={{
-                        background: selectedDay === i ? 'linear-gradient(45deg, #667eea, #764ba2)' : 'rgba(255, 255, 255, 0.9)',
-                        color: selectedDay === i ? 'white' : '#333',
-                        cursor: 'pointer',
-                        backdropFilter: 'blur(15px)'
-                      }}
-                      onClick={() => setSelectedDay(i)}
-                    >
-                      <div className="card-body">
-                        <div style={{fontSize: '2.5rem'}} className="mb-3">{day.icon}</div>
-                        <h5 className="card-title fw-bold mb-2">{day.name}</h5>
-                        <p className="card-text">{day.summary}</p>
-                      </div>
+        </div>
+        {/* Main Content */}
+        <div style={styles.mainContent}>
+          {/* Itinerary Section */}
+          <div style={{...styles.section, ...styles.fadeIn, border: '2.5px solid #ffb347', boxShadow: '0 12px 32px 0 rgba(255, 179, 71, 0.13)'}}>
+            <h2 style={{ 
+              ...styles.heading,
+              fontSize: '1.7rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              color: 'black',
+            }}>
+              <i className="fas fa-route" style={{ color: '#ffa726' }}></i>
+              Itinerary Details
+            </h2>
+            <div style={styles.gradientBar}></div>
+            <div style={{ 
+              display: 'grid',
+              gap: '20px'
+            }}>
+              {serviceData.days.map((day, index) => (
+                <div key={index} style={{...styles.dayCard, ...styles.cardHover}}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '15px',
+                    marginBottom: '15px'
+                  }}>
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      background: 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'white',
+                      fontSize: '1.2rem',
+                      fontWeight: 'bold',
+                      '@media (max-width: 480px)': {
+                        width: '30px',
+                        height: '30px',
+                        fontSize: '1rem'
+                      }
+                    }}>
+                      {index + 1}
                     </div>
+                    <h3 style={{ 
+                      ...styles.subheading,
+                      margin: 0,
+                      color: '#222',
+                    }}>
+                      {day.name}
+                    </h3>
                   </div>
-                ))}
-              </div>
-
-              {/* Selected Day Details */}
-              <div className="card service-card border-0 rounded-4 p-4">
-                <div className="card-body">
-                  <div className="d-flex align-items-center mb-4">
-                    <div style={{fontSize: '3rem'}} className="me-3">{service.days[selectedDay].icon}</div>
-                    <div>
-                      <h3 className="fw-bold text-dark mb-1">{service.days[selectedDay].name}</h3>
-                      <p className="text-muted mb-0">{service.days[selectedDay].summary}</p>
-                    </div>
-                  </div>
-
-                  <div className="row g-4">
-                    {Object.entries(service.days[selectedDay].details).map(([timeSlot, activity], idx) => (
-                      <div key={idx} className="col-12">
-                        <div className="detail-card rounded-3 p-4 border-0">
-                          <div className="d-flex align-items-start">
-                            <div className="me-3 mt-2">
-                              <div style={{
-                                width: '12px',
-                                height: '12px',
-                                background: 'linear-gradient(45deg, #667eea, #764ba2)',
-                                borderRadius: '50%'
-                              }}></div>
-                            </div>
-                            <div className="flex-grow-1">
-                              <h6 className="fw-semibold text-dark mb-2 d-flex align-items-center">
-                                <Clock className="me-2 text-primary" size={16} />
-                                {timeSlot}
-                              </h6>
-                              <p className="text-muted mb-0 lh-lg">{activity}</p>
-                            </div>
-                            <div className="text-muted">
-                              <Camera size={20} />
-                            </div>
-                          </div>
-                        </div>
+                  <p style={{ 
+                    ...styles.text,
+                    marginBottom: '20px',
+                    fontStyle: 'italic',
+                  }}>
+                    {day.summary}
+                  </p>
+                  <div style={{
+                    display: 'grid',
+                    gap: '15px'
+                  }}>
+                    {Object.entries(day.details).map(([key, value]) => (
+                      <div key={key} style={styles.timeSlot}>
+                        <span style={{ 
+                          color: '#ffa726',
+                          minWidth: '100px',
+                          fontWeight: 500
+                        }}>
+                          {key}
+                        </span>
+                        <span style={{ 
+                          color: '#2d3748',
+                          flex: 1
+                        }}>
+                          {value}
+                        </span>
                       </div>
                     ))}
                   </div>
-
-                  {/* Call to Action */}
-                  <div className="text-center mt-5">
-                    <button className="btn btn-gradient fw-semibold px-5 py-3 me-3" style={styles.gradientBtn}>
-                      <Utensils className="me-2" size={20} />
-                      Reserve This Experience
-                    </button>
-                    <p className="text-muted mt-3 small">
-                      <i className="fas fa-shield-alt me-2"></i>
-                      Free cancellation up to 24 hours before
-                    </p>
-                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
-        
+          {/* Decorative Accent Bar */}
+          <div style={styles.gradientBar}></div>
+          {/* Package Details Section */}
+          <div style={styles.packageGrid}>
+            {/* Includes */}
+            {serviceData.includes && (
+              <div style={{...styles.section, ...styles.fadeInDelayed}}>
+                <h2 style={{ 
+                  ...styles.subheading,
+                  color: '#4CAF50',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}>
+                  <i className="fas fa-check-circle" style={{ color: '#4CAF50' }}></i>
+                  Package Includes
+                </h2>
+                <ul style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: 0,
+                  display: 'grid',
+                  gap: '15px'
+                }}>
+                  {serviceData.includes.map((item, index) => (
+                    <li key={index} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '15px',
+                      padding: '12px',
+                      background: 'rgba(197, 225, 165, 0.18)',
+                      borderRadius: '10px',
+                      color: '#2d3748',
+                      transition: 'box-shadow 0.2s, transform 0.2s',
+                    }}>
+                      <span style={{ 
+                        color: '#4CAF50',
+                        fontSize: '1.2rem'
+                      }}>✔️</span>
+                      <span style={{ 
+                        color: '#2d3748',
+                        fontWeight: 500,
+                      }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {/* Exclusions */}
+            {serviceData.exclusions && (
+              <div style={{...styles.section, ...styles.fadeInDelayed}}>
+                <h2 style={{ 
+                  ...styles.subheading,
+                  color: '#f44336',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}>
+                  <i className="fas fa-times-circle" style={{ color: '#f44336' }}></i>
+                  Exclusions
+                </h2>
+                <ul style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: 0,
+                  display: 'grid',
+                  gap: '15px'
+                }}>
+                  {serviceData.exclusions.map((item, index) => (
+                    <li key={index} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '15px',
+                      padding: '12px',
+                      background: 'rgba(255, 205, 210, 0.18)',
+                      borderRadius: '10px',
+                      color: '#2d3748',
+                      transition: 'box-shadow 0.2s, transform 0.2s',
+                    }}>
+                      <span style={{ 
+                        color: '#f44336',
+                        fontSize: '1.2rem'
+                      }}>❌</span>
+                      <span style={{ 
+                        color: '#2d3748',
+                        fontWeight: 500,
+                      }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+      {/* Animations */}
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };

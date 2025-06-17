@@ -11,19 +11,44 @@ import Banner5 from '../Banner5';
 
 function Home() {
   return (
-    <div style={{ overflowX: 'hidden'}}>
-      <Banner />
-      <Banner2 />
-      <br/><br/>
-      <Banner3 />
-      <br /><br />
-      <br /><br />
-      {/* <Banner4 /> */}
-      <Banner5 />
-      {/* <Banner6 /> */}
-      {/* <Banner7 /> */}
-      {/* <Banner8 /> */}
-      {/* <Banner9 /> */}
+    <div style={{
+      overflowX: 'hidden',
+      width: '100%',
+      position: 'relative',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '32px 16px',
+      boxSizing: 'border-box',
+      maxWidth: '100vw',
+    }}>
+      <div style={{width: '100%', maxWidth: 1400, display: 'flex', flexDirection: 'column', gap: 32}}>
+        <Banner />
+        <Banner2 />
+        <Banner3 />
+        {/* <Banner4 /> */}
+        <Banner5 />
+        {/* <Banner6 /> */}
+        {/* <Banner7 /> */}
+        {/* <Banner8 /> */}
+        {/* <Banner9 /> */}
+      </div>
+      {/* Responsive styles */}
+      <style>{`
+        @media (max-width: 900px) {
+          div[style*='maxWidth: 1400px'] {
+            max-width: 98vw !important;
+            gap: 20px !important;
+          }
+        }
+        @media (max-width: 600px) {
+          div[style*='maxWidth: 1400px'] {
+            padding: 0 !important;
+            gap: 12px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

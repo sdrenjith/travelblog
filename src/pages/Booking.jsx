@@ -24,234 +24,289 @@ function Booking() {
     e.target.reset();
   };
 
-  useEffect(() => {
+   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // For sequential animation
-  useEffect(() => {
-    const fields = document.querySelectorAll('.booking-input-group');
-    fields.forEach((field, i) => {
-      field.style.opacity = 0;
-      setTimeout(() => {
-        field.style.opacity = 1;
-        field.style.transform = 'translateY(0)';
-      }, 300 + i * 180);
-    });
-  }, []);
-
   return (
-    <div className="booking-bg">
-      {/* Decorative Top Wave */}
-      <div className="booking-wave">
-        <svg viewBox="0 0 1440 180" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 120L60 110C120 100 240 80 360 90C480 100 600 140 720 150C840 160 960 140 1080 120C1200 100 1320 80 1380 70L1440 60V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V120Z" fill="#ffe29f"/></svg>
+    <div style={{
+      minHeight: '100vh',
+      width: '100vw',
+      overflow: 'hidden',
+      position: 'relative',
+      background: 'linear-gradient(135deg, #f8fafc 0%, #fceabb 100%)',
+    }}>
+      {/* Animated Gradient Background */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+      }}>
+        <div style={{
+          position: 'absolute',
+          top: '-120px',
+          left: '-120px',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle at 30% 30%, #ffb347 0%, #ffcc80 100%)',
+          opacity: 0.25,
+          filter: 'blur(40px)',
+          animation: 'float 8s ease-in-out infinite',
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '-100px',
+          right: '-100px',
+          width: '300px',
+          height: '300px',
+          background: 'radial-gradient(circle at 70% 70%, #a1c4fd 0%, #c2e9fb 100%)',
+          opacity: 0.22,
+          filter: 'blur(40px)',
+          animation: 'float 10s ease-in-out infinite',
+          animationDelay: '2s',
+        }} />
+        <div style={{
+          position: 'absolute',
+          top: '40%',
+          left: '50%',
+          width: '200px',
+          height: '200px',
+          background: 'radial-gradient(circle at 50% 50%, #fcb69f 0%, #ffecd2 100%)',
+          opacity: 0.18,
+          filter: 'blur(30px)',
+          transform: 'translate(-50%, -50%)',
+          animation: 'float 12s ease-in-out infinite',
+          animationDelay: '4s',
+        }} />
+        {/* Travel-themed background image with overlay */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.13,
+          zIndex: 1,
+        }} />
       </div>
-      {/* Animated Floating Travel Icons */}
-      <div className="booking-float-icons">
-        <i className="fas fa-plane"></i>
-        <i className="fas fa-map-marked-alt"></i>
-        <i className="fas fa-umbrella-beach"></i>
-        <i className="fas fa-suitcase-rolling"></i>
-        <i className="fas fa-mountain"></i>
+
+      {/* Floating Secure Badge */}
+      <div style={{
+        position: 'fixed',
+        top: 30,
+        right: 30,
+        zIndex: 50,
+        background: 'rgba(255,255,255,0.85)',
+        borderRadius: '30px',
+        boxShadow: '0 10px 16px rgba(0,0,0,0.08)',
+        padding: '10px 24px',
+        display: 'flex',
+        alignItems: 'center',
+        fontWeight: 600,
+        color: '#4CAF50',
+        fontSize: '1.1rem',
+        letterSpacing: '0.02em',
+        border: '1.5px solid #e0e0e0',
+        gap: 10,
+      }}>
+        <i className="fas fa-shield-alt" style={{color: '#4CAF50', fontSize: '1.2rem'}}></i>
+        100% Secure Booking
       </div>
+
+      <div style={{
+        position: 'relative',
+        zIndex: 10,
+        maxWidth: 600,
+        margin: '0 auto',
+        padding: '120px 16px 60px 16px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        {/* Hero Section */}
+        <div style={{
+          textAlign: 'center',
+          marginBottom: 40,
+          animation: 'fade-in 1.2s cubic-bezier(.39,.575,.56,1) both',
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: 18,
+          }}>
+            <div style={{
+              background: 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)',
+              borderRadius: '50%',
+              padding: 22,
+              boxShadow: '0 4px 16px rgba(255, 179, 71, 0.15)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              animation: 'bounce 2.5s infinite',
+            }}>
+              <i className="fas fa-suitcase-rolling" style={{color: 'white', fontSize: '2.5rem'}}></i>
+            </div>
+          </div>
+          <h1 style={{
+            fontSize: '2.7rem',
+            fontWeight: 700,
+            color: '#333',
+            marginBottom: 12,
+            lineHeight: 1.1,
+          }}>
+            REACH OUT FOR THE<br />
+            <span style={{
+              background: 'linear-gradient(90deg, #ffb347 0%, #ffcc80 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              display: 'inline-block',
+              animation: 'pulse 2s infinite',
+            }}>BEST EXPERIENCE</span>
+          </h1>
+          <p style={{
+            fontSize: '1.2rem',
+            color: '#666',
+            maxWidth: 420,
+            margin: '0 auto',
+            lineHeight: 1.6,
+          }}>
+            Ready to embark on your next adventure? Let us craft the perfect travel experience tailored just for you.
+          </p>
+        </div>
+
+        {/* Glassmorphism Form */}
+        <form ref={form} onSubmit={sendEmail} style={{
+          width: '100%',
+          background: 'rgba(255,255,255,0.85)',
+          borderRadius: 28,
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)',
+          padding: '36px 28px',
+          backdropFilter: 'blur(12px)',
+          border: '1.5px solid #f3e9e1',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 22,
+          animation: 'fade-in 1.7s cubic-bezier(.39,.575,.56,1) both',
+        }}>
+          <label style={{fontWeight: 500, color: '#444', marginBottom: 6}}>Name</label>
+          <input style={{
+            background: 'rgba(255,255,255,0.95)',
+            border: '1.5px solid #ffe0b2',
+            borderRadius: 12,
+            padding: '14px 18px',
+            fontSize: '1rem',
+            color: '#333',
+            marginBottom: 8,
+            outline: 'none',
+            transition: 'border 0.2s',
+          }} type="text" name="name" placeholder='Type your Name...' required />
+
+          <label style={{fontWeight: 500, color: '#444', marginBottom: 6}}>Phone Number</label>
+          <input style={{
+            background: 'rgba(255,255,255,0.95)',
+            border: '1.5px solid #ffe0b2',
+            borderRadius: 12,
+            padding: '14px 18px',
+            fontSize: '1rem',
+            color: '#333',
+            marginBottom: 8,
+            outline: 'none',
+            transition: 'border 0.2s',
+          }} type="text" name="phone" placeholder='Type your Phone Number...' required />
+
+          <label style={{fontWeight: 500, color: '#444', marginBottom: 6}}>Email</label>
+          <input style={{
+            background: 'rgba(255,255,255,0.95)',
+            border: '1.5px solid #ffe0b2',
+            borderRadius: 12,
+            padding: '14px 18px',
+            fontSize: '1rem',
+            color: '#333',
+            marginBottom: 8,
+            outline: 'none',
+            transition: 'border 0.2s',
+          }} type="email" name="email" placeholder='Type your Email...' required />
+
+          <label style={{fontWeight: 500, color: '#444', marginBottom: 6}}>Message</label>
+          <textarea style={{
+            background: 'rgba(255,255,255,0.95)',
+            border: '1.5px solid #ffe0b2',
+            borderRadius: 12,
+            padding: '14px 18px',
+            fontSize: '1rem',
+            color: '#333',
+            marginBottom: 8,
+            outline: 'none',
+            minHeight: 90,
+            resize: 'vertical',
+            transition: 'border 0.2s',
+          }} name="message" placeholder='Type your Message...' required />
+              
+                 <button style={{
+            background: 'linear-gradient(90deg, #ffb347 0%, #ffcc80 100%)',
+            color: '#fff',
+            border: 'none',
+            padding: '15px 0',
+            borderRadius: '30px',
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'background 0.3s, transform 0.2s',
+            boxShadow: '0 4px 12px rgba(249, 115, 22, 0.13)',
+            marginTop: 18,
+            letterSpacing: '0.02em',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 10,
+          }} type="submit">
+            <i className="fas fa-paper-plane"></i>
+          BOOK YOUR TRAVEL
+        </button>
+          </form>
+
+        {/* Additional Info */}
+        <div style={{
+          marginTop: 38,
+          textAlign: 'center',
+          color: '#888',
+          fontSize: '1.08rem',
+        }}>
+          <p>🌟 Get personalized recommendations • 🎯 Tailored itineraries • 💼 Professional support</p>
+          <p style={{marginTop: 6, color: '#aaa'}}>We typically respond within 24 hours</p>
+        </div>
+      </div>
+
+      {/* Animations */}
       <style>{`
-        .booking-bg {
-          min-height: 100vh;
-          background: linear-gradient(120deg, #ffe29f 0%, #ffa751 100%), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-          background-size: cover;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 40px 10px;
-          position: relative;
-          overflow: hidden;
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-30px) scale(1.04); }
         }
-        .booking-wave {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          z-index: 1;
-        }
-        .booking-float-icons {
-          position: absolute;
-          top: 0; left: 0; width: 100%; height: 100%;
-          pointer-events: none;
-          z-index: 2;
-        }
-        .booking-float-icons i {
-          position: absolute;
-          font-size: 2.2rem;
-          opacity: 0.18;
-          color: #ffb837;
-          animation: floatIcon 8s ease-in-out infinite;
-        }
-        .booking-float-icons i:nth-child(1) { left: 8%; top: 18%; animation-delay: 0s; }
-        .booking-float-icons i:nth-child(2) { left: 80%; top: 12%; animation-delay: 2s; }
-        .booking-float-icons i:nth-child(3) { left: 60%; top: 70%; animation-delay: 1s; }
-        .booking-float-icons i:nth-child(4) { left: 20%; top: 65%; animation-delay: 3s; }
-        .booking-float-icons i:nth-child(5) { left: 45%; top: 40%; animation-delay: 1.5s; }
-        @keyframes floatIcon {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-30px) scale(1.15); opacity: 0.28; }
-        }
-        .booking-card {
-          background: rgba(255,255,255,0.95);
-          border-radius: 24px;
-          box-shadow: 0 8px 32px rgba(255, 167, 81, 0.18), 0 1.5px 8px rgba(255, 184, 53, 0.08);
-          padding: 48px 32px 40px 32px;
-          max-width: 420px;
-          width: 100%;
-          margin: 0 auto;
-          animation: fadeInUp 1s cubic-bezier(.23,1.01,.32,1) both;
-          z-index: 10;
-          transition: transform 0.25s cubic-bezier(.23,1.01,.32,1), box-shadow 0.25s;
-        }
-        .booking-card:hover {
-          transform: scale(1.025) translateY(-4px);
-          box-shadow: 0 16px 40px rgba(255, 167, 81, 0.22), 0 2px 12px rgba(255, 184, 53, 0.13);
-        }
-        .booking-title {
-          font-size: 2.2rem;
-          font-weight: 700;
-          text-align: center;
-          margin-bottom: 10px;
-          color: #ff8c42;
-          letter-spacing: 1px;
-        }
-        .booking-title span {
-          color: #f9a51a;
-        }
-        .booking-sub {
-          text-align: center;
-          color: #555;
-          font-size: 1.1rem;
-          margin-bottom: 32px;
-        }
-        .booking-form label {
-          display: block;
-          margin-bottom: 6px;
-          color: #ff8c42;
-          font-weight: 500;
-          font-size: 1rem;
-        }
-        .booking-input-group {
-          position: relative;
-          margin-bottom: 22px;
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.6s, transform 0.6s;
-        }
-        .booking-input-group i {
-          position: absolute;
-          left: 14px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #ffb837;
-          font-size: 1.1rem;
-          transition: color 0.3s;
-        }
-        .booking-form input,
-        .booking-form textarea {
-          width: 100%;
-          padding: 12px 12px 12px 38px;
-          border-radius: 10px;
-          border: 1.5px solid #ffe29f;
-          background: #fffbe9;
-          font-size: 1rem;
-          color: #333;
-          outline: none;
-          transition: border-color 0.2s, box-shadow 0.2s;
-          box-shadow: 0 1px 4px rgba(255, 184, 53, 0.07);
-        }
-        .booking-form input:focus,
-        .booking-form textarea:focus {
-          border-color: #ffb837;
-          box-shadow: 0 2px 8px rgba(255, 184, 53, 0.13);
-        }
-        .booking-form input:focus ~ i,
-        .booking-form textarea:focus ~ i {
-          color: #ff8c42;
-        }
-        .booking-form textarea {
-          min-height: 80px;
-          resize: vertical;
-        }
-        .booking-btn {
-          background: linear-gradient(90deg, #ffb837 0%, #ff8c42 100%);
-          color: #fff;
-          border: none;
-          padding: 15px 0;
-          border-radius: 30px;
-          font-size: 1.1rem;
-          font-weight: 600;
-          cursor: pointer;
-          width: 100%;
-          margin-top: 18px;
-          box-shadow: 0 4px 12px rgba(249, 115, 22, 0.13);
-          transition: background 0.2s, transform 0.2s;
-          position: relative;
-          overflow: hidden;
-        }
-        .booking-btn:active {
-          animation: btnBounce 0.3s;
-        }
-        @keyframes btnBounce {
-          0% { transform: scale(1); }
-          30% { transform: scale(0.96); }
-          60% { transform: scale(1.04); }
-          100% { transform: scale(1); }
-        }
-        .booking-btn:hover {
-          background: linear-gradient(90deg, #ff8c42 0%, #ffb837 100%);
-          transform: translateY(-2px) scale(1.03);
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @media (max-width: 600px) {
-          .booking-card { padding: 28px 8px 24px 8px; }
-          .booking-title { font-size: 1.3rem; }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-18px); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+        @media (max-width: 700px) {
+          form {
+            padding: 18px 6px !important;
+          }
+          h1 {
+            font-size: 2rem !important;
+          }
         }
       `}</style>
-      <div className="booking-card">
-        <div className="booking-title">
-          REACH OUT FOR THE BEST <br />
-          <span>EXPERIENCE</span>
-        </div>
-        <div className="booking-sub">
-          Book your next adventure with us! Fill out the form and our team will get in touch soon.
-        </div>
-        <form ref={form} onSubmit={sendEmail} className="booking-form">
-          <div className="booking-input-group">
-            <i className="fas fa-user"></i>
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Type your Name..." required />
-          </div>
-          <div className="booking-input-group">
-            <i className="fas fa-phone"></i>
-            <label>Phone Number</label>
-            <input type="text" name="phone" placeholder="Type your Phone Number..." required />
-          </div>
-          <div className="booking-input-group">
-            <i className="fas fa-envelope"></i>
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Type your Email..." required />
-          </div>
-          <div className="booking-input-group">
-            <i className="fas fa-comment-dots"></i>
-            <label>Message</label>
-            <textarea name="message" placeholder="Type your Message..." required />
-          </div>
-          <button className="booking-btn" type="submit">
-            BOOK YOUR TRAVEL
-          </button>
-        </form>
-      </div>
     </div>
-  )
+  );
 }
 
 export default Booking;

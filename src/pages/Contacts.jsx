@@ -3,11 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import './Contacts.css';
 
 function Contacts() {
+  const location = useLocation();
 
-
-const location = useLocation();
-
-   useEffect(() => {
+  useEffect(() => {
     if (location.hash === '#enquiry') {
       const element = document.getElementById('enquiry');
       if (element) {
@@ -16,9 +14,16 @@ const location = useLocation();
     }
   }, [location]);
 
+  const handleInstagramClick = () => {
+    // Replace 'your_instagram_username' with the actual Instagram username
+    window.open('https://www.instagram.com/your_instagram_username/', '_blank');
+  };
 
-
-
+  const handleWhatsAppClick = () => {
+    // Replace 'your_phone_number' with your actual WhatsApp number (include country code without + symbol)
+    // Example: 1234567890 for +1 234 567 890
+    window.open('https://wa.me/your_phone_number', '_blank');
+  };
 
   return (
     <div className="contacts-page">
@@ -26,6 +31,12 @@ const location = useLocation();
       <link
         href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
         rel="stylesheet"
+      />
+      
+      {/* Font Awesome for icons */}
+      <link 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+        rel="stylesheet" 
       />
       
       <div className="hero-section">
@@ -39,7 +50,7 @@ const location = useLocation();
         </div>
       </div>
 
-      <div className="contact-content"  id="enquiry">
+      <div className="contact-content" id="enquiry">
         <h2>Have a Question ?</h2>
         <h3 className="drop-line">DROP A LINE</h3>
         
@@ -70,6 +81,16 @@ const location = useLocation();
           </form>
         </div>
 
+        {/* Floating Social Icons */}
+        <div className="floating-social-icons">
+          <div className="social-icon instagram-icon" onClick={handleInstagramClick}>
+            <i className="fab fa-instagram"></i>
+          </div>
+          <div className="social-icon whatsapp-icon" onClick={handleWhatsAppClick}>
+            <i className="fab fa-whatsapp"></i>
+          </div>
+        </div>
+
         {/* Map Section */}
         <div className="map-container">
           <iframe
@@ -83,32 +104,82 @@ const location = useLocation();
           ></iframe>
         </div>
 
-        {/* Social Media Section
-        <div className="social-media-section">
-          <div className="social-links">
-            <a href="#" className="social-link">
-              <div className="icon-container">
-                <i className="fab fa-facebook-f"></i>
-              </div>
-              <span>Like us on Facebook!</span>
-            </a>
-            <a href="#" className="social-link">
-              <div className="icon-container">
-                <i className="fab fa-x-twitter"></i>
-              </div>
-              <span>Follow us on X</span>
-            </a>
-            <a href="#" className="social-link">
-              <div className="icon-container">
-                <i className="fab fa-youtube"></i>
-              </div>
-              <span>Watch us on Youtube</span>
-            </a>
-          </div>
-        </div> */}
+        {/* Social Media Section */}
+        
       </div>
+
+      <style jsx>{`
+        /* Floating Social Icons */
+        .floating-social-icons {
+          position: fixed;
+          right: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .social-icon {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+          transform: scale(1.1);
+        }
+
+        .social-icon i {
+          font-size: 24px;
+          color: white;
+        }
+
+        /* Instagram Icon Styles */
+        .instagram-icon {
+          background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+          box-shadow: 0 4px 15px rgba(240, 148, 51, 0.4);
+        }
+
+        .instagram-icon:hover {
+          box-shadow: 0 6px 20px rgba(240, 148, 51, 0.6);
+        }
+
+        /* WhatsApp Icon Styles */
+        .whatsapp-icon {
+          background: #25D366;
+          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon:hover {
+          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .floating-social-icons {
+            right: 20px;
+            gap: 12px;
+          }
+          
+          .social-icon {
+            width: 45px;
+            height: 45px;
+          }
+          
+          .social-icon i {
+            font-size: 20px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
 
-export default Contacts; 
+export default Contacts;

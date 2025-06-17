@@ -1,39 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 function Banner3() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <div className="travel-package" style={{
+    <div style={{
       maxWidth: "1200px",
       margin: "40px auto",
       padding: "20px",
       display: "flex",
+      flexDirection: isMobile ? "column" : "row",
       gap: "30px",
       alignItems: "start",
-      position: "relative",
-      marginBottom: "1px"
+      position: "relative"
     }}>
-      {/* Left side - Images Stack */}
+      {/* Left Image Stack */}
       <div style={{
         flex: "1.5",
         position: "relative",
-        height: "600px"
+        height: isMobile ? "400px" : "600px",
+        marginBottom: isMobile ? "40px" : "0"
       }}>
         {/* Bottom Image */}
         <div style={{
           position: "absolute",
-          top: "90px",
-          left: "-100px",
+          top: isMobile ? "60px" : "90px",
+          left: isMobile ? "0px" : "-100px",
           width: "100%",
-          height: "450px",
+          height: isMobile ? "300px" : "450px",
           borderRadius: "8px",
           overflow: "hidden",
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           zIndex: 1
         }}>
           <img 
-            src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+            src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1740&q=80"
             alt="Peru Landscape"
             style={{
               width: "120%",
@@ -43,17 +56,16 @@ function Banner3() {
           />
         </div>
 
-        {/* Top Image Container */}
+        {/* Top Image */}
         <div style={{
           position: "absolute",
           top: 0,
-          left: 70,
-          right: 2,
-          width: "550px",
-          height: "450px",
+          left: isMobile ? "0px" : "70px",
+          width: isMobile ? "100%" : "550px",
+          height: isMobile ? "250px" : "450px",
           borderRadius: "8px",
           overflow: "hidden",
-          // boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           zIndex: 2
         }}>
           <img 
@@ -62,51 +74,42 @@ function Banner3() {
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-               position: "absolute",
-          top: 0,
-          left: 70,
-          right: 2,
-          width: "550px",
-          height: "450px",
-          borderRadius: "8px",
-          overflow: "hidden",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          zIndex: 2
+              objectFit: "cover"
             }}
           />
-          
-          {/* Price Circle Overlay */}
-          <div style={{
-            position: "absolute",
-            top: "40px",
-            right: "10px",
-            width: "160px",
-            height: "160px",
-            borderRadius: "50%",
-            backgroundColor: "#f97316",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
-            zIndex: 4,
-          }}>
+
+          {/* Price Circle */}
+          {!isMobile && (
             <div style={{
-              fontSize: "42px",
-              fontWeight: "bold",
-              lineHeight: "1"
-            }}>6 Day</div>
-            <div style={{
-              fontSize: "16px",
-              marginTop: "5px"
-            }}>7 NIGHT</div>
-          </div>
+              position: "absolute",
+              top: "40px",
+              right: "10px",
+              width: "160px",
+              height: "160px",
+              borderRadius: "50%",
+              backgroundColor: "#f97316",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+              boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
+              zIndex: 4,
+            }}>
+              <div style={{
+                fontSize: "42px",
+                fontWeight: "bold"
+              }}>6 Day</div>
+              <div style={{
+                fontSize: "16px",
+                marginTop: "5px"
+              }}>7 NIGHT</div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Right side - Content */}
+      {/* Right Content */}
       <div style={{
         flex: "1",
         padding: "20px 0",
@@ -115,17 +118,18 @@ function Banner3() {
       }}>
         <h3 style={{
           color: "#f97316",
-          fontSize: "24px",
-          fontWeight: "normal",
+          fontSize: "22px",
           fontFamily: 'Itim, cursive',
-          marginBottom: "10px"
+          marginBottom: "10px",
+          textAlign: isMobile ? "center" : "left"
         }}>CELLULAR JAIL</h3>
         
         <h2 style={{
-          fontSize: "32px",
+          fontSize: isMobile ? "24px" : "32px",
           fontWeight: "bold",
           marginBottom: "20px",
-          color: "#1f2937"
+          color: "#1f2937",
+          textAlign: isMobile ? "center" : "left"
         }}>PORT BLAIR TO DIGLIPUR</h2>
         
         <p style={{
@@ -133,12 +137,12 @@ function Banner3() {
           fontSize: "14px",
           lineHeight: "1.6",
           marginBottom: "30px",
-          fontWeight: "300"
+          fontWeight: "300",
+          textAlign: isMobile ? "center" : "left"
         }}>
           Perfect for travelers eager to uncover the region's rich archaeological and cultural heritage in just a few days, this adventure features an unforgettable four-day trek along the legendary Inca Trail.
         </p>
 
-        {/* Travel Details */}
         <div style={{
           display: "flex",
           flexDirection: "column",
@@ -146,62 +150,54 @@ function Banner3() {
           marginBottom: "30px",
           fontSize: "13px"
         }}>
-          <div className="detail-row" style={{
-            display: "flex",
-            gap: "10px",
-            alignItems: "center"
-          }}>
-            <span style={{ color: "#4b5563", width: "150px" }}>TRAVEL STYLE:</span>
-            <span style={{ color: "#f97316", fontWeight: "500" }}>ACTIVE</span>
-          </div>
-          
-          <div className="detail-row" style={{
-            display: "flex",
-            gap: "10px",
-            alignItems: "center"
-          }}>
-            <span style={{ color: "#4b5563", width: "150px" }}>SERVICE LEVEL:</span>
-            <span style={{ color: "#f97316", fontWeight: "500" }}>STANDARD</span>
-          </div>
-          
-          <div className="detail-row" style={{
-            display: "flex",
-            gap: "10px",
-            alignItems: "center"
-          }}>
-            <span style={{ color: "#4b5563", width: "120px" }}>TRIP TYPE:</span>
-            <span style={{ color: "#f97316", fontWeight: "500" ,marginLeft: "29px"}}>SMALL GROUP</span>
-          </div>
+          {[
+            { label: "TRAVEL STYLE:", value: "ACTIVE" },
+            { label: "SERVICE LEVEL:", value: "STANDARD" },
+            { label: "TRIP TYPE:", value: "SMALL GROUP" }
+          ].map(({ label, value }, idx) => (
+            <div key={idx} style={{
+              display: "flex",
+              justifyContent: isMobile ? "center" : "start",
+              gap: "10px",
+              alignItems: "center"
+            }}>
+              <span style={{ color: "#4b5563", width: "150px", textAlign: isMobile ? "right" : "left" }}>{label}</span>
+              <span style={{ color: "#f97316", fontWeight: "500" }}>{value}</span>
+            </div>
+          ))}
         </div>
 
-        {/* Book Button with Hover Effect */}
-        <button 
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          style={{
-            backgroundColor: isHovered ? "#ea580c" : "#f97316",
-            color: "white",
-            border: "none",
-            padding: "15px 40px",
-            borderRadius: "30px",
-            fontSize: "16px",
-            fontWeight: "500",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-            boxShadow: isHovered 
-              ? "0 6px 20px rgba(249, 115, 22, 0.4)" 
-              : "0 4px 12px rgba(249, 115, 22, 0.2)",
-            transform: isHovered ? "translateY(-2px)" : "translateY(0)"
-          }}
-        >
-          BOOK YOUR TRAVEL
-        </button>
+        {/* Book Button */}
+        <div style={{ textAlign: isMobile ? "center" : "left" }}>
+          <button 
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            style={{
+              backgroundColor: isHovered ? "#ea580c" : "#f97316",
+              color: "white",
+              border: "none",
+              padding: "15px 40px",
+              borderRadius: "30px",
+              fontSize: "16px",
+              fontWeight: "500",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              boxShadow: isHovered 
+                ? "0 6px 20px rgba(249, 115, 22, 0.4)" 
+                : "0 4px 12px rgba(249, 115, 22, 0.2)",
+              transform: isHovered ? "translateY(-2px)" : "translateY(0)"
+            }}
+          >
+            BOOK YOUR TRAVEL
+          </button>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Banner3
+export default Banner3;
+
 
 
 

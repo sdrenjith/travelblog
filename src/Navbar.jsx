@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import Logo from '../public/navlog.png'
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   // Handle scroll effect
   useEffect(() => {
@@ -51,31 +54,36 @@ function Navbar() {
     </a>
   );
 
-
   //when click booktravel button go to booking page
   const handleBookClick = () => {
     Navigate('/Booking');
   }
 
+  const isActive = (path) => {
+    return location.pathname === path ? 'active' : '';
+  };
+
   return (
     <>
-      <nav className={`navbar-custom ${isScrolled ? 'scrolled' : ''}`} style={{overflowX: "hidden"}}>
-        <div className="container">
+      <nav className={`navbar-custom ${isScrolled ? 'scrolled' : ''}`} style={{overflowX: "hidden", width: "100%", position: "fixed", top: 0, left: 0, right: 0}}>
+        <div className="container" style={{maxWidth: "100%", padding: "0 20px",overflowX: 'hidden'}}>
           <Link className="navbar-brand" to="/">
-            <img 
-              src="https://unitravel.ancorathemes.com/wp-content/uploads/2017/01/logo1_x2.png" 
+            <img
+            width={'900px'}
+            height={'700px'} 
+              src={Logo} 
               alt="UniTravel Logo"
             />
           </Link>
           
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <Link className="nav-link home" to="/" onClick={closeMenu}>HOME</Link>
-            <Link className="nav-link about" to="/about" onClick={closeMenu}>ABOUT</Link>
-            <Link className="nav-link packages" to="/packages" onClick={closeMenu}>PACKAGES</Link>
-            <Link className="nav-link Destination" to="/Destination" onClick={closeMenu}>DESTINATIONS</Link>
-            <Link className="nav-link stay" to="/stay" onClick={closeMenu}>ACTIVITIES</Link>
-            <Link className="nav-link booking" to="/booking" onClick={closeMenu}>BOOKING</Link>
-            <Link className="nav-link contacts" to="/contacts" onClick={closeMenu}>CONTACT US</Link>
+            <Link className={`nav-link home ${isActive('/')}`} to="/" onClick={closeMenu}>HOME</Link>
+            <Link className={`nav-link about ${isActive('/about')}`} to="/about" onClick={closeMenu}>ABOUT</Link>
+            <Link className={`nav-link packages ${isActive('/packages')}`} to="/packages" onClick={closeMenu}>PACKAGES</Link>
+            <Link className={`nav-link Destination ${isActive('/Destination')}`} to="/Destination" onClick={closeMenu}>DESTINATIONS</Link>
+            <Link className={`nav-link stay ${isActive('/stay')}`} to="/stay" onClick={closeMenu}>ACTIVITIES</Link>
+            <Link className={`nav-link booking ${isActive('/booking')}`} to="/booking" onClick={closeMenu}>BOOKING</Link>
+            <Link className={`nav-link contacts ${isActive('/contacts')}`} to="/contacts" onClick={closeMenu}>CONTACT US</Link>
           </div>
 
           <div className="contact-section">
@@ -83,7 +91,7 @@ function Navbar() {
               <i className="fas fa-phone-alt"></i>
               <span>1 800 123 4567</span>
             </div>
-            <Link  className="book-travel-btn" to="/contacts#enquiry" onClick={handleBookClick}>ENQUIRY</Link>
+            <Link className="book-travel-btn" to="/contacts#enquiry" onClick={handleBookClick}>ENQUIRY</Link>
           </div>
 
           <button 
@@ -104,7 +112,7 @@ function Navbar() {
       <style jsx>{`
         .navbar-custom {
           background-color: #ffffff;
-          padding: 8px 0;
+          padding: 12px 0;
           box-shadow: 0 1px 3px rgba(0,0,0,0.1);
           width: 100%;
           position: fixed;
@@ -118,7 +126,7 @@ function Navbar() {
           background-color: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(10px);
           box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-          padding: 6px 0;
+          padding: 8px 0;
         }
 
         .container {
@@ -143,7 +151,7 @@ function Navbar() {
         }
 
         .navbar-brand img {
-          height: 28px;
+          height: 45px;
           width: auto;
           transition: filter 0.3s ease;
         }

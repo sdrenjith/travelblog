@@ -82,7 +82,7 @@ const DestinationDetails = () => {
   };
 
   const handleBookNow = () => {
-    console.log('Navigate to booking');
+    navigate('/booking');
   };
 
   return (

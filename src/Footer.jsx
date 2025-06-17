@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Facebook, Instagram } from "lucide-react";
-
+import logo from '../public/logo.png'
 
 const ModernFooter = () => {
   const [email, setEmail] = useState('');
@@ -94,7 +94,7 @@ const ModernFooter = () => {
         }
 
         .footer-section {
-          margin-bottom: 30px;
+          margin-bottom: 100px;
         }
 
         .footer-title {
@@ -156,8 +156,6 @@ const ModernFooter = () => {
           text-decoration: none;
         }
 
-
-
         .newsletter-text {
           margin-bottom: 20px;
           font-size: 13px;
@@ -172,6 +170,7 @@ const ModernFooter = () => {
           color: #ffffff;
           font-size: 13px;
           padding: 10px 12px;
+          width: 100%;
         }
 
         .newsletter-input::placeholder {
@@ -197,6 +196,7 @@ const ModernFooter = () => {
           text-transform: uppercase;
           letter-spacing: 0.5px;
           transition: all 0.3s ease;
+          width: 100%;
         }
 
         .newsletter-btn:hover {
@@ -311,12 +311,6 @@ const ModernFooter = () => {
             justify-content: center;
           }
 
-          .newsletter-overlay {
-            position: static;
-            width: 100%;
-            margin-top: 20px;
-          }
-
           .modern-footer {
             margin-top: 20px;
           }
@@ -324,129 +318,113 @@ const ModernFooter = () => {
       `}</style>
 
       {/* Demo content to show scroll behavior */}
-    
+     
 
       <footer className="modern-footer">
-        <div className="container">
-          <div className="footer-main">
-            <div className="row g-4">
-              
-              {/* Info Section */}
-              <div className="col-lg-3 col-md-6">
-                <div className="footer-section">
-                  <h3 className="footer-title">Info</h3>
-                  <ul className="footer-links">
-                    {infoLinks.map((link, index) => (
-                      <li key={index}>
-                        <a href={link.href} className="footer-link">
-                          {link.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Blog Section */}
-              <div className="col-lg-3 col-md-6">
-                <div className="footer-section">
-                  <h3 className="footer-title">Blog</h3>
-                  <ul className="footer-links">
-                    {blogPosts.map((post, index) => (
-                      <li key={index}>
-                        <a href={post.href} className="footer-link">
-                          {post.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Contacts Section */}
-              <div className="col-lg-3 col-md-6">
-                <div className="footer-section">
-                  <h3 className="footer-title">Contacts</h3>
-                  <div className="contact-info">
-                    <p className="fw-bold">Steven Bernson, Attorney at Law</p>
-                    <p>1556 Broadway, New York, NY</p>
-                    <p>
-                      <a href="mailto:info@example.com" className="contact-link">
-                        info@example.com
+        
+          {/* Main Info Row: Info, Blog, Contacts */}
+          <div className="row g-1 footer-main justify-content-center align-items-start mb-0">
+            <div className="col-md-2 col-12">
+              <div className="footer-section">
+                <h3 className="footer-title">Info</h3>
+                <ul className="footer-links">
+                  {infoLinks.map((link, index) => (
+                    <li key={index}>
+                      <a href={link.href} className="footer-link">
+                        {link.name}
                       </a>
-                    </p>
-                    <p>
-                      <a href="tel:18001234567" className="contact-link">
-                        1 800 123 4567
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="col-md-4 col-12">
+              <div className="footer-section">
+                <h3 className="footer-title">Blog</h3>
+                <ul className="footer-links">
+                  {blogPosts.map((post, index) => (
+                    <li key={index}>
+                      <a href={post.href} className="footer-link">
+                        {post.title}
                       </a>
-                    </p>
-                  </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="col-md-4 col-12">
+              <div className="footer-section">
+                <h3 className="footer-title">Contacts</h3>
+                <div className="ontact-info">
+                  <p className="fw-bold">Andaman Reef Tours and Travels</p>
+                  <p>Port Blair, Andaman & Nicobar Islands</p>
+                  <p>
+                    <a href="mailto:andamanbeacontoursandtravels@gmail.com" className="contact-link">
+                      andamanbeacontoursandtravels@gmail.com
+                    </a>
+                  </p>
+                  <p>
+                    <a href="tel:18001234567" className="contact-link">
+                      1 800 123 4567
+                    </a>
+                  </p>
                 </div>
               </div>
+            </div>
+          </div>
 
-              {/* Newsletter Section */}
-              <div className="col-lg-3 col-md-6">
-                <div className="footer-section">
-                  <h3 className="footer-title">Newsletter Sign Up</h3>
-                 
+          {/* Newsletter Section: below main info row */}
+          <div className="row justify-content-center mt-0 mb-4">
+            <div className="col-md-6 col-12">
+              <div className="footer-section text-center">
+                <h3 className="footer-title">Newsletter Sign Up</h3>
+                <p className="newsletter-text">
+                  Subscribe now and receive a 20% discount on your next guidebook purchase
+                </p>
+                <div className="newsletter-form d-flex flex-column flex-sm-row gap-2 justify-content-center align-items-center">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="newsletter-input mb-2 mb-sm-0"
+                    style={{ minWidth: '220px' }}
+                  />
+                  <button
+                    onClick={handleNewsletterSubmit}
+                    className="newsletter-btn"
+                  >
+                    SIGN UP
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Footer Bottom */}
-          <div className="footer-bottom">
-            <div className="footer-bottom-content">
-              <div className="footer-logo">
-                <div className="logo-icon">U</div>
-                <span className="logo-text">UNITRAVEL</span>
+          <div className="footer-bottom mt-4">
+            <div className="footer-bottom-content d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+              <div className="footer-logo d-flex align-items-center mb-2 mb-md-0">
+                <div className="logo-icon"><img style={{width: '60px',height:'40px',borderRadius: '100px'}} src={logo} alt="" /></div>
+                <span className="logo-text ms-2">Andaman Reef Tours and Travels</span>
               </div>
-              
-              <div className="copyright">
-                <span className="brand-name">AncoraThemes</span>
-                <span> © 2025. All rights reserved.</span>
+              <div className="copyright text-center mb-2 mb-md-0">
+                <span>© 2025 Andaman Reef Tours and Travels. All rights reserved.</span>
               </div>
-
-              <div className="social-links">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    title={social.name}
-                    className="social-link"
-                  >
-                    <i className={social.icon}></i>
-                  </a>
-                ))}
+              <div className="social-links d-flex gap-2">
+                <a href="#" title="Twitter" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#" title="Facebook" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/" title="Instagram" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-instagram"></i>
+                </a>
               </div>
             </div>
           </div>
-
-
-           <div className="newsletter-card">
-                    <p className="newsletter-text">
-                      Subscribe now and receive a 20% discount on your next guidebook purchase
-                    </p>
-                    <div className="newsletter-form">
-                      <div className="mb-3">
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="your@email.com"
-                          className="form-control newsletter-input"
-                        />
-                      </div>
-                      <button
-                        onClick={handleNewsletterSubmit}
-                        className="btn newsletter-btn w-100"
-                      >
-                        SIGN UP
-                      </button>
-                    </div>
-                  </div>
-        </div>
-
+       
         {/* Scroll to Top Button */}
         {showScrollTop && (
           <button
@@ -461,16 +439,8 @@ const ModernFooter = () => {
 
       {/* Bootstrap JS */}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-   
-
-
-   
- </>
+    </>
   );
 };
 
 export default ModernFooter;
-
-
-
-
