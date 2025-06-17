@@ -57,6 +57,23 @@ function BookingDetails() {
     );
   }
 
+  // Animation and accent styles
+  const fadeIn = {
+    animation: 'fade-in 1.2s cubic-bezier(.39,.575,.56,1) both',
+  };
+  const fadeInDelayed = {
+    animation: 'fade-in 1.7s cubic-bezier(.39,.575,.56,1) both',
+    animationDelay: '0.3s',
+  };
+  const gradientBar = {
+    width: '100%',
+    height: '8px',
+    borderRadius: '8px',
+    background: 'linear-gradient(90deg, #ffb347 0%, #ffcc80 100%)',
+    margin: '32px 0',
+    opacity: 0.7,
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -101,6 +118,7 @@ function BookingDetails() {
         zIndex: 2,
         background: 'transparent',
         boxSizing: 'border-box',
+        ...fadeIn
       }}>
         {/* Image Section */}
         <div style={{
@@ -115,6 +133,7 @@ function BookingDetails() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          position: 'relative',
         }}>
           <img 
             src={activityData.image} 
@@ -126,20 +145,25 @@ function BookingDetails() {
               display: 'block',
             }}
           />
+          {/* Floating rating badge */}
           <div style={{
             position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: 'rgba(255, 255, 255, 0.9)',
-            padding: '10px 20px',
+            top: '24px',
+            left: '24px',
+            background: 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)',
+            color: '#fff',
+            padding: '10px 22px',
             borderRadius: '30px',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+            fontWeight: 600,
+            fontSize: '1.1rem',
+            boxShadow: '0 2px 10px rgba(255, 179, 71, 0.13)',
+            zIndex: 2,
           }}>
-            <i className="fas fa-star" style={{ color: '#ffd700' }}></i>
-            <span style={{ fontWeight: 'bold', color: '#333' }}>{activityData.rating}</span>
+            <i className="fas fa-star" style={{ color: '#fff700' }}></i>
+            <span>{activityData.rating}</span>
           </div>
         </div>
 
@@ -147,20 +171,22 @@ function BookingDetails() {
         <div style={{
           flex: '2 1 400px',
           minWidth: '320px',
-          background: '#fff',
+          background: 'rgba(255,255,255,0.97)',
           borderRadius: '20px',
-          padding: '32px',
-          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
+          padding: '40px 32px',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)',
           display: 'flex',
           flexDirection: 'column',
           gap: '30px',
+          ...fadeInDelayed
         }}>
           <div>
             <h1 style={{
               fontSize: '2.2rem',
-              color: '#333',
+              color: '#222',
               marginBottom: '10px',
               wordBreak: 'break-word',
+              fontWeight: 700,
             }}>
               {activityData.name}
             </h1>
@@ -174,6 +200,9 @@ function BookingDetails() {
             </p>
           </div>
 
+          {/* Gradient Accent Bar */}
+          <div style={gradientBar}></div>
+
           {/* Activity Details */}
           <div style={{
             background: 'rgba(255, 255, 255, 0.9)',
@@ -184,9 +213,11 @@ function BookingDetails() {
           }}>
             <h2 style={{
               fontSize: '1.4rem',
-              color: '#333',
+              color: '#ffb347',
               marginBottom: '20px',
+              fontWeight: 700,
             }}>
+              <i className="fas fa-info-circle" style={{color:'#ffb347', marginRight:8}}></i>
               Activity Details
             </h2>
             <div style={{
@@ -246,20 +277,22 @@ function BookingDetails() {
             onClick={() => navigate('/booking')}
             style={{
               padding: '15px 30px',
-              background: 'linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%)',
+              background: 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)',
               color: 'white',
               border: 'none',
               borderRadius: '30px',
               cursor: 'pointer',
               fontSize: '1.1rem',
-              fontWeight: 500,
+              fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '10px',
-              boxShadow: '0 4px 15px rgba(255, 107, 107, 0.15)',
+              boxShadow: '0 4px 15px rgba(255, 179, 71, 0.15)',
               transition: 'all 0.3s ease',
             }}
+            onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%)'}
+            onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(135deg, #ffb347 0%, #ffcc80 100%)'}
           >
             <i className="fas fa-calendar-check"></i>
             Book This Activity
@@ -268,6 +301,10 @@ function BookingDetails() {
       </div>
       {/* Responsive styles */}
       <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         @media (max-width: 900px) {
           .booking-details-flex {
             flex-direction: column !important;
