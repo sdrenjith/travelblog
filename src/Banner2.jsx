@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function Banner2() {
   const imageStyle = {
     width: '100%',
-    height: '173px',
+    height: '250px',
     objectFit: 'cover',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -92,7 +92,7 @@ function Banner2() {
           {
             src: 'https://th.bing.com/th/id/OSK.HERO2VO1uFErHZIjEsJaEEFjswDE49C2fsSuFmG2JDYp6RY?w=312&h=200&c=15&rs=2&o=6&dpr=1.5&pid=SANGAM',
             title: 'NORTHBAY',
-            desc: 'North Bay is a treasure waiting to be explored, offering a bit of everything — vibrant coral reefs, golden sandy beaches, clear blue waters, and thrilling underwater adventures. It’s a paradise for nature lovers and adventure seekers alike.',
+            desc: 'North Bay is a treasure waiting to be explored, offering a bit of everything — vibrant coral reefs, golden sandy beaches, clear blue waters, and thrilling underwater adventures. It\'s a paradise for nature lovers and adventure seekers alike.',
           },
           {
             src: 'https://th.bing.com/th/id/R.5691088987fd0812abe9eaae0d72b6a6?rik=3s526oooiQbanA&riu=http%3a%2f%2fwww.go2india.in%2fandaman%2fimages%2fwandoorbeach.JPG&ehk=IhhS3cg0Z%2fIAnStTa4rU8Gymv4IbbCmsWZdaSrJc8DM%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',

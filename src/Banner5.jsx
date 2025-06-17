@@ -10,7 +10,7 @@ function Banner5() {
 
   const itineraryData = {
     "Day 1": {
-      image: "https://th.bing.com/th/id/OSK.HEROUSNawIGlOLb0so4SzWbVmbGuL3Hoet47EM5zw-I-kTk?w=312&h=200&c=15&rs=2&o=6&dpr=1.5&pid=SANGAM",
+      image: "https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600",
       text:
         "Neil Island is a small island in the southern part of the Andaman archipelago, located between Havelock Island and Port Blair. Known for its laid-back charm.",
     },
@@ -30,7 +30,7 @@ function Banner5() {
     "Day 5": {
       image: "https://cdn.britannica.com/04/242304-050-6B22FC09/Cellular-Jail-India-.jpg",
       text:
-          "The Cellular Jail is a colonial-era prison built in the early 20th century, located in Port Blair. It stands as the most iconic symbol of India’s freedom struggle ."    },
+          "The Cellular Jail is a colonial-era prison built in the early 20th century, located in Port Blair. It stands as the most iconic symbol of India's freedom struggle ."    },
     "Day 6": {
       image: "https://th.bing.com/th/id/OIP.UAv4w_Y8GqSJZmIlwHl51AHaFL?rs=1&pid=ImgDetMain",
       text:
@@ -44,7 +44,8 @@ function Banner5() {
     "Day 8": {
       image: "https://th.bing.com/th/id/OIP.LcgD_dLiduudkcE6nFgPPwHaE7?rs=1&pid=ImgDetMain",
       text:
-      "Diglipur is the main commercial and administrative center of North Andaman. Surrounded by natural beauty, it is one of the most important destinations for eco-tourism and adventure."    },
+      "Diglipur is the main commercial and administrative center of North Andaman, known for its natural beauty and adventure activities."
+    },
   };
 
   // Update selected day and active dot index on click
@@ -52,6 +53,26 @@ function Banner5() {
     setSelectedDay(day);
     setActiveIndex(index);
   };
+
+  // Calculate left offset for the card
+  const timelineWidth = 800; // px, adjust if needed
+  const cardWidth = 600; // px, should match the card's maxWidth
+  const dayCount = days.length;
+  const daySpacing = timelineWidth / (dayCount - 1);
+  const dotX = activeIndex * daySpacing;
+  let leftOffset = dotX - cardWidth / 2;
+  let pointerLeft = '50%';
+  let pointerTransform = 'translateX(-50%)';
+  // Clamp card so it doesn't overflow container
+  if (leftOffset < 0) {
+    pointerLeft = `${dotX}px`;
+    pointerTransform = 'translateX(0)';
+    leftOffset = 0;
+  } else if (leftOffset > timelineWidth - cardWidth) {
+    pointerLeft = `${dotX - (timelineWidth - cardWidth)}px`;
+    pointerTransform = 'translateX(0)';
+    leftOffset = timelineWidth - cardWidth;
+  }
 
   return (
     <div
@@ -81,18 +102,49 @@ function Banner5() {
          
 
           {/* Itinerary card */}
-          <div style={{marginRight: "500px",marginBottom: "1px",marginTop: "10px"}}>
-          <div className="card shadow-lg" style={{ width: "200px", height: "300px" }}>
-            <img
-              src={itineraryData[selectedDay].image}
-              className="card-img-top"
-              alt={selectedDay}
-              style={{ height: "300px", objectFit: "cover" }}
-            />
-            <div className="card-body" style={{ backgroundColor: "white", color: "#333", padding: "20px" }}>
-              <p className="card-text" style={{ fontSize: "13px",fontWeight: "300", margin: 0 }}>{itineraryData[selectedDay].text}</p>
+          <div style={{ position: 'relative', width: timelineWidth, margin: '0 auto', paddingTop: 260, paddingBottom: 40 }}>
+            {/* Popup Card Positioned Above Timeline */}
+            <div
+              style={{
+                position: 'absolute',
+                left: leftOffset,
+                top: 0,
+                zIndex: 2,
+                width: cardWidth,
+                background: 'white',
+                borderRadius: 16,
+                boxShadow: '0 8px 32px rgba(31,38,135,0.13)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                paddingBottom: 24,
+                transition: 'left 0.4s cubic-bezier(.4,2,.6,1)',
+              }}
+            >
+              <img
+                src={itineraryData[selectedDay].image}
+                alt={selectedDay}
+                style={{
+                  width: '100%',
+                  height: 180,
+                  objectFit: 'cover',
+                  borderTopLeftRadius: 16,
+                  borderTopRightRadius: 16,
+                }}
+              />
+              <div
+                style={{
+                  padding: '22px 32px',
+                  fontSize: '1.18rem',
+                  color: '#333',
+                  fontWeight: 400,
+                  textAlign: 'center',
+                  lineHeight: 1.6,
+                }}
+              >
+                {itineraryData[selectedDay].text}
+              </div>
             </div>
-          </div>
           </div>
 
           {/* Timeline dots and lines */}
@@ -150,6 +202,17 @@ function Banner5() {
           </div>
         </div>
       </div>
+      <style>{`
+@media (max-width: 900px) {
+  .itinerary-popup-card {
+    width: 98% !important;
+    max-width: 98vw !important;
+    min-width: 0 !important;
+    font-size: 1rem !important;
+    padding: 0 0 18px 0 !important;
+  }
+}
+`}</style>
     </div>
   );
 }

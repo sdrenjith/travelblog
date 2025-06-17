@@ -9,21 +9,21 @@ function Banner() {
       title: "INSPIRING, BEAUTIFUL, BREATHTAKING",
       subtitle: "Visiting Andaman was a dream come true. The crystal-clear beaches, peaceful islands, and rich history made it an unforgettable experience. We especially loved the boat rides and the Cellular Jail light show!",
       location: "Machu Picchu",
-      price: "$1200"
+      highlight: "Unforgettable Journeys Await"
     },
     {
       image: "https://images.pexels.com/photos/2554603/pexels-photo-2554603.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "EXPLORE ANCIENT WONDERS",
       subtitle: "Andaman is pure magic. From snorkeling in Havelock to relaxing at Radhanagar Beach, every moment was picture-perfect. The people were friendly and the food was delicious too!",
       location: "Sacred Valley",
-      price: "$950"
+      highlight: "Discover the Magic of Andaman"
     },
     {
       image: "https://images.pexels.com/photos/90336/pexels-photo-90336.jpeg?auto=compress&cs=tinysrgb&w=600",
       title: "AUTHENTIC CULTURAL EXPERIENCE",
       subtitle: "We were amazed by the beauty of the coral reefs and untouched beaches. If you love nature, peace, and adventure, Andaman is the place to be.",
       location: "Cusco Region",
-      price: "$800"
+      highlight: "Adventure, Culture & Serenity"
     }
   ];
 
@@ -75,8 +75,8 @@ function Banner() {
               {slides[currentSlide].subtitle}
             </p>
             <div className="price-tag">
-              <h3 className="price-label">{slides[currentSlide].location} from</h3>
-              <div className="price">{slides[currentSlide].price}</div>
+              <h3 className="price-label">{slides[currentSlide].location}</h3>
+              <div className="price">{slides[currentSlide].highlight}</div>
             </div>
           </div>
 

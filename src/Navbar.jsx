@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import Logo from '../public/navlog.png'
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +18,7 @@ function Navbar() {
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMenuOpen && !event.target.closest('.navbar-custom')) {
+      if (isMenuOpen && !event.target.closest('.navbar-container')) {
         setIsMenuOpen(false);
       }
     };
@@ -47,230 +46,296 @@ function Navbar() {
     setIsMenuOpen(false);
   };
 
-  // Mock Link component for demonstration (replace with actual react-router-dom Link)
+  const handleItemClick = (item) => {
+    // Implement item click handling
+  };
+
+  // Mock Link component for demonstration
   const Link = ({ to, children, className, onClick }) => (
     <a href={to} className={className} onClick={onClick}>
       {children}
     </a>
   );
 
-  //when click booktravel button go to booking page
-  const handleBookClick = () => {
-    Navigate('/Booking');
-  }
-
-  const isActive = (path) => {
-    return location.pathname === path ? 'active' : '';
-  };
+  const navigationItems = [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'packages', label: 'Packages', href: '/packages' },
+    { id: 'destination', label: 'Destinations', href: '/destination' },
+    { id: 'stay', label: 'Activities', href: '/stay' },
+    { id: 'booking', label: 'Booking', href: '/booking' },
+    { id: 'contacts', label: 'Contact', href: '/contacts' },
+  ];
 
   return (
     <>
-      <nav className={`navbar-custom ${isScrolled ? 'scrolled' : ''}`} style={{overflowX: "hidden", width: "100%", position: "fixed", top: 0, left: 0, right: 0}}>
-        <div className="container" style={{maxWidth: "100%", padding: "0 20px",overflowX: 'hidden'}}>
+      <nav className={`navbar-container ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="navbar-content">
+          {/* Logo Section */}
           <Link className="navbar-brand" to="/">
-            <img
-            width={'900px'}
-            height={'700px'} 
-              src={Logo} 
-              alt="UniTravel Logo"
-            />
-          </Link>
-          
-          <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <Link className={`nav-link home ${isActive('/')}`} to="/" onClick={closeMenu}>HOME</Link>
-            <Link className={`nav-link about ${isActive('/about')}`} to="/about" onClick={closeMenu}>ABOUT</Link>
-            <Link className={`nav-link packages ${isActive('/packages')}`} to="/packages" onClick={closeMenu}>PACKAGES</Link>
-            <Link className={`nav-link Destination ${isActive('/Destination')}`} to="/Destination" onClick={closeMenu}>DESTINATIONS</Link>
-            <Link className={`nav-link stay ${isActive('/stay')}`} to="/stay" onClick={closeMenu}>ACTIVITIES</Link>
-            <Link className={`nav-link booking ${isActive('/booking')}`} to="/booking" onClick={closeMenu}>BOOKING</Link>
-            <Link className={`nav-link contacts ${isActive('/contacts')}`} to="/contacts" onClick={closeMenu}>CONTACT US</Link>
-          </div>
-
-          <div className="contact-section">
-            <div className="phone-number">
-              <i className="fas fa-phone-alt"></i>
-              <span>1 800 123 4567</span>
+            <div className="logo-wrapper">
+              <img src="/navlog.png" alt="Reef Logo" className="logo-image" />
+              
             </div>
-            <Link className="book-travel-btn" to="/contacts#enquiry" onClick={handleBookClick}>ENQUIRY</Link>
+          </Link>
+
+          {/* Navigation Links */}
+          <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+            <div className="nav-links">
+              {navigationItems.map((item) => (
+                <NavLink
+                  key={item.id}
+                  className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+                  to={item.href}
+                  end={item.href === '/'}
+                >
+                  {item.label}
+                  <div className="nav-underline"></div>
+                </NavLink>
+              ))}
+            </div>
           </div>
 
-          <button 
-            className={`mobile-menu-toggle ${isMenuOpen ? 'active' : ''}`}
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          {/* Right Section */}
+          <div className="navbar-actions">
+            
+
+            <Link className="enquiry-btn" to="/contacts">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              <span> ENQUIRY</span>
+              <div className="btn-shine"></div>
+            </Link>
+
+            {/* Mobile Menu Toggle */}
+            <button 
+              className={`mobile-toggle ${isMenuOpen ? 'active' : ''}`}
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <span className="toggle-bar bar-1"></span>
+              <span className="toggle-bar bar-2"></span>
+              <span className="toggle-bar bar-3"></span>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Overlay */}
-        <div className={`mobile-menu-overlay ${isMenuOpen ? 'active' : ''}`} onClick={closeMenu}></div>
+        <div className={`mobile-overlay ${isMenuOpen ? 'active' : ''}`} onClick={closeMenu}></div>
       </nav>
 
       <style jsx>{`
-        .navbar-custom {
-          background-color: #ffffff;
-          padding: 12px 0;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-          width: 100%;
+        .navbar-container {
           position: fixed;
           top: 0;
+          left: 0;
+          right: 0;
           z-index: 1000;
-          transition: all 0.3s ease;
-          overflow-x: "hidden";
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .navbar-custom.scrolled {
-          background-color: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-          padding: 8px 0;
+        .navbar-container.scrolled {
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          backdrop-filter: blur(20px);
         }
 
-        .container {
+        .navbar-content {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 20px;
+          height: 80px;
           position: relative;
         }
 
         .navbar-brand {
-          flex-shrink: 0;
-          transition: transform 0.3s ease;
-          z-index: 1001;
+          text-decoration: none;
+          transition: transform 0.2s ease;
         }
 
         .navbar-brand:hover {
-          transform: scale(1.05);
+          transform: translateY(-1px);
         }
 
-        .navbar-brand img {
+        .logo-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .logo-image {
           height: 45px;
           width: auto;
-          transition: filter 0.3s ease;
+          transition: all 0.3s ease;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
 
-        .navbar-brand:hover img {
-          filter: brightness(1.1);
+        .navbar-brand:hover .logo-image {
+          filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+          transform: scale(1.02);
+        }
+
+        .brand-text {
+          display: flex;
+          flex-direction: column;
+          gap: 1px;
+        }
+
+        .brand-name {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #1f2937;
+          line-height: 1;
+          letter-spacing: -0.025em;
+        }
+
+        .brand-tagline {
+          font-size: 0.65rem;
+          color: #6b7280;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .nav-menu {
+          display: flex;
+          align-items: center;
         }
 
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 15px;
-          margin: 0;
-          padding: 0 15px;
-          font-size: 10px;
+          gap: 32px;
         }
 
         .nav-link {
-          color: #86898d;
-          font-size: 10px;
-          font-weight: 500;
-          text-decoration: none;
-          text-transform: uppercase;
-          transition: all 0.3s ease;
-          white-space: nowrap;
-          letter-spacing: 0.2px;
           position: relative;
-          padding: 8px 12px;
-          border-radius: 4px;
-        }
-
-        .nav-link::before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(45deg, #ffa726, #f57c00);
-          transition: all 0.3s ease;
-          transform: translateX(-50%);
-        }
-
-        .nav-link:hover::before {
-          width: 80%;
+          display: flex;
+          align-items: center;
+          color: gray !important;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+          transition: all 0.2s ease;
+          padding: 8px 0;
         }
 
         .nav-link:hover {
-          color: rgb(239, 152, 22);
-          text-decoration: none;
-          background-color: rgba(255, 167, 38, 0.1);
-          transform: translateY(-2px);
+          color: #f59e0b;
         }
 
         .nav-link.active {
-          color: #ffa726;
-          background-color: rgba(255, 167, 38, 0.1);
+          color: #f59e0b;
         }
 
-        .nav-link.active::before {
-          width: 80%;
+        .nav-underline {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #f59e0b, #d97706);
+          transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .contact-section {
+        .nav-link:hover .nav-underline,
+        .nav-link.active .nav-underline {
+          width: 100%;
+        }
+
+        .navbar-actions {
           display: flex;
           align-items: center;
-          gap: 15px;
-          flex-shrink: 0;
+          gap: 24px;
+        }
+
+        .phone-section {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 16px;
+          background: rgba(16, 185, 129, 0.1);
+          border-radius: 8px;
+          transition: all 0.2s ease;
+          cursor: pointer;
+        }
+
+        .phone-section:hover {
+          background: rgba(16, 185, 129, 0.15);
+          transform: translateY(-1px);
+        }
+
+        .phone-icon {
+          width: 24px;
+          height: 24px;
+          color: #10b981;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.2s ease;
+        }
+
+        .phone-section:hover .phone-icon {
+          transform: scale(1.1);
+        }
+
+        .phone-info {
+          display: flex;
+          flex-direction: column;
+          gap: 1px;
+        }
+
+        .phone-label {
+          font-size: 0.65rem;
+          color: #10b981;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .phone-number {
+          font-size: 0.85rem;
+          color: #374151;
+          font-weight: 600;
+          letter-spacing: -0.025em;
+        }
+
+        .enquiry-btn {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 4px;
-          color: #86898d;
-          font-size: 11px;
-          font-weight: 500;
-          white-space: nowrap;
-          transition: all 0.3s ease;
-          padding: 6px 10px;
-          border-radius: 20px;
-        }
-
-        .phone-number:hover {
-          background-color: rgba(255, 167, 38, 0.1);
-          color: #ffa726;
-          transform: scale(1.05);
-        }
-
-        .phone-number i {
-          color: #ffa726;
-          transform: rotate(90deg);
-          font-size: 10px;
-          transition: transform 0.3s ease;
-        }
-
-        .phone-number:hover i {
-          transform: rotate(90deg) scale(1.2);
-        }
-
-        .book-travel-btn {
-          background: linear-gradient(45deg, #ffa726, #f57c00);
+          justify-content: center;
+          padding: 12px 24px;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
           color: white;
-          padding: 8px 16px;
-          font-size: 10px;
-          font-weight: 600;
           text-decoration: none;
+          font-weight: 600;
+          font-size: 0.85rem;
           text-transform: uppercase;
-          transition: all 0.3s ease;
-          white-space: nowrap;
-          letter-spacing: 0.2px;
-          border-radius: 25px;
-          box-shadow: 0 2px 8px rgba(255, 167, 38, 0.3);
-          position: relative;
+          letter-spacing: 0.05em;
+          border-radius: 6px;
+          transition: all 0.2s ease;
           overflow: hidden;
+          box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
         }
 
-        .book-travel-btn::before {
-          content: '';
+        .enquiry-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+          color: white;
+          text-decoration: none;
+        }
+
+        .btn-shine {
           position: absolute;
           top: 0;
           left: -100%;
@@ -280,270 +345,194 @@ function Navbar() {
           transition: left 0.5s ease;
         }
 
-        .book-travel-btn:hover::before {
+        .enquiry-btn:hover .btn-shine {
           left: 100%;
         }
 
-        .book-travel-btn:hover {
-          background: linear-gradient(45deg, #f57c00, #e65100);
-          color: white;
-          text-decoration: none;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 15px rgba(255, 167, 38, 0.5);
-        }
-
-        .mobile-menu-toggle {
+        .mobile-toggle {
           display: none;
           flex-direction: column;
           justify-content: center;
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           background: none;
           border: none;
           cursor: pointer;
-          padding: 0;
-          z-index: 1001;
+          gap: 4px;
         }
 
-        .mobile-menu-toggle span {
-          width: 25px;
-          height: 3px;
-          background-color: #86898d;
-          margin: 3px 0;
-          transition: 0.3s;
-          border-radius: 2px;
+        .toggle-bar {
+          width: 24px;
+          height: 2px;
+          background: #4b5563;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          border-radius: 1px;
         }
 
-        .mobile-menu-toggle.active span:nth-child(1) {
-          transform: rotate(-45deg) translate(-5px, 6px);
-          background-color: #ffa726;
+        .mobile-toggle.active .bar-1 {
+          transform: rotate(45deg) translate(5px, 5px);
+          background: #f59e0b;
         }
 
-        .mobile-menu-toggle.active span:nth-child(2) {
+        .mobile-toggle.active .bar-2 {
           opacity: 0;
+          transform: translateX(20px);
         }
 
-        .mobile-menu-toggle.active span:nth-child(3) {
-          transform: rotate(45deg) translate(-5px, -6px);
-          background-color: #ffa726;
+        .mobile-toggle.active .bar-3 {
+          transform: rotate(-45deg) translate(7px, -6px);
+          background: #f59e0b;
         }
 
-        .mobile-menu-overlay {
-          display: none;
+        .mobile-overlay {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          z-index: 999;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
           opacity: 0;
-          transition: opacity 0.3s ease;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 999;
         }
 
-        .mobile-menu-overlay.active {
+        .mobile-overlay.active {
           opacity: 1;
+          visibility: visible;
         }
 
-        /* Tablet Responsive */
+        /* Responsive Design */
         @media (max-width: 1200px) {
-          .container {
-            padding: 0 15px;
-            gap: 15px;
+          .navbar-content {
+            padding: 0 20px;
           }
 
           .nav-links {
-            gap: 12px;
-            padding: 0 10px;
+            gap: 24px;
           }
 
-          .nav-link {
-            padding: 6px 8px;
-          }
-
-          .contact-section {
-            gap: 12px;
+          .navbar-actions {
+            gap: 20px;
           }
         }
 
         @media (max-width: 992px) {
           .nav-links {
-            gap: 8px;
-            padding: 0 8px;
+            gap: 20px;
           }
 
           .nav-link {
-            font-size: 9px;
-            padding: 6px 6px;
+            font-size: 0.85rem;
           }
 
-          .phone-number {
-            font-size: 10px;
-            padding: 4px 8px;
+          .phone-info {
+            display: none;
           }
 
-          .book-travel-btn {
-            font-size: 9px;
-            padding: 6px 12px;
+          .phone-section {
+            padding: 10px;
           }
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
-          .container {
-            padding: 0 15px;
-          }
-
-          .mobile-menu-toggle {
+          .mobile-toggle {
             display: flex;
           }
 
-          .nav-links {
+          .nav-menu {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 280px;
+            width: 300px;
             height: 100vh;
-            background-color: #ffffff;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 80px 30px 30px;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            transition: right 0.3s ease;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
-            gap: 0;
+            padding: 100px 32px 32px;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
           }
 
-          .nav-links.active {
+          .nav-menu.active {
             right: 0;
           }
 
-          .mobile-menu-overlay {
-            display: block;
+          .nav-links {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            width: 100%;
           }
 
           .nav-link {
             width: 100%;
-            padding: 15px 0;
-            font-size: 14px;
-            border-bottom: 1px solid #f0f0f0;
-            border-radius: 0;
-            text-align: left;
+            padding: 16px 0;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           }
 
-          .nav-link:hover {
-            transform: translateX(10px);
-            background-color: rgba(255, 167, 38, 0.05);
+          .nav-underline {
+            height: 1px;
           }
 
-          .nav-link::before {
-            left: 0;
-            transform: none;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, #ffa726, #f57c00);
-          }
-
-          .nav-link:hover::before {
-            width: 4px;
-          }
-
-          .contact-section {
-            gap: 8px;
-          }
-
-          .phone-number {
-            font-size: 9px;
-            padding: 4px 8px;
-          }
-
-          .phone-number span {
+          .phone-section {
             display: none;
           }
 
-          .book-travel-btn {
-            font-size: 8px;
-            padding: 6px 10px;
+          .brand-text {
+            display: none;
           }
         }
 
         @media (max-width: 640px) {
-          .container {
-            padding: 0 10px;
+          .navbar-content {
+            padding: 0 16px;
+            height: 70px;
           }
 
-          .navbar-brand img {
-            height: 24px;
+          .logo-image {
+            height: 38px;
           }
 
-          .phone-number {
-            display: none;
+          .enquiry-btn {
+            padding: 10px 18px;
+            font-size: 0.8rem;
           }
 
-          .book-travel-btn {
-            font-size: 7px;
-            padding: 5px 8px;
+          .nav-menu {
+            width: 280px;
           }
         }
 
         @media (max-width: 480px) {
-          .container {
-            padding: 0 8px;
+          .navbar-content {
+            padding: 0 12px;
           }
 
-          .navbar-brand img {
-            height: 22px;
-          }
-
-          .book-travel-btn {
-            font-size: 6px;
-            padding: 4px 6px;
-          }
-
-          .nav-links {
+          .nav-menu {
             width: 100%;
-            right: -100%;
+            padding: 80px 24px 24px;
           }
 
-          .nav-links.active {
-            right: 0;
-          }
-        }
-
-        /* Very small screens */
-        @media (max-width: 360px) {
-          .book-travel-btn {
-            display: none;
-          }
-
-          .mobile-menu-toggle {
-            width: 25px;
-            height: 25px;
-          }
-
-          .mobile-menu-toggle span {
-            width: 20px;
-            height: 2px;
+          .enquiry-btn {
+            padding: 8px 16px;
+            font-size: 0.75rem;
           }
         }
 
-        /* Landscape orientation for mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-          .nav-links {
-            padding: 60px 30px 20px;
-          }
-
-          .nav-link {
-            padding: 10px 0;
-            font-size: 12px;
-          }
+        /* Animation performance optimization */
+        .nav-link,
+        .enquiry-btn,
+        .mobile-toggle,
+        .logo-image {
+          will-change: transform;
         }
 
-        /* High DPI screens */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-          .navbar-brand img {
-            image-rendering: -webkit-optimize-contrast;
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
           }
         }
       `}</style>

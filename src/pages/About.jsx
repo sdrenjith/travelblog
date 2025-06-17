@@ -1,385 +1,863 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Contacts.css';
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 
 function About() {
-   const days = [
-      "Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8",
-    ];
-    const [selectedDay, setSelectedDay] = useState("Day 1");
-    const [activeIndex, setActiveIndex] = useState(0);
-    
-    // Carousel state
-    const [currentSlide, setCurrentSlide] = useState(0);
-  
-    const itineraryData = {
-      "Day 1": {
-        image: "https://images.pexels.com/photos/158272/mont-blanc-du-tacul-high-mountains-alpine-chamonix-158272.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Cusco is a city in southeastern Peru, near the Urubamba Valley of the Andes mountain range. It is the capital of the Cusco Region.",
-      },
-      "Day 2": {
-        image: "https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Lima is the capital and largest city of peru.With a population of almost 10 million,Lima is the most populous metropolitan area of peru ",
-      },
-      "Day 3": {
-        image: "https://images.pexels.com/photos/300857/pexels-photo-300857.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Urumbamb is small town in peru, located near the Urumbamba River.Urumbamba is the largest town in the Sacred Valley of the Incas",
-      },
-      "Day 4": {
-        image: "https://images.pexels.com/photos/1118861/pexels-photo-1118861.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "it is the capital and largest city of the Arequipa Region.Arequipa is the second most industrialized and commercialized city in peru",
-      },
-      "Day 5": {
-        image: "https://images.pexels.com/photos/464311/pexels-photo-464311.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Machu Picchu is a 15th-century Inca citadel situated on a mountain ridge. it is the most familiar icon of Inca civilization",
-      },
-      "Day 6": {
-        image: "https://images.pexels.com/photos/672451/pexels-photo-672451.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Mancora is a town and beach resort in the Piura Region,in northwestern Peru,It is known for its turquoise beaches and good waves.",
-      },
-      "Day 7": {
-        image: "https://images.pexels.com/photos/913215/pexels-photo-913215.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Puno is city in southeastern Peru, located on the shore of Lake Titicaca. Puno has several churches dating back from the colonial period",
-      },
-      "Day 8": {
-        image: "https://images.pexels.com/photos/547115/pexels-photo-547115.jpeg?auto=compress&cs=tinysrgb&w=600",
-        text:
-          "Huaraz is the main financial and commerical center of the Callejon.huaraz is the mostimportant place of winter sports and adventure",
-      },
-    };
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-    // Carousel images
-    const images = [
-      "https://images.pexels.com/photos/7970786/pexels-photo-7970786.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "https://images.pexels.com/photos/28581876/pexels-photo-28581876/free-photo-of-beautiful-tropical-seascape-with-limestone-cliffs.jpeg?auto=compress&cs=tinysrgb&w=600"
-    ];
+  // Carousel images
+  const images = [
+    "https://images.pexels.com/photos/7970786/pexels-photo-7970786.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/28581876/pexels-photo-28581876/free-photo-of-beautiful-tropical-seascape-with-limestone-cliffs.jpeg?auto=compress&cs=tinysrgb&w=600"
+  ];
 
-    // Carousel functions
-    const goToSlide = (slideIndex) => {
-      setCurrentSlide(slideIndex);
-    };
+  // Andaman testimonials
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      location: "Mumbai, Maharashtra",
+      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150",
+      text: "Our Andaman trip was absolutely magical! The crystal clear waters of Radhanagar Beach and the underwater coral garden at Havelock Island were beyond imagination. The team arranged everything perfectly - from comfortable stays to exciting water sports. My family and I created memories that will last a lifetime!",
+      rating: 5,
+      experience: "Family Trip - 7 Days"
+    },
+    {
+      name: "Rajesh Kumar",
+      location: "Delhi, NCR",
+      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150",
+      text: "As a solo traveler, I was initially nervous about visiting Andaman, but this tour company made everything seamless. The scuba diving at Neil Island was incredible - I saw colorful fish and coral reefs up close! The local seafood and the sunset at Corbyn's Cove Beach were unforgettable highlights.",
+      rating: 5,
+      experience: "Solo Adventure - 5 Days"
+    },
+    {
+      name: "Sneha & Arjun Patel",
+      location: "Ahmedabad, Gujarat",
+      image: "https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=150",
+      text: "Perfect honeymoon destination! The romantic beach walks at sunset, candlelight dinner by the shore, and the peaceful boat rides through the mangroves created the most romantic atmosphere. Port Blair's Cellular Jail gave us a glimpse of history too. Highly recommend for couples!",
+      rating: 5,
+      experience: "Honeymoon - 6 Days"
+    },
+    {
+      name: "Dr. Anita Menon",
+      location: "Kochi, Kerala",
+      image: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150",
+      text: "The biodiversity of Andaman is remarkable! As a nature enthusiast, I was thrilled to see the endemic species and pristine beaches. The glass boat ride showed us amazing marine life without getting wet. The guides were knowledgeable about local ecology and conservation efforts.",
+      rating: 5,
+      experience: "Nature Exploration - 8 Days"
+    },
+    {
+      name: "Vikram Singh",
+      location: "Jaipur, Rajasthan",
+      image: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=150",
+      text: "Adventure lover's paradise! The jet skiing, parasailing, and deep-sea fishing exceeded all expectations. The limestone caves at Baratang and the mud volcano were unique experiences. Great organization, professional water sports instructors, and safety was never compromised.",
+      rating: 5,
+      experience: "Adventure Sports - 4 Days"
+    }
+  ];
 
-    const nextSlide = () => {
-      setCurrentSlide((prev) => (prev + 1) % images.length);
-    };
+  // Auto-rotate testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
-    const prevSlide = () => {
-      setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
-    };
+  // Carousel functions
+  const goToSlide = (slideIndex) => {
+    setCurrentSlide(slideIndex);
+  };
 
-    // Update selected day and active dot index on click
-    const handleDayClick = (day, index) => {
-      setSelectedDay(day);
-      setActiveIndex(index);
-    };
-  
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToTestimonial = (index) => {
+    setCurrentTestimonial(index);
+  };
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
-    <div>
+    <div className="modern-about">
+      <style>
+        {`
+          .modern-about {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+          }
+
+          .hero-section {
+            position: relative;
+            background: none;
+            overflow: hidden;
+          }
+
+          .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+            background-size: cover;
+            background-position: center;
+            opacity: 1;
+            z-index: 1;
+          }
+
+          .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: heroSlideUp 1s ease-out;
+          }
+
+          @keyframes heroSlideUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 8px 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+          }
+
+          .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+          }
+
+          .breadcrumb a:hover {
+            color: #ffd700;
+          }
+
+          .about-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+          }
+
+          .about-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+          }
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+          }
+
+          .explore-title {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+          }
+
+          @keyframes titleGlow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+          }
+
+          .main-title {
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            position: relative;
+          }
+
+          .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+            animation: lineExpand 1s ease-out 0.5s both;
+          }
+
+          @keyframes lineExpand {
+            from { width: 0; }
+            to { width: 80px; }
+          }
+
+          .description-text {
+            color: #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 400;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+          }
+
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .carousel-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            padding: 10px;
+          }
+
+          .carousel-container:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+          }
+
+          .carousel-nav-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border: none !important;
+            width: 50px;
+            height: 50px;
+            border-radius: 50% !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+          }
+
+          .carousel-container:hover .carousel-nav-button {
+            opacity: 1;
+          }
+
+          .carousel-nav-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+          }
+
+          .carousel-indicator {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+          }
+
+          .carousel-indicator:hover {
+            transform: scale(1.2);
+          }
+
+          .carousel-image {
+            transition: all 0.5s ease;
+            border-radius: 15px;
+          }
+
+          .carousel-image:hover {
+            transform: scale(1.03);
+          }
+
+          .marquee-container {
+            overflow: hidden;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+          }
+
+          .marquee-container::before, .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+          }
+
+          .marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, #667eea, transparent);
+          }
+
+          .marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, #764ba2, transparent);
+          }
+
+          .marquee-track {
+            display: flex;
+            animation: marquee 25s linear infinite;
+            gap: 20px;
+          }
+
+          .marquee-track:hover {
+            animation-play-state: paused;
+          }
+
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+
+          .marquee-track img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            filter: brightness(0.8);
+          }
+
+          .marquee-track img:hover {
+            transform: scale(1.05);
+            filter: brightness(1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+          }
+
+          .testimonials-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: backgroundMove 20s linear infinite;
+          }
+
+          @keyframes backgroundMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(60px); }
+          }
+
+          .testimonials-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+          }
+
+          .testimonials-title h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          }
+
+          .testimonials-title p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+          }
+
+          .testimonial-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 0 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 120px;
+            color: rgba(102, 126, 234, 0.1);
+            font-family: serif;
+            line-height: 1;
+          }
+
+          .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+          }
+
+          .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+          }
+
+          .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 4px solid #667eea;
+            transition: all 0.3s ease;
+          }
+
+          .testimonial-card:hover .testimonial-avatar {
+            transform: scale(1.1);
+            border-color: #764ba2;
+          }
+
+          .testimonial-info h4 {
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+          }
+
+          .testimonial-location {
+            color: #667eea;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+
+          .testimonial-text {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-style: italic;
+          }
+
+          .testimonial-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+          }
+
+          .rating {
+            display: flex;
+            gap: 5px;
+          }
+
+          .star {
+            color: #ffd700;
+            font-size: 1.2rem;
+          }
+
+          .experience-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+          }
+
+          .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+          }
+
+          .testimonial-nav-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+          }
+
+          .testimonial-nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+          }
+
+          .testimonial-indicators {
+            display: flex;
+            gap: 10px;
+          }
+
+          .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+          }
+
+          .testimonial-dot.active {
+            background: white;
+            transform: scale(1.2);
+          }
+
+          .testimonial-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+          }
+
+          .stats-section {
+            background: white;
+            padding: 60px 0;
+            text-align: center;
+          }
+
+          .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+          }
+
+          .stat-item {
+            padding: 30px 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            transition: all 0.3s ease;
+            cursor: pointer;
+          }
+
+          .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+          }
+
+          .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+          }
+
+          .stat-label {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 1.1rem;
+          }
+
+          @media (max-width: 768px) {
+            .explore-title {
+              font-size: 2rem;
+            }
+            
+            .main-title {
+              font-size: 1.8rem;
+            }
+            
+            .about-content {
+              padding: 40px 20px;
+              margin: 30px 0;
+            }
+            
+            .testimonial-card {
+              margin: 0 10px;
+              padding: 30px 20px;
+            }
+            
+            .testimonials-title h2 {
+              font-size: 2rem;
+            }
+          }
+        `}
+      </style>
+
       {/* Hero Section */}
       <div className="hero-section" style={{
-        backgroundImage: 'url("https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
-        height: '500px',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        height: '55vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative',
+        position: 'relative'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.5)'
-        }}></div>
-        <div style={{position: 'relative', color: 'white', textAlign: 'center'}}>
-          <h1 className="display-4 fw-bold">ABOUT US</h1>
-          <div className="breadcrumb" style={{marginLeft: '70px'}}>
-            <Link to="/">HOME</Link>
-            <span className="separator">/</span>
-            <span className="current">ABOUT US</span>
+        <div className="hero-content" style={{
+          textAlign: 'center',
+          color: 'white',
+          maxWidth: '600px',
+          padding: '0 20px'
+        }}>
+          <h1 style={{
+            fontSize: '3.5rem',
+            fontWeight: '300',
+            marginBottom: '20px',
+            textShadow: '0 4px 8px rgba(0,0,0,0.3)'
+          }}>
+            ABOUT US
+          </h1>
+          <div className="breadcrumb">
+            <a href="/" style={{ marginRight: '10px' }}>HOME</a>
+            <span style={{ margin: '0 10px', opacity: '0.7' }}>/</span>
+            <span>ABOUT US</span>
           </div>
         </div>
       </div>
 
-      {/* About Content */}
-      <div className="container my-5 p-4">
-        <div className="row align-items-center">
-          {/* Text Section */}
-          <div className="col-12 col-md-6 mb-4 mb-md-0">
-            <h2 className="mb-3" style={{ fontWeight: "300", fontSize: "2rem", color: "orange",fontFamily: 'Satisfy, cursive', }}>
-              Explore with Us
-            </h2>
-            <h3 className="mb-3" style={{ fontWeight: "700", fontSize: "1.8rem", color: "#3f3f3f" }}>
-              Discover the World, One Journey at a Time
-            </h3>
-            <p className="mb-4" style={{ color: "#3f3f3f", fontSize: "0.8rem",lineHeight:'1.8',fontWeight:'normal',maxWidth: '60%' }}>
-              Embark on a journey of discovery with us. From pristine beaches to cultural landmarks,
-              we bring you closer to the world's most captivating destinations. Our expertly curated
-              packages ensure an unforgettable travel experience tailored to your dreams commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
-            </p>
-          </div>
+      <div className="container">
+        {/* About Content */}
+        <div className="about-content">
+          <div className="row align-items-center">
+            <div className="col-12 col-md-6 mb-4 mb-md-0">
+              <h2 className="explore-title">
+                Explore with Us
+              </h2>
+              <h3 className="main-title">
+                Discover the World, One Journey at a Time
+              </h3>
+              <p className="description-text">
+                Embark on a journey of discovery with us. From pristine beaches to cultural landmarks,
+                we bring you closer to the world's most captivating destinations. Our expertly curated
+                packages ensure an unforgettable travel experience tailored to your dreams. With over
+                a decade of experience, we've helped thousands of travelers create memories that last
+                a lifetime in the stunning Andaman Islands.
+              </p>
+            </div>
 
-          {/* Image Carousel Section */}
-          <div className="col-12 col-md-6" style={{paddingLeft: '20px'}}>
-            <div className="position-relative carousel-container">
-              {/* Add custom styles */}
-              <style>
-                {`
-                  .carousel-container {
-                    border-radius: 15px;
-                    overflow: hidden;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-                    transition: transform 0.3s ease;
-                    max-width: 100%;
-                  }
-                  
-                  .carousel-container:hover {
-                    transform: scale(1.02);
-                  }
-
-                  .carousel-nav-button {
-                    opacity: 0;
-                    transition: all 0.3s ease;
-                    background: rgba(0, 0, 0, 0.6) !important;
-                    border: none !important;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50% !important;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  }
-
-                  .carousel-container:hover .carousel-nav-button {
-                    opacity: 1;
-                  }
-
-                  .carousel-nav-button:hover {
-                    background: rgba(0, 0, 0, 0.8) !important;
-                    transform: scale(1.1);
-                  }
-
-                  .carousel-indicator {
-                    transition: all 0.3s ease;
-                    transform: scale(1);
-                  }
-
-                  .carousel-indicator:hover {
-                    transform: scale(1.2);
-                  }
-
-                  .carousel-image {
-                    transition: transform 0.5s ease;
-                  }
-
-                  .carousel-image:hover {
-                    transform: scale(1.05);
-                  }
-
-                  @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                  }
-
-                  .fade-in {
-                    animation: fadeIn 0.5s ease-in;
-                  }
-                `}
-              </style>
-
-              {/* Navigation bars/indicators */}
-              <div className="position-absolute bottom-0 start-50 translate-middle-x mb-4" style={{zIndex: 10}}>
-                <div className="d-flex gap-3">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => goToSlide(index)}
-                      className={`carousel-indicator btn p-0 ${currentSlide === index ? 'bg-white' : 'bg-white opacity-50'}`}
-                      style={{
-                        width: '40px',
-                        height: '4px',
-                        border: 'none',
-                        cursor: 'pointer',
-                        borderRadius: '2px'
-                      }}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
+            <div className="col-12 col-md-6">
+              <div className="carousel-container" style={{ position: 'relative' }}>
+                {/* Navigation indicators */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '20px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 10
+                }}>
+                  <div style={{ display: 'flex', gap: '15px' }}>
+                    {images.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={`carousel-indicator ${currentSlide === index ? 'bg-white' : 'bg-white opacity-50'}`}
+                        style={{
+                          width: '40px',
+                          height: '4px',
+                          border: 'none',
+                          cursor: 'pointer',
+                          borderRadius: '2px'
+                        }}
+                      ></button>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Images */}
-              <div className="rounded overflow-hidden">
-                <div 
-                  style={{
+                {/* Images */}
+                <div style={{ borderRadius: '15px', overflow: 'hidden' }}>
+                  <div style={{
                     display: 'flex',
                     transform: `translateX(-${currentSlide * 100}%)`,
                     transition: 'transform 0.5s ease-in-out'
+                  }}>
+                    {images.map((src, index) => (
+                      <div key={index} style={{ flexShrink: 0, width: '100%' }}>
+                        <img
+                          style={{
+                            width: '100%',
+                            height: '400px',
+                            objectFit: 'cover'
+                          }}
+                          src={src}
+                          className="carousel-image"
+                          alt={`Slide ${index + 1}`}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Navigation buttons */}
+                <button
+                  className="carousel-nav-button"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '15px',
+                    transform: 'translateY(-50%)'
                   }}
+                  onClick={prevSlide}
                 >
-                  {images.map((src, index) => (
-                    <div key={index} style={{flexShrink: 0, width: '100%'}}>
-                      <img
-                        style={{
-                          width: '700px', 
-                          height: '340px', 
-                          objectFit: 'cover'
-                        }}
-                        src={src}
-                        className="d-block w-100 carousel-image"
-                        alt={`Slide ${index + 1}`}
-                      />
-                    </div>
-                  ))}
+                  <span style={{ color: 'white', fontSize: '24px' }}>‹</span>
+                </button>
+
+                <button
+                  className="carousel-nav-button"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '15px',
+                    transform: 'translateY(-50%)'
+                  }}
+                  onClick={nextSlide}
+                >
+                  <span style={{ color: 'white', fontSize: '24px' }}>›</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="stats-section">
+          <div className="stats-container">
+            <div className="stat-item">
+              <div className="stat-number">500+</div>
+              <div className="stat-label">Happy Travelers</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">50+</div>
+              <div className="stat-label">Destinations</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">10+</div>
+              <div className="stat-label">Years Experience</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">98%</div>
+              <div className="stat-label">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Gallery Marquee */}
+      <div className="marquee-container">
+        <div className="marquee-track">
+          <img src="https://images.pexels.com/photos/7970786/pexels-photo-7970786.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Andaman Beach" />
+          <img src="https://images.pexels.com/photos/28581876/pexels-photo-28581876/free-photo-of-beautiful-tropical-seascape-with-limestone-cliffs.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limestone Cliffs" />
+          <img src="https://images.pexels.com/photos/10914023/pexels-photo-10914023.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Crystal Waters" />
+          <img src="https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Port Blair" />
+          <img src="https://images.pexels.com/photos/10794420/pexels-photo-10794420.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tropical Paradise" />
+          <img src="https://images.pexels.com/photos/10794387/pexels-photo-10794387.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Island Life" />
+          <img src="https://images.pexels.com/photos/7970769/pexels-photo-7970769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sunset Beach" />
+          <img src="https://images.pexels.com/photos/16827207/pexels-photo-16827207/free-photo-of-sea-coast-with-island.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coastal Beauty" />
+          {/* Duplicate for seamless loop */}
+          <img src="https://images.pexels.com/photos/7970786/pexels-photo-7970786.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Andaman Beach" />
+          <img src="https://images.pexels.com/photos/28581876/pexels-photo-28581876/free-photo-of-beautiful-tropical-seascape-with-limestone-cliffs.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limestone Cliffs" />
+          <img src="https://images.pexels.com/photos/10914023/pexels-photo-10914023.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Crystal Waters" />
+          <img src="https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Port Blair" />
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="testimonials-section">
+        <div className="container">
+          <div className="testimonials-title">
+            <h2>What Our Travelers Say</h2>
+            <p>Real experiences from real people who discovered Andaman with us</p>
+          </div>
+
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div className="testimonial-card">
+              <div className="testimonial-header">
+                <img 
+                  src={testimonials[currentTestimonial].image} 
+                  alt={testimonials[currentTestimonial].name}
+                  className="testimonial-avatar"
+                />
+                <div className="testimonial-info">
+                  <h4>{testimonials[currentTestimonial].name}</h4>
+                  <div className="testimonial-location">
+                    📍 {testimonials[currentTestimonial].location}
+                  </div>
                 </div>
               </div>
+              
+              <div className="testimonial-text">
+                {testimonials[currentTestimonial].text}
+              </div>
+              
+              <div className="testimonial-footer">
+                <div className="rating">
+                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                    <span key={i} className="star">★</span>
+                  ))}
+                </div>
+                <div className="experience-tag">
+                  {testimonials[currentTestimonial].experience}
+                </div>
+              </div>
+            </div>
 
-              {/* Previous button */}
+            <div className="testimonial-nav">
               <button 
-                className="carousel-nav-button position-absolute top-50 start-0 translate-middle-y btn ms-3"
-                type="button" 
-                onClick={prevSlide}
+                className="testimonial-nav-button"
+                onClick={prevTestimonial}
               >
-                <span aria-hidden="true" style={{color: 'white', fontSize: '24px'}}>&lsaquo;</span>
-                <span className="visually-hidden">Previous</span>
+                ‹
               </button>
-
-              {/* Next button */}
+              
+              <div className="testimonial-indicators">
+                {testimonials.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`testimonial-dot ${currentTestimonial === index ? 'active' : ''}`}
+                    onClick={() => goToTestimonial(index)}
+                  ></div>
+                ))}
+              </div>
+              
               <button 
-                className="carousel-nav-button position-absolute top-50 end-0 translate-middle-y btn me-3"
-                type="button" 
-                onClick={nextSlide}
+                className="testimonial-nav-button"
+                onClick={nextTestimonial}
               >
-                <span aria-hidden="true" style={{color: 'white', fontSize: '24px'}}>&rsaquo;</span>
-                <span className="visually-hidden">Next</span>
+                ›
               </button>
             </div>
-
-            {/* Add description section below carousel */}
-           
           </div>
         </div>
       </div>
-
-      {/* Rest of your component remains the same */}
-      <div className="row mt-5 pt-5">
-        <div className="row container" style={{ display: "flex", flexWrap: "wrap" }}>
-          <div className="col-1"></div>
-        </div>
-      </div>
-
-    
-
-
-      {/* gallary */}
-     
-     <div className='marquee-container'>
-      <div className='marquee-track'>
-
-        <img src="https://images.pexels.com/photos/7970786/pexels-photo-7970786.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-         <img src="https://images.pexels.com/photos/28581876/pexels-photo-28581876/free-photo-of-beautiful-tropical-seascape-with-limestone-cliffs.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-          <img src="https://images.pexels.com/photos/10914023/pexels-photo-10914023.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-           <img src="https://images.pexels.com/photos/30188165/pexels-photo-30188165/free-photo-of-colorful-boat-on-crystal-clear-waters-in-port-blair.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-
-           {/* repeat again for looping effect */}
-
-           <img src="https://images.pexels.com/photos/10794420/pexels-photo-10794420.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-         <img src="https://images.pexels.com/photos/10794387/pexels-photo-10794387.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-          <img src="https://images.pexels.com/photos/7970769/pexels-photo-7970769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-           <img src="https://images.pexels.com/photos/16827207/pexels-photo-16827207/free-photo-of-sea-coast-with-island.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-
-      </div>
-     </div>
-     
-
-
-
-
-
-      {/* Plan your trip */}
-      {/* <div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '60px',
-            marginLeft: '400px',
-            flexDirection: 'column',
-            alignItems: 'flex-start'
-          }}
-        >
-          <h5
-            style={{
-              fontFamily: 'Itim, cursive',
-              marginLeft: '130px',
-              color: 'orange',
-              fontWeight: 'bold',
-            }}
-          >
-            Blog
-          </h5>
-          <h3 style={{ marginLeft: '10px' }}>PLAN YOUR TRIP NOW</h3>
-        </div>
-
-        <div>
-          <div className="row" >
-            <div className="col-2"></div>
-            <div className="col-3">
-              <img width={'100%'} src="https://images.pexels.com/photos/2884864/pexels-photo-2884864.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-            </div>
-            <div className="col-3">
-              <img width={'100%'} src="https://images.pexels.com/photos/1537979/pexels-photo-1537979.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
-            </div>
-            <div className="col-3">
-              <img width={'100%'} src="https://media.istockphoto.com/id/546456042/photo/kanyakumari-mountains.jpg?b=1&s=612x612&w=0&k=20&c=DbHm6IHpU8Z2wdBM-wOr4OJ2Z0GoOQWA3GkKS7RzlbI=" alt="" />
-            </div>
-          </div>
-
-          <div className="row" style={{padding: '20px'}}>
-            <div className="col-2"></div>
-            <div className="col-3">
-              <p style={{marginLeft: '80px',fontSize: '10PX'}}>NOV 22,2016</p> 
-              <h6 style={{fontWeight:'1', marginLeft: '40px',fontSize: '10px'}}>HOW TO GET ACCLIMATED</h6>    
-              <div className="row" style={{marginLeft: '5px'}}>
-                <div className="col" id='row1'><i className="fa-solid fa-user" style={{color: '#ffc800'}}></i>ADAM BROWN</div>
-                <div className="col" id='row1'><i className="fa-solid fa-eye" style={{color: '#fbcc23'}}></i>386</div>
-                <div className="col" id='row1'><i className="fa-solid fa-comment" style={{color: '#ffb005'}}></i>3</div>
-              </div>
-            </div>
-
-            <div className="col-3">
-              <p style={{marginLeft: '117px',fontSize: '10PX'}}>NOV 22,2016</p> 
-              <h6 style={{fontWeight:'1', marginLeft: '80px',fontSize: '10px'}}>HOW TO GET ACCLIMATED</h6>    
-              <div className="row" style={{marginLeft: '50px'}}>
-                <div className="col" id='row1'><i className="fa-solid fa-user" style={{color: '#ffc800'}}></i>ADAM BROWN</div>
-                <div className="col" id='row1'><i className="fa-solid fa-eye" style={{color: '#fbcc23'}}></i>107</div>
-              </div>
-            </div>
-
-            <div className="col-3">
-              <p style={{marginLeft: '117px',fontSize: '10PX'}}>NOV 22,2016</p> 
-              <h6 style={{fontWeight:'1', marginLeft: '80px',fontSize: '10px'}}>HOW TO GET ACCLIMATED</h6>    
-              <div className="row" style={{marginLeft: '50px'}}>
-                <div className="col" id='row1'><i className="fa-solid fa-user" style={{color: '#ffc800'}}></i>ADAM BROWN</div>
-                <div className="col" style={{marginBottom: "100px"}} id='row1'><i className="fa-solid fa-eye" style={{color: '#fbcc23'}}></i>97</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }

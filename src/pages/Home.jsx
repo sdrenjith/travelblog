@@ -21,10 +21,14 @@ function Home() {
       alignItems: 'center',
       padding: '32px 16px',
       boxSizing: 'border-box',
-      maxWidth: '100vw',
+      maxWidth: '100%',
     }}>
-      <div style={{width: '100%', maxWidth: 1400, display: 'flex', flexDirection: 'column', gap: 32}}>
+      {/* Banner section full width */}
+      <div style={{width: '100%'}}>
         <Banner />
+      </div>
+      {/* Main content constrained to 1400px */}
+      <div style={{width: '100%', maxWidth: '80%', display: 'flex', flexDirection: 'column', gap: 32}}>
         <Banner2 />
         <Banner3 />
         {/* <Banner4 /> */}
@@ -36,7 +40,7 @@ function Home() {
       </div>
       {/* Responsive styles */}
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1400px) {
           div[style*='maxWidth: 1400px'] {
             max-width: 98vw !important;
             gap: 20px !important;
